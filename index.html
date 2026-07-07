@@ -1263,7 +1263,7 @@
                 event.target.value = '';
             };
 
-            // Google Drive Sync (adapted from TaskFlow)
+            // Google Drive Sync
             async function ensureGoogleAuth() {
                 if (typeof google === 'undefined' || typeof google.accounts === 'undefined') {
                     const loaded = await new Promise((resolve) => {
