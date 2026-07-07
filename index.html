@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>M A Hakim – Wholesale Manager</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for all scripts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Gujarati:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c7a47;
+            --sidebar-bg: #1e4620;
+            --card-bg: #ffffff;
+            --bg: #f0f8f1;
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --card-hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            transition: font-family 0.2s;
+        }
+
+        /* Language specific font overrides */
+        body[lang="hi"] {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+
+        body[lang="gu"] {
+            font-family: 'Noto Sans Gujarati', sans-serif;
+        }
+
+        body[lang="ur"] {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            direction: rtl;
+        }
+
+        body[lang="ur"] .sidebar {
+            text-align: right;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f2a1a 0%, #1e4620 40%, #14351a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(44, 122, 71, 0.25) 0%, transparent 70%);
+            top: -200px;
+            right: -150px;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .auth-container::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(72, 199, 142, 0.2) 0%, transparent 70%);
+            bottom: -180px;
+            left: -120px;
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0)
+            }
+
+            33% {
+                transform: translate(40px, -30px)
+            }
+
+            66% {
+                transform: translate(-20px, 20px)
+            }
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .auth-card .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, #2c7a47, #48c78e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .auth-card .logo-icon {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 1.2rem;
+            color: #64748b;
+        }
+
+        .auth-toggle a {
+            color: #2c7a47;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .auth-toggle a:hover {
+            text-decoration: underline;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #0f2a1a;
+            color: #e2e8f0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 100;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .sidebar-header h3 {
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin: 0;
+            background: linear-gradient(135deg, #48c78e, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem 0.8rem;
+        }
+
+        .sidebar-nav .nav-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-nav .nav-link {
+            color: #94a3b8;
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar-nav .nav-link:hover,
+        .sidebar-nav .nav-link.active {
+            background: rgba(44, 122, 71, 0.25);
+            color: #e2e8f0;
+            transform: translateX(3px);
+        }
+
+        .sidebar-nav .nav-link i {
+            width: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 1.5rem 2rem;
+            transition: var(--transition);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .top-bar h4 {
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c7a47, #48c78e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .card-custom {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-custom:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-1px);
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.3rem 1.5rem;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        .stat-card.purple {
+            border-left-color: #8b5cf6;
+        }
+
+        .stat-card.blue {
+            border-left-color: #0ea5e9;
+        }
+
+        .stat-card.green {
+            border-left-color: #10b981;
+        }
+
+        .stat-card.orange {
+            border-left-color: #f59e0b;
+        }
+
+        .stat-card .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e293b;
+            letter-spacing: -1px;
+        }
+
+        .stat-card .stat-label {
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #2c7a47, #48c78e);
+            border: none;
+            color: #fff;
+            padding: 0.6rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(44, 122, 71, 0.3);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(44, 122, 71, 0.4);
+            color: #fff;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid #e2e8f0;
+            background: #fff;
+            color: #334155;
+            padding: 0.6rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-outline-custom:hover {
+            border-color: #2c7a47;
+            color: #2c7a47;
+            background: #f8fafc;
+        }
+
+        .section-page {
+            display: none;
+        }
+
+        .section-page.active {
+            display: block;
+            animation: fadeSlideIn 0.35s ease;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #94a3b8;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .modal-custom .modal-content {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-custom .modal-header {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.2rem 1.5rem;
+            background: #f8fafc;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .modal-custom .modal-footer {
+            border-top: 1px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+        }
+
+        .google-drive-btn {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            padding: 0.7rem 1.3rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .google-drive-btn:hover {
+            border-color: #4285f4;
+            background: #f8fafc;
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.15);
+        }
+
+        .session-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .session-overlay.show {
+            display: flex;
+        }
+
+        .session-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2rem 2rem 1.5rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            animation: fadeSlideIn 0.3s ease;
+        }
+
+        .session-box h4 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .session-box .btn-logout {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+        }
+
+        .session-box .btn-unlock {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+        }
+
+        @media (max-width:768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        .sidebar-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+
+        .sidebar-backdrop.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:9999;"></div>
+
+    <!-- AUTH -->
+    <div id="authContainer" class="auth-container">
+        <div class="auth-card" id="loginCard">
+            <div class="logo-icon">🏥</div>
+            <div class="logo">M A Hakim</div>
+            <p class="text-center text-muted mb-3" style="font-size:0.9rem;">Wholesale Medicine Manager</p>
+            <form id="loginForm" autocomplete="off">
+                <div class="mb-3"><label class="form-label fw-semibold">Email</label><input type="email"
+                        class="form-control" id="loginEmail" placeholder="your@email.com" required></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Password</label><input type="password"
+                        class="form-control" id="loginPassword" placeholder="••••••••" required></div>
+                <button type="submit" class="btn btn-primary-custom w-100 mt-2"><i
+                        class="fas fa-sign-in-alt me-2"></i>Sign In</button>
+            </form>
+            <p class="auth-toggle mt-3">Don't have an account? <a onclick="showRegister()">Create Account</a></p>
+            <p class="text-center mt-2" style="font-size:0.7rem;color:#94a3b8;">🔒 All data stored locally</p>
+        </div>
+        <div class="auth-card" id="registerCard" style="display:none;">
+            <div class="logo-icon">🚀</div>
+            <div class="logo">Join M A Hakim</div>
+            <p class="text-center text-muted mb-3" style="font-size:0.9rem;">Set up your workspace</p>
+            <form id="registerForm" autocomplete="off">
+                <div class="mb-3"><label class="form-label fw-semibold">Full Name</label><input type="text"
+                        class="form-control" id="regName" placeholder="Hakim Sahab" required></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Email</label><input type="email"
+                        class="form-control" id="regEmail" placeholder="your@email.com" required></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Password</label><input type="password"
+                        class="form-control" id="regPassword" placeholder="Min 6 characters" minlength="6" required>
+                </div>
+                <div class="mb-3"><label class="form-label fw-semibold">Confirm Password</label><input type="password"
+                        class="form-control" id="regConfirmPassword" placeholder="Re-enter password" required></div>
+                <button type="submit" class="btn btn-primary-custom w-100 mt-2"><i
+                        class="fas fa-user-plus me-2"></i>Create Account</button>
+            </form>
+            <p class="auth-toggle mt-3">Already have an account? <a onclick="showLogin()">Sign In</a></p>
+        </div>
+    </div>
+
+    <!-- APP -->
+    <div id="appContainer" class="app-container" style="display:none;">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>🏥 M A Hakim</h3><small style="color:#94a3b8;font-size:0.7rem;">Wholesale Manager</small>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item"><button class="nav-link active" data-page="dashboard"><i
+                            class="fas fa-th-large"></i> Dashboard</button></div>
+                <div class="nav-item"><button class="nav-link" data-page="medicines"><i class="fas fa-pills"></i>
+                        Medicines</button></div>
+                <div class="nav-item"><button class="nav-link" data-page="customers"><i class="fas fa-store"></i>
+                        Customers</button></div>
+                <div class="nav-item"><button class="nav-link" data-page="orders"><i class="fas fa-shopping-cart"></i>
+                        Orders</button></div>
+                <div class="nav-item"><button class="nav-link" data-page="payments"><i class="fas fa-rupee-sign"></i>
+                        Payments</button></div>
+                <div class="nav-item"><button class="nav-link" data-page="returns"><i class="fas fa-undo"></i>
+                        Returns</button></div>
+                <div class="nav-item"><button class="nav-link" data-page="reminders"><i class="fas fa-bell"></i>
+                        Reminders</button></div>
+                <div class="nav-item"><button class="nav-link" data-page="settings"><i class="fas fa-cog"></i> Settings
+                        & Sync</button></div>
+            </nav>
+            <div class="sidebar-footer"><button class="btn btn-sm w-100"
+                    style="background:rgba(239,68,68,0.2);color:#fca5a5;border:none;border-radius:8px;padding:8px;"
+                    onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</button></div>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="top-bar">
+                <h4 id="pageTitle">📊 Dashboard</h4>
+                <div class="d-flex align-items-center gap-3">
+                    <select class="form-select form-select-sm" id="langSwitcher" onchange="switchLanguage(this.value)"
+                        style="width:auto;">
+                        <option value="en">English</option>
+                        <option value="hi">हिन्दी</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="ur">اردو</option>
+                    </select>
+                    <div class="user-badge">
+                        <div class="user-avatar" id="userAvatarLetter">U</div><span class="fw-semibold"
+                            id="userDisplayName">User</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pages will be rendered dynamically by JS -->
+            <div id="page-dashboard" class="section-page active"></div>
+            <div id="page-medicines" class="section-page" style="display:none;"></div>
+            <div id="page-customers" class="section-page" style="display:none;"></div>
+            <div id="page-orders" class="section-page" style="display:none;"></div>
+            <div id="page-payments" class="section-page" style="display:none;"></div>
+            <div id="page-returns" class="section-page" style="display:none;"></div>
+            <div id="page-reminders" class="section-page" style="display:none;"></div>
+            <div id="page-settings" class="section-page" style="display:none;"></div>
+        </main>
+    </div>
+
+    <!-- Session Lock Overlay -->
+    <div id="sessionOverlay" class="session-overlay">
+        <div class="session-box">
+            <h4><i class="fas fa-lock me-2"></i>Session Locked</h4>
+            <p>You were inactive for a while. Please enter your password to continue.</p>
+            <input type="password" id="sessionPassword" class="form-control" placeholder="Enter your password..."
+                onkeydown="if(event.key==='Enter')unlockSession()">
+            <div class="btn-group mt-3"><button class="btn btn-unlock" onclick="unlockSession()">Unlock</button><button
+                    class="btn btn-logout" onclick="sessionLogout()">Logout</button></div>
+        </div>
+    </div>
+
+    <!-- Modals container -->
+    <div id="modalContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
+    <script>
+        // ==================== APP CORE ====================
+        (function () {
+            const APP_PREFIX = 'hakim_mgr_';
+            let currentUser = null, currentPage = 'dashboard', locked = false;
+            let sessionTimer;
+
+            // Toast helper (fixed)
+            function showToast(msg, type = 'info') {
+                const container = document.querySelector('.toast-container');
+                if (!container) return;
+                const bg = { success: 'bg-success text-white', error: 'bg-danger text-white', info: 'bg-info text-dark', warning: 'bg-warning text-dark' }[type] || 'bg-info text-dark';
+                const icon = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle', warning: 'fa-exclamation-triangle' }[type] || 'fa-info-circle';
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = `<div class="toast align-items-center ${bg} border-0"><div class="d-flex"><div class="toast-body"><i class="fas ${icon} me-2"></i>${msg}</div><button class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div></div>`;
+                const toastEl = wrapper.firstChild;
+                container.appendChild(toastEl);
+                const bsToast = new bootstrap.Toast(toastEl, { delay: 3000 });
+                bsToast.show();
+                toastEl.addEventListener('hidden.bs.toast', () => toastEl.remove());
+            }
+
+            function getStorageKey(k) { return APP_PREFIX + (currentUser ? 'user_' + currentUser.id + '_' : 'global_') + k; }
+            function save(k, v) { localStorage.setItem(getStorageKey(k), JSON.stringify(v)); }
+            function load(k, d = []) { const r = localStorage.getItem(getStorageKey(k)); return r ? JSON.parse(r) : d; }
+
+            // Auth
+            function hash(p) { let h = 0; for (let i = 0; i < p.length; i++) { h = ((h << 5) - h) + p.charCodeAt(i); h |= 0; } return 'h_' + Math.abs(h).toString(36) + '_' + btoa(p).replace(/=/g, ''); }
+            function users() { return JSON.parse(localStorage.getItem(APP_PREFIX + 'all_users') || '[]'); }
+            function saveUsers(u) { localStorage.setItem(APP_PREFIX + 'all_users', JSON.stringify(u)); }
+            function register(n, e, p) {
+                const all = users(); if (all.find(u => u.email === e.toLowerCase())) { showToast('Email already exists', 'error'); return false; }
+                const nu = { id: 'u_' + Date.now(), name: n, email: e.toLowerCase(), passwordHash: hash(p), createdAt: new Date().toISOString() };
+                all.push(nu); saveUsers(all);
+                showToast('Account created! Sign in.', 'success'); return true;
+            }
+            function login(e, p) {
+                const all = users(); const u = all.find(u => u.email === e.toLowerCase());
+                if (!u) { showToast('No account found', 'error'); return false; }
+                if (u.passwordHash !== hash(p)) { showToast('Incorrect password', 'error'); return false; }
+                currentUser = u; localStorage.setItem(APP_PREFIX + 'current_user_id', u.id);
+                showToast('Welcome, ' + u.name + '!', 'success'); return true;
+            }
+            window.logout = () => { if (confirm('Logout?')) { currentUser = null; localStorage.removeItem(APP_PREFIX + 'current_user_id'); location.reload(); } };
+            window.showRegister = () => { document.getElementById('loginCard').style.display = 'none'; document.getElementById('registerCard').style.display = 'block'; };
+            window.showLogin = () => { document.getElementById('registerCard').style.display = 'none'; document.getElementById('loginCard').style.display = 'block'; };
+
+            // Language
+            const i18n = {
+                en: {
+                    dashboard: "Dashboard", medicines: "Medicines", customers: "Customers", orders: "Orders", payments: "Payments", returns: "Returns", reminders: "Reminders", settings: "Settings",
+                    addMedicine: "Add Medicine", addCustomer: "Add Customer", newOrder: "New Order", addReturn: "Add Return", addReminder: "Add Reminder",
+                    stock: "Stock", price: "Wholesale Price", expiry: "Expiry", actions: "Actions",
+                    save: "Save", cancel: "Cancel", delete: "Delete", edit: "Edit",
+                    lowStock: "Low Stock", todayOrders: "Today's Orders", totalMedicines: "Total Medicines",
+                    totalCustomers: "Total Customers", pendingPay: "Pending Payments",
+                    name: "Name", category: "Category", unit: "Unit", quantity: "Quantity",
+                    wholesalePrice: "Wholesale Price", purchasePrice: "Purchase Price",
+                    batch: "Batch", notes: "Notes", contact: "Contact", address: "Address",
+                    orderDate: "Order Date", customer: "Customer", items: "Items",
+                    total: "Total", paid: "Paid", balance: "Balance", status: "Status",
+                    addPayment: "Add Payment", amount: "Amount", date: "Date",
+                    returnReason: "Reason", refund: "Refund", reminderText: "Reminder",
+                    dueDate: "Due Date", exportData: "Export JSON", importData: "Import JSON",
+                    googleDriveSync: "Google Drive Sync", clientId: "Client ID", folderName: "Folder Name",
+                    upload: "Upload", restore: "Restore", language: "Language",
+                    minStock: "Min Stock"
+                },
+                hi: {
+                    dashboard: "डैशबोर्ड", medicines: "दवाइयाँ", customers: "ग्राहक", orders: "ऑर्डर", payments: "भुगतान", returns: "वापसी", reminders: "रिमाइंडर", settings: "सेटिंग्स",
+                    addMedicine: "दवा जोड़ें", addCustomer: "ग्राहक जोड़ें", newOrder: "नया ऑर्डर", addReturn: "वापसी जोड़ें", addReminder: "रिमाइंडर जोड़ें",
+                    stock: "स्टॉक", price: "थोक मूल्य", expiry: "समाप्ति", actions: "कार्य",
+                    save: "सहेजें", cancel: "रद्द करें", delete: "हटाएं", edit: "संपादित करें",
+                    lowStock: "कम स्टॉक", todayOrders: "आज के ऑर्डर", totalMedicines: "कुल दवाएं",
+                    totalCustomers: "कुल ग्राहक", pendingPay: "लंबित भुगतान",
+                    name: "नाम", category: "श्रेणी", unit: "इकाई", quantity: "मात्रा",
+                    wholesalePrice: "थोक मूल्य", purchasePrice: "खरीद मूल्य",
+                    batch: "बैच", notes: "नोट्स", contact: "संपर्क", address: "पता",
+                    orderDate: "ऑर्डर तिथि", customer: "ग्राहक", items: "आइटम",
+                    total: "कुल", paid: "भुगतान", balance: "बकाया", status: "स्थिति",
+                    addPayment: "भुगतान जोड़ें", amount: "राशि", date: "तारीख",
+                    returnReason: "कारण", refund: "वापसी राशि", reminderText: "रिमाइंडर",
+                    dueDate: "नियत तिथि", exportData: "JSON निर्यात", importData: "JSON आयात",
+                    googleDriveSync: "Google Drive सिंक", clientId: "क्लाइंट आईडी", folderName: "फोल्डर नाम",
+                    upload: "अपलोड", restore: "बहाल", language: "भाषा",
+                    minStock: "न्यूनतम स्टॉक"
+                },
+                gu: {
+                    dashboard: "ડેશબોર્ડ", medicines: "દવાઓ", customers: "ગ્રાહકો", orders: "ઓર્ડર", payments: "ચુકવણી", returns: "રિટર્ન", reminders: "રિમાઇન્ડર", settings: "સેટિંગ્સ",
+                    addMedicine: "દવા ઉમેરો", addCustomer: "ગ્રાહક ઉમેરો", newOrder: "નવો ઓર્ડર", addReturn: "રિટર્ન ઉમેરો", addReminder: "રિમાઇન્ડર ઉમેરો",
+                    stock: "સ્ટોક", price: "જથ્થાબંધ ભાવ", expiry: "સમાપ્તિ", actions: "ક્રિયાઓ",
+                    save: "સાચવો", cancel: "રદ કરો", delete: "કાઢી નાખો", edit: "સંપાદિત કરો",
+                    lowStock: "ઓછો સ્ટોક", todayOrders: "આજના ઓર્ડર", totalMedicines: "કુલ દવાઓ",
+                    totalCustomers: "કુલ ગ્રાહકો", pendingPay: "બાકી ચુકવણી",
+                    name: "નામ", category: "શ્રેણી", unit: "એકમ", quantity: "જથ્થો",
+                    wholesalePrice: "જથ્થાબંધ ભાવ", purchasePrice: "ખરીદ ભાવ",
+                    batch: "બેચ", notes: "નોંધ", contact: "સંપર્ક", address: "સરનામું",
+                    orderDate: "ઓર્ડર તારીખ", customer: "ગ્રાહક", items: "વસ્તુઓ",
+                    total: "કુલ", paid: "ચૂકવેલ", balance: "બાકી", status: "સ્થિતિ",
+                    addPayment: "ચુકવણી ઉમેરો", amount: "રકમ", date: "તારીખ",
+                    returnReason: "કારણ", refund: "રિફંડ", reminderText: "રિમાઇન્ડર",
+                    dueDate: "નિયત તારીખ", exportData: "JSON નિકાસ", importData: "JSON આયાત",
+                    googleDriveSync: "Google Drive સિંક", clientId: "ક્લાયન્ટ ID", folderName: "ફોલ્ડર નામ",
+                    upload: "અપલોડ", restore: "પુનઃસ્થાપિત", language: "ભાષા",
+                    minStock: "ન્યૂનતમ સ્ટોક"
+                },
+                ur: {
+                    dashboard: "ڈیش بورڈ", medicines: "ادویات", customers: "گاہک", orders: "آرڈر", payments: "ادائیگی", returns: "واپسی", reminders: "یاد دہانی", settings: "ترتیبات",
+                    addMedicine: "دوا شامل کریں", addCustomer: "گاہک شامل کریں", newOrder: "نیا آرڈر", addReturn: "واپسی شامل کریں", addReminder: "یاد دہانی شامل کریں",
+                    stock: "اسٹاک", price: "تھوک قیمت", expiry: "ختم", actions: "اعمال",
+                    save: "محفوظ کریں", cancel: "منسوخ", delete: "حذف کریں", edit: "ترمیم",
+                    lowStock: "کم اسٹاک", todayOrders: "آج کے آرڈر", totalMedicines: "کل ادویات",
+                    totalCustomers: "کل گاہک", pendingPay: "زیر التواء ادائیگی",
+                    name: "نام", category: "قسم", unit: "اکائی", quantity: "مقدار",
+                    wholesalePrice: "تھوک قیمت", purchasePrice: "خرید قیمت",
+                    batch: "بیچ", notes: "نوٹس", contact: "رابطہ", address: "پتہ",
+                    orderDate: "آرڈر کی تاریخ", customer: "گاہک", items: "آئٹمز",
+                    total: "کل", paid: "ادا", balance: "بقیہ", status: "حیثیت",
+                    addPayment: "ادائیگی شامل کریں", amount: "رقم", date: "تاریخ",
+                    returnReason: "وجہ", refund: "واپسی رقم", reminderText: "یاد دہانی",
+                    dueDate: "مقررہ تاریخ", exportData: "JSON برآمد", importData: "JSON درآمد",
+                    googleDriveSync: "گوگل ڈرائیو سنک", clientId: "کلائنٹ آئی ڈی", folderName: "فولڈر کا نام",
+                    upload: "اپ لوڈ", restore: "بحال", language: "زبان",
+                    minStock: "کم از کم اسٹاک"
+                }
+            };
+            let currentLang = localStorage.getItem(APP_PREFIX + 'lang') || 'en';
+            function t(key) { return i18n[currentLang]?.[key] || i18n.en[key] || key; }
+            function applyLanguage() {
+                document.body.setAttribute('lang', currentLang);
+                document.getElementById('langSwitcher').value = currentLang;
+                if (currentPage) refreshCurrentPage();
+            }
+            window.switchLanguage = (lang) => { currentLang = lang; localStorage.setItem(APP_PREFIX + 'lang', lang); applyLanguage(); };
+
+            // Data helpers
+            function getMedicines() { return load('medicines'); }
+            function getCustomers() { return load('customers'); }
+            function getOrders() { return load('orders'); }
+            function getPayments() { return load('payments'); }
+            function getReturns() { return load('returns'); }
+            function getReminders() { return load('reminders'); }
+
+            // Navigation
+            function navigateTo(page) {
+                currentPage = page;
+                document.querySelectorAll('.section-page').forEach(el => el.style.display = 'none');
+                document.getElementById('page-' + page).style.display = 'block';
+                document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelector(`[data-page="${page}"]`).classList.add('active');
+                document.getElementById('pageTitle').textContent = t(page);
+                refreshCurrentPage();
+                if (page === 'settings') populateSettings();
+                document.getElementById('sidebar').classList.remove('show');
+                document.querySelector('.sidebar-backdrop')?.classList.remove('show');
+            }
+            window.addEventListener('DOMContentLoaded', () => {
+                const backdrop = document.createElement('div');
+                backdrop.className = 'sidebar-backdrop';
+                backdrop.onclick = () => { document.getElementById('sidebar').classList.remove('show'); backdrop.classList.remove('show'); };
+                document.body.appendChild(backdrop);
+                document.querySelector('.top-bar').insertAdjacentHTML('afterbegin', '<button class="btn btn-light d-md-none me-2" onclick="document.getElementById(\'sidebar\').classList.toggle(\'show\');document.querySelector(\'.sidebar-backdrop\').classList.toggle(\'show\')"><i class="fas fa-bars"></i></button>');
+            });
+
+            function refreshCurrentPage() {
+                switch (currentPage) {
+                    case 'dashboard': renderDashboard(); break;
+                    case 'medicines': renderMedicines(); break;
+                    case 'customers': renderCustomers(); break;
+                    case 'orders': renderOrders(); break;
+                    case 'payments': renderPayments(); break;
+                    case 'returns': renderReturns(); break;
+                    case 'reminders': renderReminders(); break;
+                    case 'settings': populateSettings(); break;
+                }
+            }
+
+            // Dashboard
+            function renderDashboard() {
+                const meds = getMedicines(), custs = getCustomers(), ords = getOrders();
+                const today = new Date().toISOString().split('T')[0];
+                const todayOrders = ords.filter(o => o.date === today);
+                const lowStock = meds.filter(m => {
+                    const min = m.minStock || 10;
+                    return m.stock <= min;
+                });
+                const pending = ords.filter(o => o.paidAmount < o.totalAmount).length;
+                document.getElementById('page-dashboard').innerHTML = `
+                    <div class="row g-3 mb-3">
+                        <div class="col-6 col-md-3"><div class="stat-card purple"><div class="stat-value">${meds.length}</div><div class="stat-label">${t('totalMedicines')}</div></div></div>
+                        <div class="col-6 col-md-3"><div class="stat-card blue"><div class="stat-value">${custs.length}</div><div class="stat-label">${t('totalCustomers')}</div></div></div>
+                        <div class="col-6 col-md-3"><div class="stat-card orange"><div class="stat-value">${todayOrders.length}</div><div class="stat-label">${t('todayOrders')}</div></div></div>
+                        <div class="col-6 col-md-3"><div class="stat-card green"><div class="stat-value">${pending}</div><div class="stat-label">${t('pendingPay')}</div></div></div>
+                    </div>
+                    <div class="card-custom"><h5>${t('lowStock')}</h5>${lowStock.length ? lowStock.map(m => `<span class="badge bg-warning text-dark m-1">${m.name} (${m.stock})</span>`).join('') : '<p class="text-muted">All stock adequate</p>'}</div>
+                    <div class="card-custom"><h5>${t('todayOrders')}</h5>${todayOrders.length ? todayOrders.map(o => {
+                    const cust = custs.find(c => c.id === o.customerId);
+                    return `<div class="d-flex justify-content-between"><span>${cust?.name || 'Unknown'}</span><span>₹${o.totalAmount} | Paid: ₹${o.paidAmount}</span></div>`;
+                }).join('') : '<p class="text-muted">No orders today</p>'}</div>`;
+            }
+
+            // Medicines CRUD (now with minStock)
+            function renderMedicines() {
+                const meds = getMedicines();
+                let html = `<div class="d-flex justify-content-between align-items-center mb-3"><h5>${t('medicines')}</h5><button class="btn btn-primary-custom" onclick="openMedicineModal()"><i class="fas fa-plus me-2"></i>${t('addMedicine')}</button></div>`;
+                if (!meds.length) html += '<div class="empty-state"><i class="fas fa-pills fa-2x"></i><p>No medicines yet</p></div>';
+                else {
+                    html += `<div class="table-responsive"><table class="table table-hover"><thead><tr><th>${t('name')}</th><th>${t('category')}</th><th>${t('stock')}</th><th>${t('minStock')}</th><th>${t('wholesalePrice')}</th><th>${t('expiry')}</th><th>${t('actions')}</th></tr></thead><tbody>`;
+                    meds.forEach(m => html += `<tr><td>${m.name}</td><td>${m.category}</td><td>${m.stock} ${m.unit}</td><td>${m.minStock || 10}</td><td>₹${m.wholesalePrice}</td><td>${m.expiry || '-'}</td><td><button class="btn btn-sm btn-outline-primary" onclick="openMedicineModal('${m.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('medicines','${m.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
+                    html += '</tbody></table></div>';
+                }
+                document.getElementById('page-medicines').innerHTML = html;
+            }
+            window.openMedicineModal = (id = null) => {
+                const meds = getMedicines(); const med = id ? meds.find(m => m.id === id) : null;
+                const modalHtml = `
+                <div class="modal fade modal-custom" id="medicineModal" tabindex="-1">
+                    <div class="modal-dialog"><div class="modal-content">
+                        <div class="modal-header"><h5>${id ? t('edit') : t('addMedicine')}</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                        <div class="modal-body">
+                            <input type="hidden" id="medId" value="${id || ''}">
+                            <div class="mb-2"><label>${t('name')} *</label><input class="form-control" id="medName" value="${med?.name || ''}" required></div>
+                            <div class="mb-2"><label>${t('category')}</label><select class="form-select" id="medCategory"><option>Unani</option><option>Ayurveda</option><option>Homeopathy</option></select></div>
+                            <div class="mb-2"><label>${t('unit')}</label><input class="form-control" id="medUnit" value="${med?.unit || 'Tablet'}"></div>
+                            <div class="mb-2"><label>${t('stock')}</label><input type="number" class="form-control" id="medStock" value="${med?.stock || 0}"></div>
+                            <div class="mb-2"><label>${t('minStock')}</label><input type="number" class="form-control" id="medMinStock" value="${med?.minStock || 10}"></div>
+                            <div class="mb-2"><label>${t('wholesalePrice')}</label><input type="number" class="form-control" id="medPrice" value="${med?.wholesalePrice || 0}"></div>
+                            <div class="mb-2"><label>${t('purchasePrice')}</label><input type="number" class="form-control" id="medPurchase" value="${med?.purchasePrice || 0}"></div>
+                            <div class="mb-2"><label>${t('expiry')}</label><input type="date" class="form-control" id="medExpiry" value="${med?.expiry || ''}"></div>
+                            <div class="mb-2"><label>${t('batch')}</label><input class="form-control" id="medBatch" value="${med?.batch || ''}"></div>
+                            <div class="mb-2"><label>${t('notes')}</label><textarea class="form-control" id="medNotes">${med?.notes || ''}</textarea></div>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-outline-custom" data-bs-dismiss="modal">${t('cancel')}</button><button class="btn btn-primary-custom" onclick="saveMedicine()">${t('save')}</button></div>
+                    </div></div></div>`;
+                document.getElementById('modalContainer').innerHTML = modalHtml;
+                new bootstrap.Modal(document.getElementById('medicineModal')).show();
+            };
+            window.saveMedicine = () => {
+                const meds = getMedicines();
+                const data = {
+                    id: document.getElementById('medId').value || 'med_' + Date.now(),
+                    name: document.getElementById('medName').value.trim(),
+                    category: document.getElementById('medCategory').value,
+                    unit: document.getElementById('medUnit').value,
+                    stock: parseInt(document.getElementById('medStock').value) || 0,
+                    minStock: parseInt(document.getElementById('medMinStock').value) || 10,
+                    wholesalePrice: parseFloat(document.getElementById('medPrice').value) || 0,
+                    purchasePrice: parseFloat(document.getElementById('medPurchase').value) || 0,
+                    expiry: document.getElementById('medExpiry').value,
+                    batch: document.getElementById('medBatch').value,
+                    notes: document.getElementById('medNotes').value
+                };
+                if (!data.name) { showToast('Name required', 'warning'); return; }
+                const idx = meds.findIndex(m => m.id === data.id);
+                if (idx >= 0) meds[idx] = data; else meds.push(data);
+                save('medicines', meds);
+                bootstrap.Modal.getInstance(document.getElementById('medicineModal')).hide();
+                showToast('Medicine saved!', 'success');
+                renderMedicines();
+            };
+
+            // Customers CRUD
+            function renderCustomers() {
+                const custs = getCustomers();
+                let html = `<div class="d-flex justify-content-between align-items-center mb-3"><h5>${t('customers')}</h5><button class="btn btn-primary-custom" onclick="openCustomerModal()"><i class="fas fa-plus me-2"></i>${t('addCustomer')}</button></div>`;
+                if (!custs.length) html += '<div class="empty-state"><i class="fas fa-store fa-2x"></i><p>No customers yet</p></div>';
+                else {
+                    html += `<div class="table-responsive"><table class="table table-hover"><thead><tr><th>${t('name')}</th><th>${t('contact')}</th><th>${t('address')}</th><th>${t('actions')}</th></tr></thead><tbody>`;
+                    custs.forEach(c => html += `<tr><td>${c.name}</td><td>${c.phone || '-'}</td><td>${c.address || '-'}</td><td><button class="btn btn-sm btn-outline-primary" onclick="openCustomerModal('${c.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('customers','${c.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
+                    html += '</tbody></table></div>';
+                }
+                document.getElementById('page-customers').innerHTML = html;
+            }
+            window.openCustomerModal = (id = null) => {
+                const custs = getCustomers(); const cust = id ? custs.find(c => c.id === id) : null;
+                const modalHtml = `
+                <div class="modal fade modal-custom" id="customerModal">
+                    <div class="modal-dialog"><div class="modal-content">
+                        <div class="modal-header"><h5>${id ? t('edit') : t('addCustomer')}</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                        <div class="modal-body">
+                            <input type="hidden" id="custId" value="${id || ''}">
+                            <div class="mb-2"><label>${t('name')} *</label><input class="form-control" id="custName" value="${cust?.name || ''}"></div>
+                            <div class="mb-2"><label>${t('contact')}</label><input class="form-control" id="custPhone" value="${cust?.phone || ''}"></div>
+                            <div class="mb-2"><label>${t('address')}</label><textarea class="form-control" id="custAddress">${cust?.address || ''}</textarea></div>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-outline-custom" data-bs-dismiss="modal">${t('cancel')}</button><button class="btn btn-primary-custom" onclick="saveCustomer()">${t('save')}</button></div>
+                    </div></div></div>`;
+                document.getElementById('modalContainer').innerHTML = modalHtml;
+                new bootstrap.Modal(document.getElementById('customerModal')).show();
+            };
+            window.saveCustomer = () => {
+                const custs = getCustomers();
+                const data = {
+                    id: document.getElementById('custId').value || 'cust_' + Date.now(),
+                    name: document.getElementById('custName').value.trim(),
+                    phone: document.getElementById('custPhone').value,
+                    address: document.getElementById('custAddress').value
+                };
+                if (!data.name) { showToast('Name required', 'warning'); return; }
+                const idx = custs.findIndex(c => c.id === data.id);
+                if (idx >= 0) custs[idx] = data; else custs.push(data);
+                save('customers', custs);
+                bootstrap.Modal.getInstance(document.getElementById('customerModal')).hide();
+                showToast('Customer saved!', 'success');
+                renderCustomers();
+            };
+
+            // Orders CRUD (including payment tracking)
+            function renderOrders() {
+                const ords = getOrders(), custs = getCustomers(), meds = getMedicines();
+                let html = `<div class="d-flex justify-content-between align-items-center mb-3"><h5>${t('orders')}</h5><button class="btn btn-primary-custom" onclick="openOrderModal()"><i class="fas fa-plus me-2"></i>${t('newOrder')}</button></div>`;
+                if (!ords.length) html += '<div class="empty-state"><i class="fas fa-shopping-cart fa-2x"></i><p>No orders yet</p></div>';
+                else {
+                    html += `<div class="table-responsive"><table class="table table-hover"><thead><tr><th>${t('orderDate')}</th><th>${t('customer')}</th><th>${t('items')}</th><th>${t('total')}</th><th>${t('paid')}</th><th>${t('balance')}</th><th>${t('status')}</th><th>${t('actions')}</th></tr></thead><tbody>`;
+                    ords.forEach(o => {
+                        const cust = custs.find(c => c.id === o.customerId);
+                        const itemsStr = o.items.map(i => { const m = meds.find(x => x.id === i.medicineId); return (m?.name || '?') + ' x' + i.quantity; }).join(', ');
+                        const balance = o.totalAmount - o.paidAmount;
+                        html += `<tr><td>${o.date}</td><td>${cust?.name || 'Unknown'}</td><td>${itemsStr}</td><td>₹${o.totalAmount}</td><td>₹${o.paidAmount}</td><td>₹${balance}</td><td>${balance <= 0 ? '✅ Paid' : '❌ Pending'}</td><td><button class="btn btn-sm btn-outline-primary" onclick="openOrderModal('${o.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-info" onclick="openPaymentModal('${o.id}')"><i class="fas fa-rupee-sign"></i></button> <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('orders','${o.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                    });
+                    html += '</tbody></table></div>';
+                }
+                document.getElementById('page-orders').innerHTML = html;
+            }
+            window.openOrderModal = (id = null) => {
+                const ords = getOrders(), custs = getCustomers(), meds = getMedicines();
+                const order = id ? ords.find(o => o.id === id) : null;
+                const modalHtml = `
+                <div class="modal fade modal-custom" id="orderModal">
+                    <div class="modal-dialog modal-lg"><div class="modal-content">
+                        <div class="modal-header"><h5>${id ? t('edit') : t('newOrder')}</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                        <div class="modal-body">
+                            <input type="hidden" id="orderId" value="${id || ''}">
+                            <div class="row mb-2"><div class="col"><label>${t('customer')} *</label><select class="form-select" id="orderCustomer">${custs.map(c => `<option value="${c.id}" ${order?.customerId === c.id ? 'selected' : ''}>${c.name}</option>`).join('')}</select></div>
+                            <div class="col"><label>${t('orderDate')} *</label><input type="date" class="form-control" id="orderDate" value="${order?.date || new Date().toISOString().split('T')[0]}"></div></div>
+                            <label class="fw-semibold">${t('items')}</label>
+                            <div id="orderItemsContainer">${(order?.items || []).map((item, idx) => `
+                                <div class="row g-2 mb-2 order-item-row">
+                                    <div class="col-5"><select class="form-select med-select">${meds.map(m => `<option value="${m.id}" ${item.medicineId === m.id ? 'selected' : ''}>${m.name}</option>`).join('')}</select></div>
+                                    <div class="col-3"><input type="number" class="form-control qty-input" value="${item.quantity}" placeholder="Qty"></div>
+                                    <div class="col-2"><input type="number" class="form-control price-input" value="${item.price || 0}" placeholder="Price"></div>
+                                    <div class="col-2"><button class="btn btn-sm btn-danger" onclick="this.closest('.order-item-row').remove()"><i class="fas fa-times"></i></button></div>
+                                </div>`).join('')}</div>
+                            <button type="button" class="btn btn-sm btn-outline-primary mt-1" onclick="addOrderItemRow()">+ Add Medicine</button>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-outline-custom" data-bs-dismiss="modal">${t('cancel')}</button><button class="btn btn-primary-custom" onclick="saveOrder()">${t('save')}</button></div>
+                    </div></div></div>`;
+                document.getElementById('modalContainer').innerHTML = modalHtml;
+                if (!order) document.getElementById('orderItemsContainer').innerHTML = '';
+                new bootstrap.Modal(document.getElementById('orderModal')).show();
+            };
+            window.addOrderItemRow = () => {
+                const meds = getMedicines();
+                const row = document.createElement('div');
+                row.className = 'row g-2 mb-2 order-item-row';
+                row.innerHTML = `
+                    <div class="col-5"><select class="form-select med-select">${meds.map(m => `<option value="${m.id}">${m.name}</option>`).join('')}</select></div>
+                    <div class="col-3"><input type="number" class="form-control qty-input" placeholder="Qty" value="1"></div>
+                    <div class="col-2"><input type="number" class="form-control price-input" placeholder="Price"></div>
+                    <div class="col-2"><button class="btn btn-sm btn-danger" onclick="this.closest('.order-item-row').remove()"><i class="fas fa-times"></i></button></div>`;
+                document.getElementById('orderItemsContainer').appendChild(row);
+            };
+            window.saveOrder = () => {
+                const ords = getOrders();
+                const orderId = document.getElementById('orderId').value || 'ord_' + Date.now();
+                const customerId = document.getElementById('orderCustomer').value;
+                const date = document.getElementById('orderDate').value;
+                const items = [];
+                document.querySelectorAll('.order-item-row').forEach(row => {
+                    const sel = row.querySelector('.med-select');
+                    const qty = row.querySelector('.qty-input');
+                    const price = row.querySelector('.price-input');
+                    if (sel && qty) items.push({ medicineId: sel.value, quantity: parseInt(qty.value) || 1, price: parseFloat(price?.value) || 0 });
+                });
+                if (!items.length) { showToast('Add at least one item', 'warning'); return; }
+                const totalAmount = items.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+                const existingOrder = ords.find(o => o.id === orderId);
+                const paidAmount = existingOrder ? existingOrder.paidAmount : 0;
+                const data = { id: orderId, customerId, date, items, totalAmount, paidAmount, createdAt: existingOrder?.createdAt || new Date().toISOString() };
+                if (existingOrder) {
+                    const idx = ords.findIndex(o => o.id === orderId);
+                    ords[idx] = data;
+                } else ords.push(data);
+                save('orders', ords);
+                bootstrap.Modal.getInstance(document.getElementById('orderModal')).hide();
+                showToast('Order saved!', 'success');
+                renderOrders();
+            };
+            window.openPaymentModal = (orderId) => {
+                const order = getOrders().find(o => o.id === orderId);
+                if (!order) return;
+                const modalHtml = `
+                <div class="modal fade modal-custom" id="paymentModal">
+                    <div class="modal-dialog"><div class="modal-content">
+                        <div class="modal-header"><h5>${t('addPayment')} - ₹${order.totalAmount - order.paidAmount} remaining</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                        <div class="modal-body">
+                            <input type="hidden" id="payOrderId" value="${orderId}">
+                            <div class="mb-2"><label>${t('amount')} *</label><input type="number" class="form-control" id="payAmount" placeholder="Amount"></div>
+                            <div class="mb-2"><label>${t('date')}</label><input type="date" class="form-control" id="payDate" value="${new Date().toISOString().split('T')[0]}"></div>
+                            <div class="mb-2"><label>${t('notes')}</label><input class="form-control" id="payNotes"></div>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-outline-custom" data-bs-dismiss="modal">${t('cancel')}</button><button class="btn btn-primary-custom" onclick="savePayment()">${t('save')}</button></div>
+                    </div></div></div>`;
+                document.getElementById('modalContainer').innerHTML = modalHtml;
+                new bootstrap.Modal(document.getElementById('paymentModal')).show();
+            };
+            window.savePayment = () => {
+                const orderId = document.getElementById('payOrderId').value;
+                const amount = parseFloat(document.getElementById('payAmount').value) || 0;
+                if (amount <= 0) { showToast('Enter valid amount', 'warning'); return; }
+                const orders = getOrders();
+                const order = orders.find(o => o.id === orderId);
+                if (!order) return;
+                order.paidAmount += amount;
+                const payments = getPayments();
+                payments.push({ id: 'pay_' + Date.now(), orderId, amount, date: document.getElementById('payDate').value, notes: document.getElementById('payNotes').value, createdAt: new Date().toISOString() });
+                save('payments', payments);
+                save('orders', orders);
+                bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
+                showToast('Payment recorded!', 'success');
+                renderOrders();
+            };
+
+            function renderPayments() {
+                const payments = getPayments(), orders = getOrders(), custs = getCustomers();
+                let html = `<h5>${t('payments')}</h5>`;
+                if (!payments.length) html += '<div class="empty-state"><i class="fas fa-rupee-sign fa-2x"></i><p>No payments recorded</p></div>';
+                else {
+                    html += `<div class="table-responsive"><table class="table"><thead><tr><th>${t('date')}</th><th>${t('customer')}</th><th>${t('amount')}</th><th>${t('notes')}</th></tr></thead><tbody>`;
+                    payments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(p => {
+                        const order = orders.find(o => o.id === p.orderId);
+                        const cust = order ? custs.find(c => c.id === order.customerId) : null;
+                        html += `<tr><td>${p.date}</td><td>${cust?.name || '?'}</td><td>₹${p.amount}</td><td>${p.notes || '-'}</td></tr>`;
+                    });
+                    html += '</tbody></table></div>';
+                }
+                document.getElementById('page-payments').innerHTML = html;
+            }
+
+            // Returns
+            function renderReturns() {
+                const returns = getReturns(), meds = getMedicines(), custs = getCustomers();
+                let html = `<div class="d-flex justify-content-between align-items-center mb-3"><h5>${t('returns')}</h5><button class="btn btn-primary-custom" onclick="openReturnModal()"><i class="fas fa-plus me-2"></i>${t('addReturn')}</button></div>`;
+                if (!returns.length) html += '<div class="empty-state"><i class="fas fa-undo fa-2x"></i><p>No returns recorded</p></div>';
+                else {
+                    html += `<div class="table-responsive"><table class="table table-hover"><thead><tr><th>Date</th><th>Medicine</th><th>Customer</th><th>Qty</th><th>Reason</th><th>Action</th></tr></thead><tbody>`;
+                    returns.forEach(r => {
+                        const med = meds.find(m => m.id === r.medicineId);
+                        const cust = custs.find(c => c.id === r.customerId);
+                        html += `<tr><td>${r.date}</td><td>${med?.name || '?'}</td><td>${cust?.name || 'Walk-in'}</td><td>${r.quantity}</td><td>${r.reason || '-'}</td><td><button class="btn btn-sm btn-outline-primary" onclick="openReturnModal('${r.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('returns','${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                    });
+                    html += '</tbody></table></div>';
+                }
+                document.getElementById('page-returns').innerHTML = html;
+            }
+            window.openReturnModal = (id = null) => {
+                const returns = getReturns(), meds = getMedicines(), custs = getCustomers();
+                const ret = id ? returns.find(r => r.id === id) : null;
+                const modalHtml = `
+                <div class="modal fade modal-custom" id="returnModal">
+                    <div class="modal-dialog"><div class="modal-content">
+                        <div class="modal-header"><h5>${id ? 'Edit Return' : 'Record Return'}</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                        <div class="modal-body">
+                            <input type="hidden" id="returnId" value="${id || ''}">
+                            <div class="mb-2"><label>Medicine *</label><select class="form-select" id="retMed">${meds.map(m => `<option value="${m.id}" ${ret?.medicineId === m.id ? 'selected' : ''}>${m.name}</option>`).join('')}</select></div>
+                            <div class="mb-2"><label>Customer</label><select class="form-select" id="retCust"><option value="">-- None --</option>${custs.map(c => `<option value="${c.id}" ${ret?.customerId === c.id ? 'selected' : ''}>${c.name}</option>`).join('')}</select></div>
+                            <div class="mb-2"><label>Quantity *</label><input type="number" class="form-control" id="retQty" value="${ret?.quantity || 1}"></div>
+                            <div class="mb-2"><label>Reason</label><input class="form-control" id="retReason" value="${ret?.reason || ''}"></div>
+                            <div class="mb-2"><label>Date</label><input type="date" class="form-control" id="retDate" value="${ret?.date || new Date().toISOString().split('T')[0]}"></div>
+                            <div class="mb-2"><label>Refund Amount (if any)</label><input type="number" class="form-control" id="retRefund" value="${ret?.refund || 0}"></div>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-outline-custom" data-bs-dismiss="modal">${t('cancel')}</button><button class="btn btn-primary-custom" onclick="saveReturn()">${t('save')}</button></div>
+                    </div></div></div>`;
+                document.getElementById('modalContainer').innerHTML = modalHtml;
+                new bootstrap.Modal(document.getElementById('returnModal')).show();
+            };
+            window.saveReturn = () => {
+                const returns = getReturns();
+                const data = {
+                    id: document.getElementById('returnId').value || 'ret_' + Date.now(),
+                    medicineId: document.getElementById('retMed').value,
+                    customerId: document.getElementById('retCust').value || null,
+                    quantity: parseInt(document.getElementById('retQty').value) || 1,
+                    reason: document.getElementById('retReason').value,
+                    date: document.getElementById('retDate').value,
+                    refund: parseFloat(document.getElementById('retRefund').value) || 0,
+                    createdAt: new Date().toISOString()
+                };
+                if (!data.medicineId) { showToast('Select a medicine', 'warning'); return; }
+                const meds = getMedicines();
+                const med = meds.find(m => m.id === data.medicineId);
+                if (med) {
+                    med.stock += data.quantity;
+                    save('medicines', meds);
+                }
+                const idx = returns.findIndex(r => r.id === data.id);
+                if (idx >= 0) returns[idx] = data; else returns.push(data);
+                save('returns', returns);
+                bootstrap.Modal.getInstance(document.getElementById('returnModal')).hide();
+                showToast('Return recorded!', 'success');
+                renderReturns();
+            };
+
+            // Reminders
+            function renderReminders() {
+                const reminders = getReminders();
+                let html = `<div class="d-flex justify-content-between align-items-center mb-3"><h5>${t('reminders')}</h5><button class="btn btn-primary-custom" onclick="openReminderModal()"><i class="fas fa-plus me-2"></i>${t('addReminder')}</button></div>`;
+                if (!reminders.length) html += '<div class="empty-state"><i class="fas fa-bell fa-2x"></i><p>No reminders set</p></div>';
+                else {
+                    html += `<div class="table-responsive"><table class="table"><thead><tr><th>Reminder</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead><tbody>`;
+                    reminders.forEach(r => {
+                        const isPast = new Date(r.dueDate) < new Date();
+                        html += `<tr class="${isPast ? 'table-danger' : ''}"><td>${r.text}</td><td>${r.dueDate}</td><td>${isPast ? '⚠️ Overdue' : '⏳ Pending'}</td><td><button class="btn btn-sm btn-outline-primary" onclick="openReminderModal('${r.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('reminders','${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                    });
+                    html += '</tbody></table></div>';
+                }
+                document.getElementById('page-reminders').innerHTML = html;
+            }
+            window.openReminderModal = (id = null) => {
+                const reminders = getReminders();
+                const rem = id ? reminders.find(r => r.id === id) : null;
+                const modalHtml = `
+                <div class="modal fade modal-custom" id="reminderModal">
+                    <div class="modal-dialog"><div class="modal-content">
+                        <div class="modal-header"><h5>${id ? 'Edit Reminder' : 'Add Reminder'}</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                        <div class="modal-body">
+                            <input type="hidden" id="remId" value="${id || ''}">
+                            <div class="mb-2"><label>Reminder Text *</label><input class="form-control" id="remText" value="${rem?.text || ''}"></div>
+                            <div class="mb-2"><label>Due Date *</label><input type="date" class="form-control" id="remDueDate" value="${rem?.dueDate || ''}"></div>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-outline-custom" data-bs-dismiss="modal">${t('cancel')}</button><button class="btn btn-primary-custom" onclick="saveReminder()">${t('save')}</button></div>
+                    </div></div></div>`;
+                document.getElementById('modalContainer').innerHTML = modalHtml;
+                new bootstrap.Modal(document.getElementById('reminderModal')).show();
+            };
+            window.saveReminder = () => {
+                const reminders = getReminders();
+                const data = {
+                    id: document.getElementById('remId').value || 'rem_' + Date.now(),
+                    text: document.getElementById('remText').value.trim(),
+                    dueDate: document.getElementById('remDueDate').value,
+                    createdAt: new Date().toISOString()
+                };
+                if (!data.text || !data.dueDate) { showToast('Text and date required', 'warning'); return; }
+                const idx = reminders.findIndex(r => r.id === data.id);
+                if (idx >= 0) reminders[idx] = data; else reminders.push(data);
+                save('reminders', reminders);
+                bootstrap.Modal.getInstance(document.getElementById('reminderModal')).hide();
+                showToast('Reminder saved!', 'success');
+                renderReminders();
+            };
+
+            // Settings
+            function populateSettings() {
+                const config = getDriveConfig();
+                document.getElementById('page-settings').innerHTML = `
+                    <div class="card-custom"><h5>${t('exportData')} / ${t('importData')}</h5>
+                        <button class="btn btn-outline-custom" onclick="exportData()"><i class="fas fa-download me-2"></i>${t('exportData')}</button>
+                        <input type="file" id="importFileInput" accept=".json" style="display:none;" onchange="importData(event)">
+                        <button class="btn btn-outline-custom ms-2" onclick="document.getElementById('importFileInput').click()"><i class="fas fa-upload me-2"></i>${t('importData')}</button>
+                    </div>
+                    <div class="card-custom"><h5><i class="fab fa-google-drive me-2"></i>${t('googleDriveSync')}</h5>
+                        <div class="mb-2"><label class="form-label small">${t('clientId')}</label><input type="text" class="form-control form-control-sm" id="gdriveClientId" placeholder="Enter OAuth Client ID" value="${config.clientId || ''}"></div>
+                        <div class="mb-2"><label class="form-label small">${t('folderName')}</label><input type="text" class="form-control form-control-sm" id="gdriveFolderName" placeholder="e.g., MAHakimBackups" value="${config.folderName || 'MAHakimBackups'}"></div>
+                        <button class="btn btn-sm btn-primary-custom mb-2" onclick="saveDriveConfig()">💾 Save Config</button>
+                        <div class="d-flex gap-2">
+                            <button class="google-drive-btn" onclick="uploadToGoogleDrive()"><i class="fab fa-google-drive"></i> ${t('upload')}</button>
+                            <button class="google-drive-btn" onclick="listGoogleDriveFiles()">📂 ${t('restore')}</button>
+                        </div>
+                        <div id="driveStatus" class="mt-2 small"></div>
+                        <div id="driveFileList" class="mt-2 small"></div>
+                    </div>
+                    <div class="card-custom"><h5>Session Timeout</h5>
+                        <label>Auto-lock after (minutes):</label>
+                        <input type="number" class="form-control form-control-sm" id="timeoutMinutes" value="${localStorage.getItem(APP_PREFIX + 'timeout_minutes') || '5'}" onchange="saveTimeoutSetting()">
+                    </div>`;
+            }
+            function getDriveConfig() { return load('gdrive_config', { clientId: '', folderName: 'MAHakimBackups' }); }
+            window.saveDriveConfig = () => {
+                save('gdrive_config', { clientId: document.getElementById('gdriveClientId').value.trim(), folderName: document.getElementById('gdriveFolderName').value.trim() });
+                showToast('Drive config saved', 'success');
+            };
+            window.exportData = () => {
+                const data = {
+                    medicines: getMedicines(), customers: getCustomers(), orders: getOrders(),
+                    payments: getPayments(), returns: getReturns(), reminders: getReminders(),
+                    exportDate: new Date().toISOString()
+                };
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `mahakim_backup_${new Date().toISOString().split('T')[0]}.json`; a.click();
+                showToast('Exported!', 'success');
+            };
+            window.importData = (event) => {
+                const file = event.target.files[0]; if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (confirm('Replace all data with this backup?')) {
+                            save('medicines', data.medicines || []);
+                            save('customers', data.customers || []);
+                            save('orders', data.orders || []);
+                            save('payments', data.payments || []);
+                            save('returns', data.returns || []);
+                            save('reminders', data.reminders || []);
+                            showToast('Imported!', 'success');
+                            refreshCurrentPage();
+                        }
+                    } catch { showToast('Invalid file', 'error'); }
+                };
+                reader.readAsText(file);
+                event.target.value = '';
+            };
+
+            // Google Drive Sync (adapted from TaskFlow)
+            async function ensureGoogleAuth() {
+                if (typeof google === 'undefined' || typeof google.accounts === 'undefined') {
+                    const loaded = await new Promise((resolve) => {
+                        let waited = 0;
+                        const check = () => {
+                            if (typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) resolve(true);
+                            else if (waited >= 10000) resolve(false);
+                            else { waited += 300; setTimeout(check, 300); }
+                        }; check();
+                    });
+                    if (!loaded) { showToast('Google sign-in failed to load.', 'error'); return null; }
+                }
+                const config = getDriveConfig();
+                if (!config.clientId) { showToast('Please enter Client ID', 'warning'); return null; }
+                if (!window.googleTokenClient) {
+                    window.googleTokenClient = google.accounts.oauth2.initTokenClient({
+                        client_id: config.clientId,
+                        scope: 'https://www.googleapis.com/auth/drive.file',
+                        callback: (tokenResponse) => {
+                            if (tokenResponse && tokenResponse.access_token) {
+                                localStorage.setItem('gdrive_token_' + currentUser.id, tokenResponse.access_token);
+                            }
+                        }
+                    });
+                }
+                let token = localStorage.getItem('gdrive_token_' + currentUser.id);
+                if (token) {
+                    try {
+                        const res = await fetch('https://www.googleapis.com/drive/v3/about?fields=user', { headers: { Authorization: 'Bearer ' + token } });
+                        if (!res.ok) { localStorage.removeItem('gdrive_token_' + currentUser.id); token = null; }
+                    } catch { token = null; }
+                }
+                if (!token) {
+                    window.googleTokenClient.requestAccessToken();
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    token = localStorage.getItem('gdrive_token_' + currentUser.id);
+                }
+                return token;
+            }
+            async function getOrCreateDriveFolder(token, folderName) {
+                const res = await fetch(`https://www.googleapis.com/drive/v3/files?q=name='${folderName}' and mimeType='application/vnd.google-apps.folder' and trashed=false&fields=files(id,name)`, { headers: { Authorization: 'Bearer ' + token } });
+                const data = await res.json();
+                if (data.files && data.files.length) return data.files[0].id;
+                const create = await fetch('https://www.googleapis.com/drive/v3/files', { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ name: folderName, mimeType: 'application/vnd.google-apps.folder' }) });
+                const folder = await create.json();
+                return folder.id || null;
+            }
+            window.uploadToGoogleDrive = async () => {
+                const statusEl = document.getElementById('driveStatus');
+                statusEl.textContent = '⏳ Uploading...';
+                const token = await ensureGoogleAuth();
+                if (!token) { statusEl.textContent = '❌ Authentication failed.'; return; }
+                const config = getDriveConfig();
+                const data = {
+                    medicines: getMedicines(), customers: getCustomers(), orders: getOrders(),
+                    payments: getPayments(), returns: getReturns(), reminders: getReminders(),
+                    exportDate: new Date().toISOString()
+                };
+                const fileName = `mahakim_backup_${new Date().toISOString().split('T')[0]}.json`;
+                const content = JSON.stringify(data, null, 2);
+                try {
+                    const folderId = await getOrCreateDriveFolder(token, config.folderName);
+                    if (!folderId) { statusEl.textContent = '❌ Folder not accessible.'; return; }
+                    const search = await fetch(`https://www.googleapis.com/drive/v3/files?q=name='${fileName}' and '${folderId}' in parents and trashed=false&fields=files(id)`, { headers: { Authorization: 'Bearer ' + token } });
+                    const existing = await search.json();
+                    let resp;
+                    if (existing.files && existing.files.length) {
+                        resp = await fetch(`https://www.googleapis.com/upload/drive/v3/files/${existing.files[0].id}?uploadType=media`, { method: 'PATCH', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: content });
+                    } else {
+                        const metadata = { name: fileName, parents: [folderId], mimeType: 'application/json' };
+                        const boundary = 'mahakim_boundary';
+                        const body = [`--${boundary}`, 'Content-Type: application/json; charset=UTF-8', '', JSON.stringify(metadata), `--${boundary}`, 'Content-Type: application/json', '', content, `--${boundary}--`].join('\r\n');
+                        resp = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'multipart/related; boundary="' + boundary + '"' }, body });
+                    }
+                    if (resp.ok) { statusEl.textContent = `✅ Backup uploaded (${fileName})`; showToast('Backed up to Drive!', 'success'); }
+                    else throw new Error('Upload failed');
+                } catch (e) { statusEl.textContent = '❌ Error: ' + e.message; }
+            };
+            window.listGoogleDriveFiles = async () => {
+                const statusEl = document.getElementById('driveStatus');
+                const listEl = document.getElementById('driveFileList');
+                statusEl.textContent = '⏳ Loading...';
+                const token = await ensureGoogleAuth();
+                if (!token) { statusEl.textContent = '❌ Auth failed.'; return; }
+                const config = getDriveConfig();
+                const folderId = await getOrCreateDriveFolder(token, config.folderName);
+                if (!folderId) { listEl.innerHTML = 'Folder not found.'; statusEl.textContent = ''; return; }
+                const res = await fetch(`https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents and trashed=false&orderBy=createdTime desc&pageSize=10`, { headers: { Authorization: 'Bearer ' + token } });
+                const data = await res.json();
+                if (data.files && data.files.length) {
+                    listEl.innerHTML = '<strong>📂 Backups:</strong><br>' + data.files.map(f => `<div class="d-flex justify-content-between"><span>📄 ${f.name}</span><button class="btn btn-sm btn-outline-custom" onclick="restoreFromGoogleDrive('${f.id}')">Restore</button></div>`).join('');
+                } else listEl.innerHTML = 'No backups found.';
+                statusEl.textContent = '✅ Files loaded.';
+            };
+            window.restoreFromGoogleDrive = async (fileId) => {
+                if (!confirm('Restore data from this backup?')) return;
+                const statusEl = document.getElementById('driveStatus');
+                statusEl.textContent = '⏳ Restoring...';
+                const token = await ensureGoogleAuth();
+                if (!token) { statusEl.textContent = '❌ Auth failed.'; return; }
+                try {
+                    const res = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, { headers: { Authorization: 'Bearer ' + token } });
+                    const data = await res.json();
+                    save('medicines', data.medicines || []);
+                    save('customers', data.customers || []);
+                    save('orders', data.orders || []);
+                    save('payments', data.payments || []);
+                    save('returns', data.returns || []);
+                    save('reminders', data.reminders || []);
+                    showToast('Data restored!', 'success');
+                    statusEl.textContent = '✅ Restoration complete.';
+                    refreshCurrentPage();
+                } catch (e) { statusEl.textContent = '❌ Restore failed: ' + e.message; }
+            };
+
+            // Session & Startup
+            function startAppWithUser() {
+                document.getElementById('authContainer').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'flex';
+                document.getElementById('userDisplayName').textContent = currentUser.name;
+                document.getElementById('userAvatarLetter').textContent = currentUser.name.charAt(0).toUpperCase();
+                applyLanguage();
+                navigateTo('dashboard');
+                resetSessionTimer();
+            }
+            function init() {
+                const uid = localStorage.getItem(APP_PREFIX + 'current_user_id');
+                if (uid) {
+                    const u = users().find(u => u.id === uid);
+                    if (u) { currentUser = u; startAppWithUser(); return; }
+                }
+                document.getElementById('authContainer').style.display = 'flex';
+            }
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (login(document.getElementById('loginEmail').value, document.getElementById('loginPassword').value)) startAppWithUser();
+            });
+            document.getElementById('registerForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (register(document.getElementById('regName').value, document.getElementById('regEmail').value, document.getElementById('regPassword').value)) {
+                    showLogin(); document.getElementById('loginEmail').value = document.getElementById('regEmail').value;
+                }
+            });
+            document.querySelectorAll('.sidebar-nav .nav-link').forEach(l => l.addEventListener('click', function () { navigateTo(this.dataset.page); }));
+
+            function resetSessionTimer() { clearTimeout(sessionTimer); sessionTimer = setTimeout(lockSession, 5 * 60 * 1000); }
+            function lockSession() { locked = true; document.getElementById('sessionOverlay').classList.add('show'); }
+            window.unlockSession = () => {
+                if (hash(document.getElementById('sessionPassword').value) === currentUser.passwordHash) {
+                    locked = false; document.getElementById('sessionOverlay').classList.remove('show'); resetSessionTimer();
+                } else showToast('Wrong password', 'error');
+            };
+            window.sessionLogout = () => { locked = false; document.getElementById('sessionOverlay').classList.remove('show'); logout(); };
+            document.addEventListener('click', () => { if (currentUser && !locked) resetSessionTimer(); });
+
+            window.saveTimeoutSetting = () => {
+                localStorage.setItem(APP_PREFIX + 'timeout_minutes', document.getElementById('timeoutMinutes').value);
+                resetSessionTimer();
+            };
+
+            window.deleteItem = (type, id) => {
+                if (!confirm('Delete?')) return;
+                const list = load(type);
+                save(type, list.filter(i => i.id !== id));
+                showToast('Deleted', 'success');
+                refreshCurrentPage();
+            };
+
+            init();
+        })();
+    </script>
+</body>
+
+</html>
