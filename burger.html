@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>🍔 MFM Burger Calc | V2.0 Final</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1e1e1f 0%, #2a2a2b 100%);
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-container {
+            max-width: 800px;
+            width: 100%;
+            background: #fff7ed;
+            border-radius: 3rem 3rem 2.5rem 2.5rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+            padding: 2rem 1.8rem;
+            border: 1px solid #ffd7a5;
+            transition: all 0.2s ease;
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #b45309;
+            text-shadow: 2px 2px 0 #fde68a;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.5px;
+        }
+
+        .subhead {
+            text-align: center;
+            color: #78350f;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: #fef3c7;
+            display: inline-block;
+            padding: 0.3rem 1.8rem;
+            border-radius: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            border: 1px solid #fbbf24;
+        }
+
+        .version-badge {
+            background: #dc2626;
+            color: white;
+            font-weight: 800;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .control-panel {
+            background: #1c1917;
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            margin-bottom: 1.8rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6), 0 10px 15px rgba(0, 0, 0, 0.4);
+            color: #f5f5f4;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #292524;
+            padding: 0.5rem 1.2rem;
+            border-radius: 3rem;
+        }
+
+        .input-group label {
+            font-weight: 700;
+            color: #fed7aa;
+            font-size: 1.2rem;
+        }
+
+        .input-group input {
+            width: 85px;
+            padding: 0.7rem 0.5rem;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.4rem;
+            background: #fef7ed;
+            border: 2px solid #f59e0b;
+            border-radius: 1.5rem;
+            color: #78350f;
+            outline: none;
+        }
+
+        .btn {
+            background: #f59e0b;
+            border: none;
+            color: #1c1917;
+            font-weight: 800;
+            padding: 0.75rem 1.8rem;
+            border-radius: 3rem;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            background: linear-gradient(to bottom, #fbbf24, #d97706);
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.5);
+            transition: 0.2s;
+            border: 1px solid #fde68a;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to bottom, #fcd34d, #b45309);
+            box-shadow: 0 6px 14px #f59e0b80;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin: 1.5rem 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            background: #e7e5e4;
+            border: none;
+            padding: 0.75rem 1.8rem;
+            border-radius: 2.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #44403c;
+            background: #d6d3d1;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab.active {
+            background: #16a34a;
+            color: white;
+            box-shadow: 0 0 15px #4ade80;
+            border: 1px solid #bbf7d0;
+        }
+
+        .tab.chicken-active {
+            background: #b91c1c;
+            box-shadow: 0 0 18px #f87171;
+            border: 1px solid #fecaca;
+        }
+
+        .tab.fries-tab {
+            background: #f59e0b;
+            color: #1c1917;
+        }
+
+        .tab.fries-active {
+            background: #f59e0b;
+            box-shadow: 0 0 20px #fbbf24;
+            border: 2px solid white;
+            color: #1c1917;
+        }
+
+        .recipe-card {
+            background: #fffbeb;
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+            border: 1px solid #fcd34d;
+            transition: 0.2s;
+        }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin: 1rem 0 0.6rem;
+            color: #92400e;
+            border-left: 8px solid #f59e0b;
+            padding-left: 1rem;
+            background: linear-gradient(to right, #fef9c3, transparent);
+        }
+
+        .ingredient-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffffd6;
+            padding: 0.5rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            border-bottom: 1px dashed #fcd34d;
+            gap: 0.5rem;
+        }
+
+        .ing-name {
+            font-weight: 600;
+            color: #3b2f1e;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            flex: 1;
+        }
+
+        .ing-qty {
+            font-weight: 800;
+            background: #fef3c7;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            color: #92400e;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .spoon-hint {
+            font-weight: 600;
+            color: #b45309;
+            font-size: 0.8rem;
+            background: #fde68a;
+            padding: 0.15rem 0.6rem;
+            border-radius: 1rem;
+            white-space: nowrap;
+        }
+
+        .crunch-box {
+            background: #fef9c7;
+            border-radius: 1.2rem;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            color: #713f12;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .assembly-box {
+            background: #f0fdf4;
+            border: 2px dashed #22c55e;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #14532d;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #a16207;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .sop-box {
+            background: #1c1917;
+            color: #fcd34d;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 500px) {
+            .app-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .ing-row {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <h1>🍔 MFM BURGER <span class="version-badge">V2.0</span></h1>
+        <div style="text-align: center;"><span class="subhead">Production Ready · Auto Scale</span></div>
+
+        <div class="control-panel">
+            <div class="input-group">
+                <label>🍟</label>
+                <input type="number" id="burgerQty" value="6" min="1" max="200" step="1">
+                <span style="color:#fcd34d; font-weight:bold;">Burgers</span>
+            </div>
+            <button class="btn" id="applyBtn"><span>🔄</span> Calculate</button>
+        </div>
+
+        <div class="tabs">
+            <button id="vegTab" class="tab active">🟢 Veg Sauce</button>
+            <button id="chickenTab" class="tab">🔴 Chicken Sauce</button>
+            <button id="crunchTab" class="tab">🥬 Crunch Mix</button>
+            <button id="friesTab" class="tab fries-tab">🍟 Fries</button>
+        </div>
+
+        <div id="dynamicRecipe" class="recipe-card">
+            <!-- JS filled -->
+        </div>
+        <div class="footer-note">
+            ⭐ Sauce rest 12-24h · Shelf life 3-4 din · Consistency is king 🚀
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // ----- Measurement conversion helpers -----
+            const TSP_PER_GRAM = 0.2; // 1 tsp ≈ 5g
+            const TBSP_PER_GRAM = 1 / 15; // 1 tbsp ≈ 15g
+
+            function formatSpoonMeasurement(grams) {
+                if (grams <= 0) return "0";
+
+                if (grams < 1) {
+                    const tsp = grams * TSP_PER_GRAM;
+                    if (tsp < 0.125) return `${grams.toFixed(2)}g`;
+                    const fractions = {
+                        0.125: '⅛',
+                        0.25: '¼',
+                        0.33: '⅓',
+                        0.5: '½',
+                        0.67: '⅔',
+                        0.75: '¾',
+                        0.875: '⅞'
+                    };
+                    let closest = '';
+                    let minDiff = Infinity;
+                    for (const [val, frac] of Object.entries(fractions)) {
+                        const diff = Math.abs(tsp - parseFloat(val));
+                        if (diff < minDiff && diff < 0.1) {
+                            minDiff = diff;
+                            closest = frac;
+                        }
+                    }
+                    if (closest) return `${closest} tsp`;
+                    if (tsp >= 0.1) return `${tsp.toFixed(1)} tsp`;
+                    return `${grams.toFixed(2)}g`;
+                }
+
+                const tbsp = grams * TBSP_PER_GRAM;
+                const tsp = grams * TSP_PER_GRAM;
+
+                if (tbsp >= 0.5) {
+                    const wholeTbsp = Math.floor(tbsp);
+                    const fracTbsp = tbsp - wholeTbsp;
+
+                    const fractions = {
+                        0.125: '⅛',
+                        0.25: '¼',
+                        0.33: '⅓',
+                        0.5: '½',
+                        0.67: '⅔',
+                        0.75: '¾',
+                        0.875: '⅞'
+                    };
+
+                    let fracStr = '';
+                    let minDiff = 0.08;
+                    for (const [val, frac] of Object.entries(fractions)) {
+                        const diff = Math.abs(fracTbsp - parseFloat(val));
+                        if (diff < minDiff) {
+                            minDiff = diff;
+                            fracStr = frac;
+                        }
+                    }
+
+                    if (wholeTbsp === 0 && fracStr) {
+                        return `${fracStr} tbsp`;
+                    } else if (wholeTbsp > 0 && fracStr) {
+                        return `${wholeTbsp}${fracStr} tbsp`;
+                    } else if (wholeTbsp > 0 && fracTbsp < 0.1) {
+                        return `${wholeTbsp} tbsp`;
+                    } else {
+                        return `${tbsp.toFixed(1)} tbsp`;
+                    }
+                } else {
+                    if (tsp < 0.5) return `${tsp.toFixed(1)} tsp`;
+                    const fractions = { 0.5: '½', 0.75: '¾', 1: '1' };
+                    let closest = '';
+                    let minDiff = Infinity;
+                    for (const [val, frac] of Object.entries(fractions)) {
+                        const diff = Math.abs(tsp - parseFloat(val));
+                        if (diff < minDiff && diff < 0.15) {
+                            minDiff = diff;
+                            closest = frac;
+                        }
+                    }
+                    if (closest) return `${closest} tsp`;
+                    return `${tsp.toFixed(1)} tsp`;
+                }
+            }
+
+            // ----- V2.0 BASE RECIPES (for 6 burgers) -----
+            const VEG_SAUCE_V2 = {
+                name: "🟢 MFM Veg Signature Sauce V2.0",
+                items: [
+                    { name: "FunFoods Veg Mayo", gram: 120 },
+                    { name: "Veeba Thousand Island Spread", gram: 35 },
+                    { name: "Kissan Spicy Tomato Ketchup", gram: 18 },
+                    { name: "Veeba Jalapeño Sauce", gram: 15 },
+                    { name: "French's Classic Yellow Mustard", gram: 3 },
+                    { name: "Cornitos Jalapeños (finely chopped)", gram: 12 },
+                    { name: "Jalapeño Brine", gram: 5 },
+                    { name: "Lemon Juice", gram: 2 },
+                    { name: "Garlic Powder", gram: 2 },
+                    { name: "Onion Powder", gram: 2 },
+                    { name: "Smoked Paprika", gram: 1 },
+                    { name: "Oregano", gram: 1 },
+                    { name: "Dry Parsley", gram: 1 },
+                    { name: "Black Pepper", gram: 1.5 },
+                    { name: "MSG (Ajinomoto)", gram: 0.4 },
+                    { name: "Honey", gram: 5 }
+                ]
+            };
+
+            const CHICKEN_SAUCE_V2 = {
+                name: "🔴 MFM Chicken Signature Sauce V2.0",
+                items: [
+                    { name: "FunFoods Veg Mayo", gram: 105 },
+                    { name: "Veeba Thousand Island Spread", gram: 35 },
+                    { name: "Kissan Spicy Tomato Ketchup", gram: 22 },
+                    { name: "Veeba Jalapeño Sauce", gram: 22 },
+                    { name: "French's Classic Yellow Mustard", gram: 8 },
+                    { name: "Worcestershire Sauce", gram: 5 },
+                    { name: "Cornitos Jalapeños (finely chopped)", gram: 15 },
+                    { name: "Jalapeño Brine", gram: 8 },
+                    { name: "Lemon Juice", gram: 3 },
+                    { name: "Garlic Powder", gram: 3 },
+                    { name: "Onion Powder", gram: 2 },
+                    { name: "Smoked Paprika", gram: 2 },
+                    { name: "Dry Parsley", gram: 1 },
+                    { name: "Black Pepper", gram: 2 },
+                    { name: "MSG (Ajinomoto)", gram: 0.5 },
+                    { name: "Honey", gram: 2 }
+                ]
+            };
+
+            const CRUNCH_MIX_V2 = {
+                name: "🥬 Iceberg Signature Crunch Mix V2.0",
+                items: [
+                    { name: "Iceberg (Julienne)", gram: 180 },
+                    { name: "Cornitos Jalapeños (finely chopped)", gram: 18 },
+                    { name: "Extra Virgin Olive Oil", gram: 8 },
+                    { name: "Black Pepper", gram: 1 },
+                    { name: "Celery Salt (optional but recommended)", gram: 1 }
+                ]
+            };
+
+            const FRIES_SEASONING = {
+                name: "🍟 Fries Seasoning (Bonus)",
+                items: [
+                    { name: "Salt", gram: 5 },
+                    { name: "Garlic Powder", gram: 2 },
+                    { name: "Onion Powder", gram: 2 },
+                    { name: "Smoked Paprika", gram: 2 },
+                    { name: "Black Pepper", gram: 1 },
+                    { name: "Oregano", gram: 1 },
+                    { name: "MSG", gram: 1 }
+                ]
+            };
+
+            // Assembly constants V2.0 (per burger)
+            const SAUCE_BOTTOM = 15; // g
+            const SAUCE_CRUNCH_TOSS = 10; // g (≈2 tsp)
+            const CRUNCH_MIX_PER = 30; // g
+            const SAUCE_TOP = 11; // g (10-12g, midpoint 11)
+            const BUTTER_PER_BUN = 5; // g
+
+            // Current state
+            let currentTab = 'veg'; // 'veg', 'chicken', 'crunch', 'fries'
+            let currentQty = 6;
+
+            // DOM
+            const qtyInput = document.getElementById('burgerQty');
+            const applyBtn = document.getElementById('applyBtn');
+            const vegTab = document.getElementById('vegTab');
+            const chickenTab = document.getElementById('chickenTab');
+            const crunchTab = document.getElementById('crunchTab');
+            const friesTab = document.getElementById('friesTab');
+            const dynamicDiv = document.getElementById('dynamicRecipe');
+
+            function scaleItems(baseItems, factor) {
+                return baseItems.map(item => ({
+                    ...item,
+                    gram: parseFloat((item.gram * factor).toFixed(2))
+                }));
+            }
+
+            function updateTabStyles(active) {
+                [vegTab, chickenTab, crunchTab, friesTab].forEach(t => {
+                    t.classList.remove('active', 'chicken-active', 'fries-active');
+                });
+
+                if (active === 'veg') vegTab.classList.add('active');
+                else if (active === 'chicken') chickenTab.classList.add('active', 'chicken-active');
+                else if (active === 'crunch') crunchTab.classList.add('active');
+                else if (active === 'fries') friesTab.classList.add('active', 'fries-active');
+            }
+
+            function renderRecipe(tab, qty) {
+                const factor = qty / 6;
+                let html = '';
+
+                // Header
+                html += `<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+        <span style="background:#1c1917; color:#fbbf24; padding:0.4rem 1.2rem; border-radius:2rem; font-weight:bold;">×${qty} burgers</span>
+      </div>`;
+
+                if (tab === 'veg') {
+                    const items = scaleItems(VEG_SAUCE_V2.items, factor);
+                    html += `<h2 style="color:#16a34a; margin:0 0 0.5rem 0;">🟢 Veg Signature Sauce V2.0</h2>`;
+                    html += `<div class="section-title">🧴 Sauce Ingredients</div><div class="ingredient-list">`;
+                    items.forEach(item => {
+                        html += `<div class="ing-row">
+            <span class="ing-name">🌿 ${item.name}</span>
+            <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
+          </div>`;
+                    });
+                    html += `</div>`;
+
+                    // Assembly for veg
+                    html += renderAssembly('veg', qty);
+                }
+                else if (tab === 'chicken') {
+                    const items = scaleItems(CHICKEN_SAUCE_V2.items, factor);
+                    html += `<h2 style="color:#dc2626; margin:0 0 0.5rem 0;">🔴 Chicken Signature Sauce V2.0</h2>`;
+                    html += `<div class="section-title">🧴 Sauce Ingredients</div><div class="ingredient-list">`;
+                    items.forEach(item => {
+                        html += `<div class="ing-row">
+            <span class="ing-name">🌿 ${item.name}</span>
+            <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
+          </div>`;
+                    });
+                    html += `</div>`;
+
+                    html += renderAssembly('chicken', qty);
+                }
+                else if (tab === 'crunch') {
+                    const items = scaleItems(CRUNCH_MIX_V2.items, factor);
+                    html += `<h2 style="color:#ca8a04; margin:0 0 0.5rem 0;">🥬 Iceberg Signature Crunch Mix V2.0</h2>`;
+                    html += `<div class="crunch-box">⚠️ <strong>Order aane se pehle mat banana.</strong> Sirf order ke time mix karna.</div>`;
+                    html += `<div class="section-title">🥗 Crunch Mix Ingredients</div><div class="ingredient-list">`;
+                    items.forEach(item => {
+                        html += `<div class="ing-row">
+            <span class="ing-name">🧊 ${item.name}</span>
+            <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
+          </div>`;
+                    });
+                    html += `</div>`;
+
+                    html += `<div class="crunch-box">
+          <strong>📋 Order ke time (per burger):</strong><br>
+          🥗 Crunch Mix → <strong>30 g</strong><br>
+          🫙 Sauce → <strong>10 g (≈2 tsp)</strong><br>
+          🔄 Light toss karo (5–10 sec) aur turant burger me lagao.
+        </div>`;
+                }
+                else if (tab === 'fries') {
+                    const items = scaleItems(FRIES_SEASONING.items, factor);
+                    html += `<h2 style="color:#f59e0b; margin:0 0 0.5rem 0;">🍟 Fries Seasoning (Bonus)</h2>`;
+                    html += `<div class="section-title">🧂 Seasoning Mix</div><div class="ingredient-list">`;
+                    items.forEach(item => {
+                        html += `<div class="ing-row">
+            <span class="ing-name">✨ ${item.name}</span>
+            <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
+          </div>`;
+                    });
+                    html += `</div>`;
+                    html += `<div class="crunch-box">🍟 Fries ko shake karke serve karo. Quantity fries ke hisaab se adjust kar sakte ho.</div>`;
+                }
+
+                // SOP footer
+                html += `<div class="sop-box">
+        <strong>⭐ Production SOP (V2.0):</strong><br>
+        🫙 Sauce: 12–24h fridge rest · Shelf life 3–4 din<br>
+        🥬 Iceberg dry rakho · Whole lettuce alag container<br>
+        📦 Order aate hi: Toast → Sauce → Crunch toss → Patty+Cheese → Tomato → Onion → Lettuce → Top bun → Wrap 1-2min rest
+      </div>`;
+
+                dynamicDiv.innerHTML = html;
+            }
+
+            function renderAssembly(type, qty) {
+                const cheeseType = type === 'veg' ? 'Amul White Cheese Slice' : 'Amul Orange Cheese Slice';
+                const pattyType = type === 'veg' ? 'McCain Veg Patty' : 'Meatzza Chicken Patty';
+                const totalButter = BUTTER_PER_BUN * qty;
+                const totalBottomSauce = SAUCE_BOTTOM * qty;
+                const totalCrunchMix = CRUNCH_MIX_PER * qty;
+                const totalTossSauce = SAUCE_CRUNCH_TOSS * qty;
+                const totalTopSauce = SAUCE_TOP * qty;
+
+                return `
+        <div class="assembly-box">
+          <strong>🍔 Assembly (per burger ×${qty}):</strong><br><br>
+          <table style="width:100%; font-size:0.85rem; border-collapse:collapse;">
+            <tr><td style="padding:3px 0;">🧈 Butter (toast)</td><td style="text-align:right; font-weight:bold;">${BUTTER_PER_BUN}g ×${qty} = ${totalButter}g</td></tr>
+            <tr><td style="padding:3px 0;">🟤 Bottom Sauce</td><td style="text-align:right; font-weight:bold;">${SAUCE_BOTTOM}g ×${qty} = ${totalBottomSauce}g (${formatSpoonMeasurement(totalBottomSauce)})</td></tr>
+            <tr><td style="padding:3px 0;">🥗 Crunch Mix</td><td style="text-align:right; font-weight:bold;">${CRUNCH_MIX_PER}g ×${qty} = ${totalCrunchMix}g</td></tr>
+            <tr><td style="padding:3px 0;">🫙 Toss Sauce</td><td style="text-align:right; font-weight:bold;">${SAUCE_CRUNCH_TOSS}g ×${qty} = ${totalTossSauce}g (${formatSpoonMeasurement(totalTossSauce)})</td></tr>
+            <tr><td style="padding:3px 0;">🍗 Patty</td><td style="text-align:right;">${pattyType} ×${qty}</td></tr>
+            <tr><td style="padding:3px 0;">🧀 Cheese</td><td style="text-align:right;">${cheeseType} ×${qty}</td></tr>
+            <tr><td style="padding:3px 0;">🍅 Tomato</td><td style="text-align:right;">1 slice (6-7mm) ×${qty}</td></tr>
+            <tr><td style="padding:3px 0;">🧅 Onion</td><td style="text-align:right;">2-3 rings (ice water soak) ×${qty}</td></tr>
+            <tr><td style="padding:3px 0;">🥬 Whole Lettuce</td><td style="text-align:right;">1 leaf ×${qty}</td></tr>
+            <tr><td style="padding:3px 0;">🔝 Top Sauce</td><td style="text-align:right; font-weight:bold;">10-12g ×${qty} ≈ ${totalTopSauce}g (${formatSpoonMeasurement(totalTopSauce)})</td></tr>
+          </table>
+        </div>
+      `;
+            }
+
+            // Event handlers
+            function onCalculate() {
+                let qty = parseInt(qtyInput.value, 10);
+                if (isNaN(qty) || qty < 1) qty = 1;
+                if (qty > 200) qty = 200;
+                qtyInput.value = qty;
+                currentQty = qty;
+                renderRecipe(currentTab, currentQty);
+            }
+
+            vegTab.addEventListener('click', () => {
+                currentTab = 'veg';
+                updateTabStyles('veg');
+                renderRecipe('veg', currentQty);
+            });
+
+            chickenTab.addEventListener('click', () => {
+                currentTab = 'chicken';
+                updateTabStyles('chicken');
+                renderRecipe('chicken', currentQty);
+            });
+
+            crunchTab.addEventListener('click', () => {
+                currentTab = 'crunch';
+                updateTabStyles('crunch');
+                renderRecipe('crunch', currentQty);
+            });
+
+            friesTab.addEventListener('click', () => {
+                currentTab = 'fries';
+                updateTabStyles('fries');
+                renderRecipe('fries', currentQty);
+            });
+
+            applyBtn.addEventListener('click', onCalculate);
+
+            qtyInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') onCalculate();
+            });
+
+            qtyInput.addEventListener('input', () => {
+                let qty = parseInt(qtyInput.value, 10);
+                if (!isNaN(qty) && qty >= 1 && qty <= 200) {
+                    currentQty = qty;
+                    renderRecipe(currentTab, currentQty);
+                }
+            });
+
+            // Initial render
+            updateTabStyles('veg');
+            renderRecipe('veg', 6);
+            qtyInput.value = 6;
+        })();
+    </script>
+</body>
+
+</html>

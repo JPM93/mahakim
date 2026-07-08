@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>🐟 Alfam + Seafood Master | MFM Commercial</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐟</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0f172a 0%, #1e3a5f 100%);
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-container {
+            max-width: 950px;
+            width: 100%;
+            background: #fffbeb;
+            border-radius: 3rem 3rem 2.5rem 2.5rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
+            padding: 2rem 1.8rem;
+            border: 2px solid #fbbf24;
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1e40af;
+            text-shadow: 2px 2px 0 #fde68a;
+            margin-bottom: 0.3rem;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .subhead {
+            text-align: center;
+            color: #78350f;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            background: #fef3c7;
+            display: inline-block;
+            padding: 0.3rem 1.5rem;
+            border-radius: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+            font-size: 0.85rem;
+            border: 1px solid #fbbf24;
+        }
+
+        .badge {
+            background: #dc2626;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            font-weight: 800;
+        }
+
+        .control-panel {
+            background: #1c1917;
+            border-radius: 2rem;
+            padding: 1.2rem 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+            color: #f5f5f4;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #292524;
+            padding: 0.4rem 1rem;
+            border-radius: 3rem;
+        }
+
+        .input-group label {
+            font-weight: 700;
+            color: #fed7aa;
+            font-size: 1rem;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 75px;
+            padding: 0.6rem 0.4rem;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            background: #fef7ed;
+            border: 2px solid #f59e0b;
+            border-radius: 1.5rem;
+            color: #78350f;
+            outline: none;
+        }
+
+        .input-group select {
+            width: auto;
+            font-size: 0.85rem;
+        }
+
+        .btn {
+            background: #f59e0b;
+            border: none;
+            color: #1c1917;
+            font-weight: 800;
+            padding: 0.65rem 1.5rem;
+            border-radius: 3rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: linear-gradient(to bottom, #fbbf24, #d97706);
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.5);
+            transition: 0.2s;
+            border: 1px solid #fde68a;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to bottom, #fcd34d, #b45309);
+            box-shadow: 0 6px 14px #f59e0b80;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+            margin: 1rem 0 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cat-tab {
+            background: #e7e5e4;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2.5rem;
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #44403c;
+            background: #d6d3d1;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+
+        .cat-tab.active {
+            background: #1e40af;
+            color: white;
+            box-shadow: 0 0 15px #60a5fa;
+            border: 1px solid #bfdbfe;
+        }
+
+        .cat-tab.seafood-active {
+            background: #0891b2;
+            box-shadow: 0 0 15px #22d3ee;
+            border: 1px solid #a5f3fc;
+        }
+
+        .cat-tab.sauce-active {
+            background: #9333ea;
+            box-shadow: 0 0 15px #c084fc;
+            border: 1px solid #e9d5ff;
+        }
+
+        .sub-tabs {
+            display: flex;
+            gap: 0.3rem;
+            justify-content: center;
+            margin: 0.8rem 0 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .sub-tab {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            padding: 0.4rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.72rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #78350f;
+            white-space: nowrap;
+        }
+
+        .sub-tab.active {
+            background: #f59e0b;
+            color: #1c1917;
+            box-shadow: 0 0 10px #fbbf24;
+            border: 1px solid white;
+        }
+
+        .recipe-card {
+            background: #fffbeb;
+            border-radius: 2rem;
+            padding: 1.2rem 1rem;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+            border: 1px solid #fcd34d;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 1rem;
+            margin: 0.8rem 0 0.5rem;
+            color: #78350f;
+            border-left: 6px solid #1e40af;
+            padding-left: 0.8rem;
+            background: linear-gradient(to right, #fef9c3, transparent);
+        }
+
+        .ingredient-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.18rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .ing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffffd6;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.8rem;
+            font-size: 0.78rem;
+            border-bottom: 1px dashed #fcd34d;
+            gap: 0.4rem;
+        }
+
+        .ing-name {
+            font-weight: 600;
+            color: #3b2f1e;
+            flex: 1;
+            font-size: 0.78rem;
+        }
+
+        .ing-qty {
+            font-weight: 800;
+            background: #fef3c7;
+            padding: 0.12rem 0.5rem;
+            border-radius: 2rem;
+            color: #92400e;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .spoon-hint {
+            font-weight: 600;
+            color: #b45309;
+            font-size: 0.7rem;
+            background: #fde68a;
+            padding: 0.08rem 0.4rem;
+            border-radius: 1rem;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border-radius: 1rem;
+            padding: 0.6rem 0.8rem;
+            margin: 0.5rem 0;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.78rem;
+            border: 1px solid #bfdbfe;
+        }
+
+        .danger-box {
+            background: #fef2f2;
+            border: 2px solid #fca5a5;
+            border-radius: 1rem;
+            padding: 0.6rem 0.8rem;
+            margin: 0.5rem 0;
+            color: #991b1b;
+            font-weight: 600;
+            font-size: 0.78rem;
+        }
+
+        .success-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 1rem;
+            padding: 0.6rem 0.8rem;
+            margin: 0.5rem 0;
+            color: #14532d;
+            font-weight: 600;
+            font-size: 0.78rem;
+        }
+
+        .sop-step {
+            background: #1c1917;
+            color: #fcd34d;
+            border-radius: 1rem;
+            padding: 0.6rem 0.8rem;
+            margin: 0.4rem 0;
+            font-size: 0.75rem;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .pairing-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        .pairing-table th {
+            background: #1e40af;
+            color: white;
+            padding: 0.4rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+
+        .pairing-table td {
+            padding: 0.35rem;
+            border-bottom: 1px solid #fcd34d;
+            text-align: center;
+        }
+
+        .pairing-table tr:nth-child(even) {
+            background: #fef9c7;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.72rem;
+            color: #a16207;
+            margin-top: 0.8rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 500px) {
+            .app-container {
+                padding: 1rem 0.6rem;
+            }
+
+            .ing-row {
+                flex-wrap: wrap;
+            }
+
+            .cat-tab,
+            .sub-tab {
+                font-size: 0.65rem;
+                padding: 0.35rem 0.5rem;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <h1>🐟 ALFAM + SEAFOOD <span class="badge">MASTER</span></h1>
+        <div style="text-align: center;"><span class="subhead">Arabic · Goan · Turkish · Frozen Ready</span></div>
+
+        <div class="control-panel">
+            <div class="input-group">
+                <label>⚖️</label>
+                <input type="number" id="batchScale" value="1" min="0.25" max="20" step="0.25">
+                <span style="color:#fcd34d; font-weight:bold;">× Batch</span>
+            </div>
+            <div class="input-group">
+                <label>📐</label>
+                <select id="scaleMode">
+                    <option value="multiply">× Multiply</option>
+                    <option value="kg">Per KG Input</option>
+                </select>
+            </div>
+            <button class="btn" id="applyBtn"><span>🔄</span> Calculate</button>
+        </div>
+
+        <div class="category-tabs" id="categoryTabs">
+            <button class="cat-tab active" data-cat="alfam">🍗 Alfam Chicken</button>
+            <button class="cat-tab" data-cat="seafood">🐟 Seafood Grill</button>
+            <button class="cat-tab" data-cat="sauces">🥣 Sauces</button>
+            <button class="cat-tab" data-cat="pairing">📋 Pairing Guide</button>
+        </div>
+
+        <div class="sub-tabs" id="subTabs"></div>
+
+        <div id="dynamicRecipe" class="recipe-card"></div>
+        <div class="footer-note">🔥 Half-cook → IQF Freeze → -18°C → Final Grill = Restaurant Fresh</div>
+    </div>
+
+    <script>
+        (function () {
+            // ============ RECIPE DATABASE ============
+            const RECIPES = {
+                // ALFAM CHICKEN
+                fullLeg: {
+                    cat: 'alfam',
+                    name: "🍗 PART 1A: Full Leg Alfam",
+                    baseDesc: "12 Full Leg ≈ ~3 KG",
+                    baseKg: 3,
+                    step1: {
+                        title: "🔪 STEP 1: First Marination (20 min)",
+                        items: [
+                            { name: "Lemon juice", gram: 60 },
+                            { name: "Salt", gram: 33, note: "32-35g" },
+                            { name: "Ginger Garlic Paste", gram: 160 },
+                            { name: "Kashmiri chilli", gram: 18 }
+                        ]
+                    },
+                    step2: {
+                        title: "🔥 STEP 2: Main Alfam Marination",
+                        groups: [
+                            {
+                                name: "🥛 Dairy & Fat", items: [
+                                    { name: "Hung curd", gram: 400, note: "380-420g" },
+                                    { name: "Fresh cream", gram: 70 },
+                                    { name: "Melted butter", gram: 35 },
+                                    { name: "Mustard oil (heated, cooled)", gram: 80 }
+                                ]
+                            },
+                            {
+                                name: "🌶 Dry Spices", items: [
+                                    { name: "Kashmiri chilli", gram: 40 },
+                                    { name: "Paprika", gram: 18 },
+                                    { name: "Coriander powder", gram: 25 },
+                                    { name: "Cumin powder", gram: 11 },
+                                    { name: "Black salt", gram: 6 },
+                                    { name: "Black pepper", gram: 5 },
+                                    { name: "Kasuri methi", gram: 3 },
+                                    { name: "Turmeric", gram: 3 }
+                                ]
+                            },
+                            {
+                                name: "🔥 Alfam Aroma Core", items: [
+                                    { name: "Resham patti / Dana masala", gram: 34, note: "32-36g" },
+                                    { name: "MSG", gram: 3.5, note: "3-4g" },
+                                    { name: "Baking soda", gram: 6 }
+                                ]
+                            },
+                            {
+                                name: "🧄 Extra GG Boost", items: [
+                                    { name: "Extra GG paste", gram: 30 }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "Best: Overnight | Minimum: 6 hours",
+                    halfCook: "Air fryer 170°C · 12-14 min · 55-60% cooked · No char",
+                    finalCook: "Air fryer 200°C · 8-10 min · Butter brush · Coal dhuaan 90 sec · Direct flame 10 sec/side",
+                    shelfLife: "6-8 weeks frozen"
+                },
+                tangdi: {
+                    cat: 'alfam',
+                    name: "🍗 PART 1B: Tangdi Alfam",
+                    baseDesc: "18 Tangdi ≈ ~2.7-2.8 KG",
+                    baseKg: 2.75,
+                    step1: {
+                        title: "🔪 STEP 1: First Marination (20 min)",
+                        items: [
+                            { name: "Lemon juice", gram: 55 },
+                            { name: "Salt", gram: 31, note: "30-32g" },
+                            { name: "Ginger Garlic Paste", gram: 150 },
+                            { name: "Kashmiri chilli", gram: 16 }
+                        ]
+                    },
+                    step2: {
+                        title: "🔥 STEP 2: Main Alfam Marination (Tangdi - extra juicy)",
+                        groups: [
+                            {
+                                name: "🥛 Dairy & Fat", items: [
+                                    { name: "Hung curd", gram: 360 },
+                                    { name: "Fresh cream", gram: 80, note: "🔥 legs se zyada" },
+                                    { name: "Melted butter", gram: 40 },
+                                    { name: "Mustard oil (heated, cooled)", gram: 75 }
+                                ]
+                            },
+                            {
+                                name: "🌶 Dry Spices", items: [
+                                    { name: "Kashmiri chilli", gram: 38 },
+                                    { name: "Paprika", gram: 16 },
+                                    { name: "Coriander powder", gram: 24 },
+                                    { name: "Cumin powder", gram: 10 },
+                                    { name: "Black salt", gram: 6 },
+                                    { name: "Black pepper", gram: 5 },
+                                    { name: "Kasuri methi", gram: 3 },
+                                    { name: "Turmeric", gram: 3 }
+                                ]
+                            },
+                            {
+                                name: "🔥 Alfam Aroma Core", items: [
+                                    { name: "Resham patti / Dana masala", gram: 32, note: "30-34g" },
+                                    { name: "MSG", gram: 3 },
+                                    { name: "Baking soda", gram: 5, note: "tangdi me thoda kam" }
+                                ]
+                            },
+                            {
+                                name: "🧄 Extra GG Boost", items: [
+                                    { name: "Extra GG paste", gram: 25 }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "Best: Overnight | Minimum: 6 hours",
+                    halfCook: "Air fryer 170°C · 12-14 min · 55-60% cooked · No char",
+                    finalCook: "Air fryer 200°C · 8-10 min · Butter brush · Coal dhuaan 90 sec",
+                    shelfLife: "6-7 weeks frozen"
+                },
+                breastShawarma: {
+                    cat: 'alfam',
+                    name: "🍗 PART 2: Chicken Breast Shawarma Style",
+                    baseDesc: "4 pcs Boneless Breast ≈ 900-1000g",
+                    baseKg: 0.95,
+                    step1: null,
+                    step2: {
+                        title: "🧄 Shawarma Marination (Arabic + Buttery Juicy)",
+                        groups: [
+                            {
+                                name: "🥛 Base", items: [
+                                    { name: "Yogurt", gram: 200 },
+                                    { name: "Mayonnaise (Veeba Classic Egg)", gram: 80 },
+                                    { name: "Olive oil", gram: 40 },
+                                    { name: "Lemon juice", gram: 25 },
+                                    { name: "Ginger Garlic Paste", gram: 35 },
+                                    { name: "Salt", gram: 18 }
+                                ]
+                            },
+                            {
+                                name: "🌶 Spices", items: [
+                                    { name: "White pepper", gram: 4 },
+                                    { name: "Paprika", gram: 10 },
+                                    { name: "Coriander powder", gram: 8 },
+                                    { name: "Cumin powder", gram: 5 },
+                                    { name: "Cinnamon powder", gram: 0.5 },
+                                    { name: "Nutmeg", gram: 0.3, note: "1 pinch" },
+                                    { name: "MSG", gram: 1.5 }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "4-6 hours",
+                    halfCook: "Pan/Oven medium heat · Just until white (50-55%) · No browning",
+                    finalCook: "Pan/grill · butter + oil · Fast toss juicy strips · Coal dhuaan 90 sec",
+                    shelfLife: "5-6 weeks frozen"
+                },
+                // SEAFOOD
+                alfamRedFish: {
+                    cat: 'seafood',
+                    name: "🟥 FLAVOUR A: Alfam Red Grill Fish",
+                    baseDesc: "Sankh + King Fish ≈ 4-4.5 KG",
+                    baseKg: 4.25,
+                    step1: {
+                        title: "🔪 FIRST MARINATION (15 min)",
+                        items: [
+                            { name: "Lemon juice", gram: 70 },
+                            { name: "Salt", gram: 40 },
+                            { name: "Ginger Garlic Paste", gram: 160 },
+                            { name: "Kashmiri chilli", gram: 20 }
+                        ]
+                    },
+                    step2: {
+                        title: "🔥 MAIN MARINATION",
+                        groups: [
+                            {
+                                name: "🥛 Dairy & Fat", items: [
+                                    { name: "Hung curd", gram: 420 },
+                                    { name: "Fresh cream", gram: 90 },
+                                    { name: "Melted butter", gram: 50 },
+                                    { name: "Mustard oil (heated)", gram: 110 }
+                                ]
+                            },
+                            {
+                                name: "🌶 Dry Spices", items: [
+                                    { name: "Kashmiri chilli", gram: 55 },
+                                    { name: "Paprika", gram: 25 },
+                                    { name: "Coriander powder", gram: 35 },
+                                    { name: "Cumin powder", gram: 16 },
+                                    { name: "Black salt", gram: 8 },
+                                    { name: "Black pepper", gram: 7 },
+                                    { name: "Kasuri methi", gram: 5 },
+                                    { name: "Turmeric", gram: 4 }
+                                ]
+                            },
+                            {
+                                name: "🔥 Signature Aroma Core", items: [
+                                    { name: "Dana masala / Resham patti", gram: 47, note: "45-50g" },
+                                    { name: "MSG", gram: 5 },
+                                    { name: "Baking soda", gram: 6, note: "fish me kam" }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "4-6 hours (MAX) ⚠️ Overnight nahi! Fish delicate hoti hai",
+                    halfCook: "Oven/Air fryer 165°C · 7-9 min · 55-60% cooked · No colour",
+                    finalCook: "Air fryer/grill 200°C · 5-7 min · Butter brush · Coal dhuaan 60-90 sec",
+                    shelfLife: "5-6 weeks frozen"
+                },
+                whiteButterFish: {
+                    cat: 'seafood',
+                    name: "🟨 FLAVOUR B: White Butter Garlic Fish",
+                    baseDesc: "Pomfret + Safeed Kunda ≈ 2.5-3 KG",
+                    baseKg: 2.75,
+                    step1: null,
+                    step2: {
+                        title: "💎 Elite Hotel/Yacht Grill Style - Creamy, Aromatic",
+                        groups: [
+                            {
+                                name: "🥛 Dairy & Fat", items: [
+                                    { name: "Thick cream", gram: 220 },
+                                    { name: "Butter (melted)", gram: 80 },
+                                    { name: "Olive oil", gram: 60 },
+                                    { name: "Ginger paste", gram: 30 },
+                                    { name: "Garlic paste", gram: 55 },
+                                    { name: "Lemon juice", gram: 35 },
+                                    { name: "Salt", gram: 32 }
+                                ]
+                            },
+                            {
+                                name: "🌿 Dry Spices & Aromatics", items: [
+                                    { name: "White pepper", gram: 6 },
+                                    { name: "Crushed coriander seed", gram: 10 },
+                                    { name: "Cumin powder", gram: 6 },
+                                    { name: "Nutmeg", gram: 0.3, note: "1 pinch" },
+                                    { name: "MSG", gram: 3 },
+                                    { name: "Saffron water", gram: 30, note: "2 tbsp" },
+                                    { name: "Cornflour", gram: 25, note: "coating + juice lock" }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "3-4 hours",
+                    halfCook: "Oven/Air fryer 165°C · 7-9 min · 55-60% cooked",
+                    finalCook: "Air fryer/grill 200°C · 5-7 min · Butter brush · Coal dhuaan 60-90 sec",
+                    shelfLife: "5-6 weeks frozen"
+                },
+                butterPepperPrawns: {
+                    cat: 'seafood',
+                    name: "🟧 FLAVOUR C: Smoky Butter Pepper Prawns",
+                    baseDesc: "120 Medium Prawns (2.5-3.5\")",
+                    baseKg: 1.5,
+                    step1: null,
+                    step2: {
+                        title: "🔥 Craving Machine - Bar-bar khane ka mann karega",
+                        groups: [
+                            {
+                                name: "🦐 Marination Base", items: [
+                                    { name: "Yogurt", gram: 260 },
+                                    { name: "Mayonnaise", gram: 120 },
+                                    { name: "Butter (melted)", gram: 70 },
+                                    { name: "Garlic paste", gram: 80 },
+                                    { name: "Lemon juice", gram: 45 },
+                                    { name: "Salt", gram: 30 }
+                                ]
+                            },
+                            {
+                                name: "🌶 Spices", items: [
+                                    { name: "Crushed black pepper", gram: 12 },
+                                    { name: "White pepper", gram: 5 },
+                                    { name: "Paprika", gram: 18 },
+                                    { name: "MSG", gram: 4 },
+                                    { name: "Sugar", gram: 4, note: "balance" }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "2-3 hours",
+                    halfCook: "Pan/Oven medium · Until just pink & curled · 50-55% only",
+                    finalCook: "Fast pan toss · butter + oil · High heat 2-3 min",
+                    shelfLife: "4-5 weeks frozen"
+                },
+                arabicGrill: {
+                    cat: 'seafood',
+                    name: "🟥 ARABIC GRILL (1kg base)",
+                    baseDesc: "Alfam-style, mustard oil, garlic-forward, charcoal aroma",
+                    baseKg: 1,
+                    step1: null,
+                    step2: {
+                        title: "🔥 Best for: King Fish, Sankh, Pomfret, Prawns",
+                        groups: [
+                            {
+                                name: "🧄 Base", items: [
+                                    { name: "Hung curd", gram: 120 },
+                                    { name: "Garlic paste", gram: 45 },
+                                    { name: "Ginger paste", gram: 25 },
+                                    { name: "Mustard oil (heated)", gram: 35 },
+                                    { name: "Olive oil", gram: 20 },
+                                    { name: "Lemon juice", gram: 25 },
+                                    { name: "Salt", gram: 14 }
+                                ]
+                            },
+                            {
+                                name: "🌶 Spices", items: [
+                                    { name: "Kashmiri chilli", gram: 15 },
+                                    { name: "Paprika", gram: 8 },
+                                    { name: "Cumin powder", gram: 6 },
+                                    { name: "Coriander powder", gram: 8 },
+                                    { name: "White pepper", gram: 3 },
+                                    { name: "Dana masala / Resham patti", gram: 12 },
+                                    { name: "MSG", gram: 1.5 }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "3-4 hours",
+                    result: "✔ clean smoke · ✔ Arabic grill aroma · ✔ craving-type flavour"
+                },
+                goanGrill: {
+                    cat: 'seafood',
+                    name: "🟧 GOAN GRILL (1kg base)",
+                    baseDesc: "Vinegar punch + red chilli heat",
+                    baseKg: 1,
+                    step1: null,
+                    step2: {
+                        title: "🔥 Best for: Sankh, Jeera Fish, Prawns",
+                        groups: [
+                            {
+                                name: "🌶 Goan Base", items: [
+                                    { name: "Goan red chilli paste", gram: 60 },
+                                    { name: "Garlic paste", gram: 45 },
+                                    { name: "Vinegar (coconut/palm)", gram: 22 },
+                                    { name: "Oil", gram: 45 },
+                                    { name: "Salt", gram: 15 }
+                                ]
+                            },
+                            {
+                                name: "🧂 Spices", items: [
+                                    { name: "Cumin powder", gram: 6 },
+                                    { name: "Coriander powder", gram: 10 },
+                                    { name: "Turmeric", gram: 4 },
+                                    { name: "Pepper", gram: 4 },
+                                    { name: "Sugar", gram: 3, note: "balance" },
+                                    { name: "MSG", gram: 1 }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "2-3 hours",
+                    result: "✔ sharp tang · ✔ bold coastal punch · ✔ once tasted, yaad rehne wala"
+                },
+                turkishGrill: {
+                    cat: 'seafood',
+                    name: "🟨 TURKISH GRILL (1kg base)",
+                    baseDesc: "Creamy, aromatic, soft-spice",
+                    baseKg: 1,
+                    step1: null,
+                    step2: {
+                        title: "🔥 Best for: Pomfret, King Fish, Prawns",
+                        groups: [
+                            {
+                                name: "🥛 Base", items: [
+                                    { name: "Yogurt", gram: 150 },
+                                    { name: "Butter (melted)", gram: 45 },
+                                    { name: "Olive oil", gram: 30 },
+                                    { name: "Garlic paste", gram: 35 },
+                                    { name: "Lemon zest", gram: 1, note: "½ tsp" },
+                                    { name: "Lemon juice", gram: 20 },
+                                    { name: "Salt", gram: 14 }
+                                ]
+                            },
+                            {
+                                name: "🌿 Spices & Herbs", items: [
+                                    { name: "White pepper", gram: 4 },
+                                    { name: "Paprika", gram: 8 },
+                                    { name: "Oregano", gram: 3 },
+                                    { name: "Thyme", gram: 2 },
+                                    { name: "Nutmeg", gram: 0.3, note: "1 pinch" },
+                                    { name: "MSG", gram: 1 }
+                                ]
+                            }
+                        ]
+                    },
+                    restTime: "3-4 hours",
+                    result: "✔ royal buttery smell · ✔ melt-in-mouth fish · ✔ premium hotel vibe"
+                },
+                // SAUCES
+                arabicGarlicDip: {
+                    cat: 'sauces',
+                    name: "🧄 ARABIC GARLIC DIP",
+                    baseDesc: "Best with: Arabic grill, alfam fish, prawns",
+                    baseKg: 0.35,
+                    step2: {
+                        title: "🥣 Blend slowly till fluffy white",
+                        groups: [
+                            {
+                                name: "🧄 Ingredients", items: [
+                                    { name: "Garlic cloves", gram: 60 },
+                                    { name: "Lemon juice", gram: 40 },
+                                    { name: "Salt", gram: 6 },
+                                    { name: "Neutral oil", gram: 250 },
+                                    { name: "Cold water", gram: 37, note: "2-3 tbsp" }
+                                ]
+                            }
+                        ]
+                    },
+                    result: "✔ sharp, creamy, addictive · ✔ Arabic grill incomplete without this"
+                },
+                tahiniLemon: {
+                    cat: 'sauces',
+                    name: "🥜 TAHINI LEMON SAUCE",
+                    baseDesc: "Best with: Turkish grill, white butter fish",
+                    baseKg: 0.18,
+                    step2: {
+                        title: "🥣 Mix to pouring consistency",
+                        groups: [
+                            {
+                                name: "🥜 Ingredients", items: [
+                                    { name: "Tahini", gram: 120 },
+                                    { name: "Lemon juice", gram: 45 },
+                                    { name: "Garlic paste", gram: 10 },
+                                    { name: "Salt", gram: 5 },
+                                    { name: "Cold water", gram: 30, note: "as needed" }
+                                ]
+                            }
+                        ]
+                    },
+                    result: "✔ nutty · ✔ creamy · ✔ luxurious mouthfeel"
+                },
+                lemonButter: {
+                    cat: 'sauces',
+                    name: "🧈 LEMON BUTTER SAUCE",
+                    baseDesc: "Best with: Goan, Turkish, prawns",
+                    baseKg: 0.18,
+                    step2: {
+                        title: "🥣 Melt & mix",
+                        groups: [
+                            {
+                                name: "🧈 Ingredients", items: [
+                                    { name: "Butter", gram: 120 },
+                                    { name: "Garlic (fine chopped)", gram: 20 },
+                                    { name: "Lemon juice", gram: 35 },
+                                    { name: "Parsley", gram: 6, note: "2 tbsp" },
+                                    { name: "White pepper", gram: 2 },
+                                    { name: "Salt", gram: 3, note: "to taste" }
+                                ]
+                            }
+                        ]
+                    },
+                    result: "✔ glossy · ✔ rich · ✔ unforgettable aroma"
+                }
+            };
+
+            const PAIRING_DATA = [
+                { fish: "King / Surmai", variant: "Arabic / Turkish", sauce: "Garlic Dip / Tahini" },
+                { fish: "Sankh", variant: "Goan / Arabic", sauce: "Lemon Butter" },
+                { fish: "Pomfret", variant: "Turkish", sauce: "Tahini" },
+                { fish: "Jeera / Safeed", variant: "Goan", sauce: "Lemon Butter" },
+                { fish: "Prawns", variant: "Arabic / Turkish", sauce: "Garlic Dip" }
+            ];
+
+            const catTabs = {
+                alfam: { label: '🍗 Alfam Chicken', subRecipes: ['fullLeg', 'tangdi', 'breastShawarma'] },
+                seafood: { label: '🐟 Seafood Grill', subRecipes: ['alfamRedFish', 'whiteButterFish', 'butterPepperPrawns', 'arabicGrill', 'goanGrill', 'turkishGrill'] },
+                sauces: { label: '🥣 Sauces', subRecipes: ['arabicGarlicDip', 'tahiniLemon', 'lemonButter'] },
+                pairing: { label: '📋 Pairing Guide', subRecipes: [] }
+            };
+
+            let currentCat = 'alfam';
+            let currentSub = 'fullLeg';
+            let scaleVal = 1;
+            let scaleMode = 'multiply';
+
+            const batchScaleInput = document.getElementById('batchScale');
+            const scaleModeSelect = document.getElementById('scaleMode');
+            const applyBtn = document.getElementById('applyBtn');
+            const categoryTabs = document.getElementById('categoryTabs');
+            const subTabsDiv = document.getElementById('subTabs');
+            const dynamicDiv = document.getElementById('dynamicRecipe');
+
+            function formatSpoon(grams) {
+                if (grams <= 0) return "0";
+                if (grams < 1) {
+                    const tsp = grams * 0.2;
+                    if (tsp < 0.125) return `${grams.toFixed(1)}g`;
+                    const fractions = { 0.125: '⅛', 0.25: '¼', 0.33: '⅓', 0.5: '½', 0.67: '⅔', 0.75: '¾' };
+                    let closest = '', minDiff = Infinity;
+                    for (const [val, frac] of Object.entries(fractions)) {
+                        const diff = Math.abs(tsp - parseFloat(val));
+                        if (diff < minDiff && diff < 0.1) { minDiff = diff; closest = frac; }
+                    }
+                    if (closest) return `${closest} tsp`;
+                    return `${tsp.toFixed(1)} tsp`;
+                }
+                const tbsp = grams / 15;
+                if (tbsp >= 0.5) {
+                    const whole = Math.floor(tbsp);
+                    const frac = tbsp - whole;
+                    const fractions = { 0.125: '⅛', 0.25: '¼', 0.33: '⅓', 0.5: '½', 0.67: '⅔', 0.75: '¾' };
+                    let fracStr = '', minDiff = 0.08;
+                    for (const [val, f] of Object.entries(fractions)) {
+                        const diff = Math.abs(frac - parseFloat(val));
+                        if (diff < minDiff) { minDiff = diff; fracStr = f; }
+                    }
+                    if (whole === 0 && fracStr) return `${fracStr} tbsp`;
+                    if (whole > 0 && fracStr) return `${whole}${fracStr} tbsp`;
+                    if (whole > 0 && frac < 0.1) return `${whole} tbsp`;
+                    return `${tbsp.toFixed(1)} tbsp`;
+                }
+                return `${(grams * 0.2).toFixed(1)} tsp`;
+            }
+
+            function getScaleFactor(recipe) {
+                if (scaleMode === 'kg') {
+                    return scaleVal / recipe.baseKg;
+                }
+                return scaleVal;
+            }
+
+            function scaleItems(items, factor) {
+                return items.map(item => ({
+                    ...item,
+                    gram: parseFloat((item.gram * factor).toFixed(1))
+                }));
+            }
+
+            function buildCategoryTabs() {
+                categoryTabs.innerHTML = '';
+                Object.entries(catTabs).forEach(([key, val]) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'cat-tab';
+                    btn.textContent = val.label;
+                    btn.dataset.cat = key;
+                    btn.addEventListener('click', () => switchCategory(key));
+                    categoryTabs.appendChild(btn);
+                });
+            }
+
+            function buildSubTabs() {
+                subTabsDiv.innerHTML = '';
+                const subs = catTabs[currentCat].subRecipes;
+                if (subs.length === 0) {
+                    subTabsDiv.style.display = 'none';
+                    return;
+                }
+                subTabsDiv.style.display = 'flex';
+                subs.forEach(key => {
+                    const btn = document.createElement('button');
+                    btn.className = 'sub-tab';
+                    btn.textContent = RECIPES[key].name.split(':')[0] || RECIPES[key].name.substring(0, 25);
+                    btn.dataset.sub = key;
+                    btn.addEventListener('click', () => switchSub(key));
+                    subTabsDiv.appendChild(btn);
+                });
+            }
+
+            function updateStyles() {
+                document.querySelectorAll('#categoryTabs .cat-tab').forEach(t => {
+                    t.classList.remove('active', 'seafood-active', 'sauce-active');
+                    if (t.dataset.cat === currentCat) {
+                        if (currentCat === 'seafood') t.classList.add('seafood-active');
+                        else if (currentCat === 'sauces') t.classList.add('sauce-active');
+                        else t.classList.add('active');
+                    }
+                });
+                document.querySelectorAll('#subTabs .sub-tab').forEach(t => {
+                    t.classList.remove('active');
+                    if (t.dataset.sub === currentSub) t.classList.add('active');
+                });
+            }
+
+            function switchCategory(cat) {
+                currentCat = cat;
+                const subs = catTabs[cat].subRecipes;
+                currentSub = subs.length > 0 ? subs[0] : null;
+                buildSubTabs();
+                updateStyles();
+                if (currentSub) renderRecipe(currentSub);
+                else renderPairing();
+            }
+
+            function switchSub(sub) {
+                currentSub = sub;
+                updateStyles();
+                renderRecipe(sub);
+            }
+
+            function renderRecipe(key) {
+                const recipe = RECIPES[key];
+                if (!recipe) return;
+
+                const factor = getScaleFactor(recipe);
+                const modeLabel = scaleMode === 'kg' ? `Per ${scaleVal}kg Input` : `×${scaleVal} Batch`;
+                const scaledBaseKg = parseFloat((recipe.baseKg * factor).toFixed(2));
+
+                let html = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.4rem;">
+          <h2 style="color:#1e40af; margin:0; font-size:1rem;">${recipe.name}</h2>
+          <span style="background:#1c1917; color:#fbbf24; padding:0.25rem 0.8rem; border-radius:2rem; font-weight:bold; font-size:0.75rem;">
+            ${modeLabel} | ~${scaledBaseKg}kg
+          </span>
+        </div>
+        <div class="info-box">📌 Base: ${recipe.baseDesc} (${recipe.baseKg}kg) · Factor: ${factor.toFixed(2)}x</div>
+      `;
+
+                // Step 1
+                if (recipe.step1) {
+                    html += `<div class="section-title">${recipe.step1.title}</div>`;
+                    html += `<div class="ingredient-list">`;
+                    const items = scaleItems(recipe.step1.items, factor);
+                    items.forEach(item => {
+                        const noteText = item.note ? ` (${item.note})` : '';
+                        html += `
+            <div class="ing-row">
+              <span class="ing-name">🧾 ${item.name}${noteText}</span>
+              <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoon(item.gram)}</span></span>
+            </div>`;
+                    });
+                    html += `</div>`;
+                }
+
+                // Step 2
+                if (recipe.step2) {
+                    html += `<div class="section-title">${recipe.step2.title}</div>`;
+                    if (recipe.step2.groups) {
+                        recipe.step2.groups.forEach(group => {
+                            html += `<div style="font-weight:700; color:#78350f; margin:0.4rem 0 0.2rem; font-size:0.8rem;">${group.name}</div>`;
+                            html += `<div class="ingredient-list">`;
+                            const items = scaleItems(group.items, factor);
+                            items.forEach(item => {
+                                const noteText = item.note ? ` (${item.note})` : '';
+                                html += `
+                <div class="ing-row">
+                  <span class="ing-name">🧾 ${item.name}${noteText}</span>
+                  <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoon(item.gram)}</span></span>
+                </div>`;
+                            });
+                            html += `</div>`;
+                        });
+                    }
+                }
+
+                // Rest time
+                if (recipe.restTime) {
+                    html += `<div class="info-box"><strong>🕒 Rest:</strong> ${recipe.restTime}</div>`;
+                }
+
+                // Result
+                if (recipe.result) {
+                    html += `<div class="success-box">${recipe.result}</div>`;
+                }
+
+                // Half cook & Final cook & Shelf life
+                if (recipe.halfCook || recipe.finalCook || recipe.shelfLife) {
+                    html += `<div class="sop-step">`;
+                    if (recipe.halfCook) html += `<strong>❄️ Half Cook:</strong> ${recipe.halfCook}<br>`;
+                    if (recipe.finalCook) html += `<strong>🔥 Final Cook:</strong> ${recipe.finalCook}<br>`;
+                    if (recipe.shelfLife) html += `<strong>⏳ Shelf Life:</strong> ${recipe.shelfLife}`;
+                    html += `</div>`;
+                }
+
+                dynamicDiv.innerHTML = html;
+            }
+
+            function renderPairing() {
+                let html = `
+        <h2 style="color:#1e40af; margin:0 0 0.8rem 0; font-size:1rem;">📋 CHEF PAIRING GUIDE</h2>
+        <div class="info-box">🧠 Memory Logic - Pehli bite yaad rahegi, doosri craving banegi, teesri baar order karega</div>
+        <table class="pairing-table">
+          <tr><th>🐟 Fish Type</th><th>🔥 Best Variant</th><th>🥣 Best Sauce</th></tr>
+      `;
+                PAIRING_DATA.forEach(row => {
+                    html += `<tr><td><strong>${row.fish}</strong></td><td>${row.variant}</td><td>${row.sauce}</td></tr>`;
+                });
+                html += `</table>
+        <div class="success-box" style="margin-top:0.8rem;">
+          <strong>🏆 FINAL WORD</strong><br>
+          Ye sirf recipes nahi, ye <strong>brand blueprint</strong> hai.<br>
+          ✔ Smell = clean, smoky, luxurious<br>
+          ✔ Taste = layered, addictive<br>
+          ✔ Texture = juicy, flaky, never dry<br>
+          ✔ Craving factor = VERY HIGH<br>
+          ✔ Freezer ke baad bhi restaurant fresh
+        </div>
+      `;
+                dynamicDiv.innerHTML = html;
+            }
+
+            function onCalculate() {
+                let val = parseFloat(batchScaleInput.value);
+                if (isNaN(val) || val < 0.25) val = 0.25;
+                if (val > 20) val = 20;
+                batchScaleInput.value = val;
+                scaleVal = val;
+                scaleMode = scaleModeSelect.value;
+                if (currentCat === 'pairing') renderPairing();
+                else if (currentSub) renderRecipe(currentSub);
+            }
+
+            scaleModeSelect.addEventListener('change', () => {
+                scaleMode = scaleModeSelect.value;
+                onCalculate();
+            });
+
+            applyBtn.addEventListener('click', onCalculate);
+            batchScaleInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') onCalculate(); });
+            batchScaleInput.addEventListener('input', () => {
+                let val = parseFloat(batchScaleInput.value);
+                if (!isNaN(val) && val >= 0.25 && val <= 20) {
+                    scaleVal = val;
+                    scaleMode = scaleModeSelect.value;
+                    if (currentCat === 'pairing') renderPairing();
+                    else if (currentSub) renderRecipe(currentSub);
+                }
+            });
+
+            // Init
+            buildCategoryTabs();
+            buildSubTabs();
+            updateStyles();
+            renderRecipe('fullLeg');
+            batchScaleInput.value = 1;
+            scaleModeSelect.value = 'multiply';
+        })();
+    </script>
+</body>
+
+</html>

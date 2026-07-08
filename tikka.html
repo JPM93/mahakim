@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>🍢 Smoky Butter Tikka | MFM Commercial</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍢</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1c0f00 0%, #3d1c00 100%);
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-container {
+            max-width: 900px;
+            width: 100%;
+            background: #fff7ed;
+            border-radius: 3rem 3rem 2.5rem 2.5rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
+            padding: 2rem 1.8rem;
+            border: 2px solid #fbbf24;
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #9a3412;
+            text-shadow: 2px 2px 0 #fde68a;
+            margin-bottom: 0.3rem;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .subhead {
+            text-align: center;
+            color: #78350f;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: #fef3c7;
+            display: inline-block;
+            padding: 0.3rem 1.8rem;
+            border-radius: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+            font-size: 0.9rem;
+            border: 1px solid #fbbf24;
+        }
+
+        .badge {
+            background: #dc2626;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            font-weight: 800;
+        }
+
+        .control-panel {
+            background: #1c1917;
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            margin-bottom: 1.8rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+            color: #f5f5f4;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #292524;
+            padding: 0.5rem 1.2rem;
+            border-radius: 3rem;
+        }
+
+        .input-group label {
+            font-weight: 700;
+            color: #fed7aa;
+            font-size: 1.1rem;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 85px;
+            padding: 0.7rem 0.5rem;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: #fef7ed;
+            border: 2px solid #f59e0b;
+            border-radius: 1.5rem;
+            color: #78350f;
+            outline: none;
+        }
+
+        .input-group select {
+            width: auto;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            background: #f59e0b;
+            border: none;
+            color: #1c1917;
+            font-weight: 800;
+            padding: 0.75rem 1.8rem;
+            border-radius: 3rem;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to bottom, #fbbf24, #d97706);
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.5);
+            transition: 0.2s;
+            border: 1px solid #fde68a;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to bottom, #fcd34d, #b45309);
+            box-shadow: 0 6px 14px #f59e0b80;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+            margin: 1.5rem 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            background: #e7e5e4;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2.5rem;
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #44403c;
+            background: #d6d3d1;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            background: #9a3412;
+            color: white;
+            box-shadow: 0 0 15px #fb923c;
+            border: 1px solid #fed7aa;
+        }
+
+        .tab.variant-tab {
+            background: #fde68a;
+            color: #78350f;
+        }
+
+        .tab.variant-active {
+            background: #f59e0b;
+            color: #1c1917;
+            box-shadow: 0 0 15px #fbbf24;
+            border: 1px solid white;
+        }
+
+        .recipe-card {
+            background: #fffbeb;
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+            border: 1px solid #fcd34d;
+            max-height: 65vh;
+            overflow-y: auto;
+        }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin: 1rem 0 0.6rem;
+            color: #78350f;
+            border-left: 8px solid #9a3412;
+            padding-left: 1rem;
+            background: linear-gradient(to right, #fef9c3, transparent);
+        }
+
+        .ingredient-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffffd6;
+            padding: 0.35rem 0.7rem;
+            border-radius: 1rem;
+            font-size: 0.82rem;
+            border-bottom: 1px dashed #fcd34d;
+            gap: 0.5rem;
+        }
+
+        .ing-name {
+            font-weight: 600;
+            color: #3b2f1e;
+            flex: 1;
+            font-size: 0.82rem;
+        }
+
+        .ing-qty {
+            font-weight: 800;
+            background: #fef3c7;
+            padding: 0.15rem 0.6rem;
+            border-radius: 2rem;
+            color: #92400e;
+            font-size: 0.78rem;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .spoon-hint {
+            font-weight: 600;
+            color: #b45309;
+            font-size: 0.72rem;
+            background: #fde68a;
+            padding: 0.1rem 0.5rem;
+            border-radius: 1rem;
+        }
+
+        .info-box {
+            background: #fef9c7;
+            border-radius: 1.2rem;
+            padding: 0.7rem 0.9rem;
+            margin: 0.7rem 0;
+            color: #713f12;
+            font-weight: 500;
+            font-size: 0.82rem;
+            border: 1px solid #fcd34d;
+        }
+
+        .danger-box {
+            background: #fef2f2;
+            border: 2px solid #fca5a5;
+            border-radius: 1.2rem;
+            padding: 0.7rem 0.9rem;
+            margin: 0.7rem 0;
+            color: #991b1b;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+
+        .success-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 1.2rem;
+            padding: 0.7rem 0.9rem;
+            margin: 0.7rem 0;
+            color: #14532d;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+
+        .variant-box {
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+            border-radius: 1.2rem;
+            padding: 0.7rem 0.9rem;
+            margin: 0.7rem 0;
+            color: #78350f;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+
+        .sop-step {
+            background: #1c1917;
+            color: #fcd34d;
+            border-radius: 1.2rem;
+            padding: 0.7rem 0.9rem;
+            margin: 0.5rem 0;
+            font-size: 0.78rem;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #a16207;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 500px) {
+            .app-container {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .ing-row {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                font-size: 0.68rem;
+                padding: 0.4rem 0.6rem;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <h1>🍢 Smoky Butter Tikka <span class="badge">COMMERCIAL</span></h1>
+        <div style="text-align: center;"><span class="subhead">Airfryer · Frozen Ready · 60 Days</span></div>
+
+        <div class="control-panel">
+            <div class="input-group">
+                <label>🍖</label>
+                <input type="number" id="meatKg" value="2" min="0.5" max="100" step="0.1">
+                <span style="color:#fcd34d; font-weight:bold;">Kg Boneless</span>
+            </div>
+            <div class="input-group">
+                <label>🍗</label>
+                <select id="meatType">
+                    <option value="chicken">🐔 Chicken</option>
+                    <option value="mutton">🐑 Mutton</option>
+                </select>
+            </div>
+            <button class="btn" id="applyBtn"><span>🔄</span> Calculate</button>
+        </div>
+
+        <div class="tabs" id="tabContainer"></div>
+
+        <div id="dynamicRecipe" class="recipe-card"></div>
+        <div class="footer-note">🔥 -18°C = 60 days · Never refreeze · Cook above 75°C final</div>
+    </div>
+
+    <script>
+        (function () {
+            const BASE_MEAT_KG = 2;
+
+            const RECIPES = {
+                tender: {
+                    name: "🔪 STEP 1: Tender Base Marinade (Juicy Lock)",
+                    items: [
+                        { name: "Thick Curd", gram: 350 },
+                        { name: "Ginger Garlic Paste", gram: 120 },
+                        { name: "Lemon Juice", gram: 40 },
+                        { name: "Mustard Oil (heated & cooled)", gram: 60 },
+                        { name: "Salt", gram: 32 },
+                        { name: "White Pepper", gram: 8 },
+                        { name: "Kashmiri Chilli", gram: 18 },
+                        { name: "Turmeric", gram: 2 },
+                        { name: "Papaya Paste ⚠️", gram: 10, dynamicGram: true, chickenGram: 10, muttonGram: 20, warn: true }
+                    ],
+                    method: "Rest: Chicken 4-6 hrs / Mutton 12-16 hrs (fridge)",
+                    warn: "⚠️ Papaya limit cross mat karo! Chicken: 10g | Mutton: 20g (per 2kg)"
+                },
+                flavor: {
+                    name: "🌶 STEP 2: Flavor Coating Marinade (Dry Starter Finish)",
+                    items: [
+                        { name: "Hung Curd", gram: 220 },
+                        { name: "Fresh Cream", gram: 80 },
+                        { name: "Melted Butter", gram: 50 },
+                        { name: "Cornflour", gram: 40 },
+                        { name: "Rice Flour", gram: 30 },
+                        { name: "Roasted Besan", gram: 25 },
+                        { name: "Black Pepper Crushed", gram: 10 },
+                        { name: "Garam Masala", gram: 6 },
+                        { name: "Kasuri Methi", gram: 4 },
+                        { name: "MSG (optional)", gram: 3 }
+                    ],
+                    method: "Coat evenly · Rest 90 min"
+                },
+                halfCook: {
+                    name: "🍳 STEP 3: Airfryer Half Cook (For Freezing)",
+                    items: [],
+                    isInfo: true,
+                    getContent: function (kg, meat) {
+                        const time = meat === 'chicken' ? '12-15 min' : '18-20 min';
+                        return `
+            <div class="info-box">
+              <strong>🔥 Half Cook Parameters (${meat === 'chicken' ? 'Chicken' : 'Mutton'}):</strong><br>
+              Temp → 160°C · Time → ${time} · Flip once<br>
+              Color pale · Internal temp ≥ 62°C<br>
+              Cool completely before freezing
+            </div>
+          `;
+                    }
+                },
+                freezeSOP: {
+                    name: "❄️ STEP 4: Freeze SOP",
+                    items: [],
+                    isSOP: true,
+                    content: `
+          <div class="sop-step"><strong>🧊 IQF FREEZING:</strong><br>
+          Separate pieces · Single layer tray · -18°C · 2 hrs until hard</div>
+          
+          <div class="sop-step"><strong>📦 VACUUM PACK:</strong><br>
+          Vacuum seal / Ziplock + air press + double bag<br>
+          Label: Product · Date · Batch · Expiry (60 days)</div>
+          
+          <div class="success-box"><strong>🔄 FINAL COOK FROM FROZEN:</strong><br>
+          ❌ No thaw needed<br>
+          Airfryer: 190°C · 8-10 min · Butter brush last 2 min<br>
+          Shallow Fry: 3-4 min flip</div>
+          
+          <div class="danger-box"><strong>⚠️ FOOD SAFETY:</strong><br>
+          🚫 Never refreeze · 🚫 Moisture = spoilage · 🚫 Cook above 75°C</div>
+        `
+                },
+                smoke: {
+                    name: "🌪 OPTIONAL SMOKE",
+                    items: [],
+                    isInfo: true,
+                    content: `
+          <div class="info-box">
+            Charcoal + ghee · Cover 2 min · Killer aroma! 🔥
+          </div>
+        `
+                },
+                variants: {
+                    name: "💣 FLAVOR VARIANTS (Same Base)",
+                    items: [],
+                    isVariants: true,
+                    content: `
+          <div class="variant-box">
+            <strong>🔥 Afghani Tikka</strong><br>
+            Add: Cheese 80g + Extra Cream + Nutmeg pinch
+          </div>
+          <div class="variant-box">
+            <strong>🥛 Malai Tikka</strong><br>
+            Remove chilli · Add extra cream + butter
+          </div>
+          <div class="variant-box">
+            <strong>🌶 Pepper Tikka</strong><br>
+            Double black pepper + Honey glaze
+          </div>
+        `
+                },
+                muttonDiff: {
+                    name: "🐑 MUTTON TIKKA DIFFERENCES",
+                    items: [],
+                    isInfo: true,
+                    content: `
+          <div class="info-box">
+            <strong>🥩 Mutton vs Chicken:</strong><br>
+            🟤 Papaya: 20g (vs 10g for chicken)<br>
+            🕒 Marination: 16 hrs (vs 4-6 hrs)<br>
+            🍳 Half cook: 18-20 min (vs 12-15 min)<br>
+            🔥 Final fry: 10-12 min (vs 8-10 min)
+          </div>
+        `
+                },
+                result: {
+                    name: "✅ FINAL RESULT",
+                    items: [],
+                    isInfo: true,
+                    content: `
+          <div class="success-box">
+            <strong>🎯 QUALITY CHECK:</strong><br>
+            ✔ Soft juicy center · ✔ Golden crispy outside<br>
+            ✔ Mild spice · ✔ No dryness · ✔ No freezer smell<br>
+            🍽 Serve with: Mint chutney · Onion rings · Lemon wedge
+          </div>
+        `
+                }
+            };
+
+            const tabKeys = ['tender', 'flavor', 'halfCook', 'freezeSOP', 'smoke', 'variants', 'muttonDiff', 'result'];
+            const tabLabels = {
+                tender: '🔪 Tenderize',
+                flavor: '🌶 Flavor Coat',
+                halfCook: '🍳 Half Cook',
+                freezeSOP: '❄️ Freeze SOP',
+                smoke: '🌪 Smoke',
+                variants: '💣 Variants',
+                muttonDiff: '🐑 Mutton Diff',
+                result: '✅ Result'
+            };
+
+            let currentTab = 'tender';
+            let currentKg = 2;
+            let currentMeat = 'chicken';
+
+            const meatKgInput = document.getElementById('meatKg');
+            const meatTypeSelect = document.getElementById('meatType');
+            const applyBtn = document.getElementById('applyBtn');
+            const tabContainer = document.getElementById('tabContainer');
+            const dynamicDiv = document.getElementById('dynamicRecipe');
+
+            function formatSpoon(grams) {
+                if (grams <= 0) return "0";
+                if (grams < 1) {
+                    const tsp = grams * 0.2;
+                    if (tsp < 0.125) return `${grams.toFixed(1)}g`;
+                    const fractions = { 0.125: '⅛', 0.25: '¼', 0.33: '⅓', 0.5: '½', 0.67: '⅔', 0.75: '¾' };
+                    let closest = '', minDiff = Infinity;
+                    for (const [val, frac] of Object.entries(fractions)) {
+                        const diff = Math.abs(tsp - parseFloat(val));
+                        if (diff < minDiff && diff < 0.1) { minDiff = diff; closest = frac; }
+                    }
+                    if (closest) return `${closest} tsp`;
+                    return `${tsp.toFixed(1)} tsp`;
+                }
+                const tbsp = grams / 15;
+                if (tbsp >= 0.5) {
+                    const whole = Math.floor(tbsp);
+                    const frac = tbsp - whole;
+                    const fractions = { 0.125: '⅛', 0.25: '¼', 0.33: '⅓', 0.5: '½', 0.67: '⅔', 0.75: '¾' };
+                    let fracStr = '', minDiff = 0.08;
+                    for (const [val, f] of Object.entries(fractions)) {
+                        const diff = Math.abs(frac - parseFloat(val));
+                        if (diff < minDiff) { minDiff = diff; fracStr = f; }
+                    }
+                    if (whole === 0 && fracStr) return `${fracStr} tbsp`;
+                    if (whole > 0 && fracStr) return `${whole}${fracStr} tbsp`;
+                    if (whole > 0 && frac < 0.1) return `${whole} tbsp`;
+                    return `${tbsp.toFixed(1)} tbsp`;
+                }
+                return `${(grams * 0.2).toFixed(1)} tsp`;
+            }
+
+            function scaleItems(baseItems, factor, meat) {
+                return baseItems.map(item => {
+                    let gram = item.gram;
+                    if (item.dynamicGram) {
+                        gram = meat === 'chicken' ? item.chickenGram : item.muttonGram;
+                    }
+                    return {
+                        ...item,
+                        gram: parseFloat((gram * factor).toFixed(1)),
+                        displayGram: gram // original base gram for reference
+                    };
+                });
+            }
+
+            function buildTabs() {
+                tabContainer.innerHTML = '';
+                tabKeys.forEach(key => {
+                    const btn = document.createElement('button');
+                    btn.className = 'tab';
+                    if (key === 'variants') btn.classList.add('variant-tab');
+                    btn.textContent = tabLabels[key];
+                    btn.dataset.tab = key;
+                    btn.addEventListener('click', () => switchTab(key));
+                    tabContainer.appendChild(btn);
+                });
+            }
+
+            function updateTabStyles(active) {
+                document.querySelectorAll('#tabContainer .tab').forEach(t => {
+                    t.classList.remove('active', 'variant-active');
+                    if (t.dataset.tab === active) {
+                        if (t.dataset.tab === 'variants') t.classList.add('variant-active');
+                        else t.classList.add('active');
+                    }
+                });
+            }
+
+            function switchTab(key) {
+                currentTab = key;
+                updateTabStyles(key);
+                render(key, currentKg, currentMeat);
+            }
+
+            function render(tabKey, kg, meat) {
+                const recipe = RECIPES[tabKey];
+                const factor = kg / BASE_MEAT_KG;
+                const meatLabel = meat === 'chicken' ? 'Chicken' : 'Mutton';
+                const restTime = meat === 'chicken' ? '4-6 hrs' : '12-16 hrs';
+
+                let html = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+          <h2 style="color:#9a3412; margin:0; font-size:1.05rem;">${recipe.name}</h2>
+          <span style="background:#1c1917; color:#fbbf24; padding:0.3rem 0.9rem; border-radius:2rem; font-weight:bold; font-size:0.8rem;">
+            🍖 ${kg}kg ${meatLabel} Boneless
+          </span>
+        </div>
+      `;
+
+                if (recipe.isSOP) {
+                    html += recipe.content;
+                } else if (recipe.isVariants) {
+                    html += recipe.content;
+                } else if (recipe.isInfo) {
+                    if (recipe.getContent) {
+                        html += recipe.getContent(kg, meat);
+                    } else {
+                        html += recipe.content;
+                    }
+                } else if (recipe.items && recipe.items.length > 0) {
+                    const items = scaleItems(recipe.items, factor, meat);
+                    html += `<div class="info-box">📌 Base: ${BASE_MEAT_KG}kg · Factor: ${factor.toFixed(2)}x · ${meatLabel}</div>`;
+
+                    if (recipe.warn) {
+                        html += `<div class="danger-box">${recipe.warn}</div>`;
+                    }
+
+                    html += `<div class="section-title">📋 Ingredients</div><div class="ingredient-list">`;
+
+                    items.forEach(item => {
+                        const noteText = item.dynamicGram ? ` (${meatLabel}: ${item.displayGram}g base)` : '';
+                        const warnIcon = item.warn ? ' ⚠️' : '';
+                        html += `
+            <div class="ing-row">
+              <span class="ing-name">🧾 ${item.name}${noteText}${warnIcon}</span>
+              <span class="ing-qty">
+                <span>${item.gram}g</span>
+                ${item.gram > 0 ? `<span class="spoon-hint">${formatSpoon(item.gram)}</span>` : ''}
+              </span>
+            </div>
+          `;
+                    });
+
+                    html += `</div>`;
+
+                    if (recipe.method) {
+                        const methodText = recipe.method.replace('Chicken 4-6 hrs / Mutton 12-16 hrs', `${meatLabel} ${restTime}`);
+                        html += `<div class="info-box"><strong>🔧 Method:</strong><br>${methodText}</div>`;
+                    }
+                }
+
+                if (tabKey === 'tender') {
+                    html += `<div class="info-box"><strong>🕒 Rest Time (${meatLabel}):</strong> ${restTime} (fridge)</div>`;
+                }
+
+                dynamicDiv.innerHTML = html;
+            }
+
+            function onCalculate() {
+                let kg = parseFloat(meatKgInput.value);
+                if (isNaN(kg) || kg < 0.5) kg = 0.5;
+                if (kg > 100) kg = 100;
+                meatKgInput.value = kg;
+                currentKg = kg;
+                currentMeat = meatTypeSelect.value;
+                render(currentTab, currentKg, currentMeat);
+            }
+
+            meatTypeSelect.addEventListener('change', () => {
+                currentMeat = meatTypeSelect.value;
+                render(currentTab, currentKg, currentMeat);
+            });
+
+            applyBtn.addEventListener('click', onCalculate);
+            meatKgInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') onCalculate(); });
+            meatKgInput.addEventListener('input', () => {
+                let kg = parseFloat(meatKgInput.value);
+                if (!isNaN(kg) && kg >= 0.5 && kg <= 100) {
+                    currentKg = kg;
+                    currentMeat = meatTypeSelect.value;
+                    render(currentTab, currentKg, currentMeat);
+                }
+            });
+
+            // Init
+            buildTabs();
+            updateTabStyles('tender');
+            render('tender', 2, 'chicken');
+            meatKgInput.value = 2;
+            meatTypeSelect.value = 'chicken';
+        })();
+    </script>
+</body>
+
+</html>
