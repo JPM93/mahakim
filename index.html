@@ -852,7 +852,7 @@
                 }).join('') : '<p class="text-muted">No orders today</p>'}</div>`;
             }
 
-            // Medicines CRUD (now with minStock)
+            // Medicines CRUD
             function renderMedicines() {
                 const meds = getMedicines();
                 let html = `<div class="d-flex justify-content-between align-items-center mb-3"><h5>${t('medicines')}</h5><button class="btn btn-primary-custom" onclick="openMedicineModal()"><i class="fas fa-plus me-2"></i>${t('addMedicine')}</button></div>`;
@@ -1039,38 +1039,97 @@
                 showToast('Order saved!', 'success');
                 renderOrders();
             };
-            window.openPaymentModal = (orderId) => {
+
+            // Payments (now with Edit/Delete)
+            window.openPaymentModal = (orderId, paymentId = null) => {
                 const order = getOrders().find(o => o.id === orderId);
-                if (!order) return;
+                const payments = getPayments();
+                const payment = paymentId ? payments.find(p => p.id === paymentId) : null;
+
+                if (!order && !payment) {
+                    showToast('Order not found', 'error');
+                    return;
+                }
+                const actualOrderId = payment ? payment.orderId : orderId;
+                const actualOrder = payment ? getOrders().find(o => o.id === payment.orderId) : order;
+                const remaining = actualOrder.totalAmount - actualOrder.paidAmount;
+
                 const modalHtml = `
                 <div class="modal fade modal-custom" id="paymentModal">
                     <div class="modal-dialog"><div class="modal-content">
-                        <div class="modal-header"><h5>${t('addPayment')} - ₹${order.totalAmount - order.paidAmount} remaining</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                        <div class="modal-header"><h5>${payment ? 'Edit Payment' : t('addPayment')} ${payment ? '' : `- ₹${remaining} remaining`}</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
                         <div class="modal-body">
-                            <input type="hidden" id="payOrderId" value="${orderId}">
-                            <div class="mb-2"><label>${t('amount')} *</label><input type="number" class="form-control" id="payAmount" placeholder="Amount"></div>
-                            <div class="mb-2"><label>${t('date')}</label><input type="date" class="form-control" id="payDate" value="${new Date().toISOString().split('T')[0]}"></div>
-                            <div class="mb-2"><label>${t('notes')}</label><input class="form-control" id="payNotes"></div>
+                            <input type="hidden" id="payOrderId" value="${actualOrderId}">
+                            <input type="hidden" id="payId" value="${payment ? payment.id : ''}">
+                            <div class="mb-2"><label>${t('amount')} *</label><input type="number" class="form-control" id="payAmount" value="${payment ? payment.amount : ''}" placeholder="Amount"></div>
+                            <div class="mb-2"><label>${t('date')}</label><input type="date" class="form-control" id="payDate" value="${payment ? payment.date : new Date().toISOString().split('T')[0]}"></div>
+                            <div class="mb-2"><label>${t('notes')}</label><input class="form-control" id="payNotes" value="${payment?.notes || ''}"></div>
                         </div>
                         <div class="modal-footer"><button class="btn btn-outline-custom" data-bs-dismiss="modal">${t('cancel')}</button><button class="btn btn-primary-custom" onclick="savePayment()">${t('save')}</button></div>
                     </div></div></div>`;
                 document.getElementById('modalContainer').innerHTML = modalHtml;
                 new bootstrap.Modal(document.getElementById('paymentModal')).show();
             };
+
             window.savePayment = () => {
                 const orderId = document.getElementById('payOrderId').value;
+                const paymentId = document.getElementById('payId').value;
                 const amount = parseFloat(document.getElementById('payAmount').value) || 0;
                 if (amount <= 0) { showToast('Enter valid amount', 'warning'); return; }
+
                 const orders = getOrders();
                 const order = orders.find(o => o.id === orderId);
                 if (!order) return;
-                order.paidAmount += amount;
+
                 const payments = getPayments();
-                payments.push({ id: 'pay_' + Date.now(), orderId, amount, date: document.getElementById('payDate').value, notes: document.getElementById('payNotes').value, createdAt: new Date().toISOString() });
+
+                if (paymentId) {
+                    // Edit mode: adjust paidAmount
+                    const existingPayment = payments.find(p => p.id === paymentId);
+                    if (!existingPayment) return;
+                    const oldAmount = existingPayment.amount;
+                    const difference = amount - oldAmount;
+                    order.paidAmount += difference;
+                    existingPayment.amount = amount;
+                    existingPayment.date = document.getElementById('payDate').value;
+                    existingPayment.notes = document.getElementById('payNotes').value;
+                } else {
+                    // Add mode
+                    order.paidAmount += amount;
+                    payments.push({
+                        id: 'pay_' + Date.now(),
+                        orderId,
+                        amount,
+                        date: document.getElementById('payDate').value,
+                        notes: document.getElementById('payNotes').value,
+                        createdAt: new Date().toISOString()
+                    });
+                }
+
                 save('payments', payments);
                 save('orders', orders);
                 bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
-                showToast('Payment recorded!', 'success');
+                showToast('Payment saved!', 'success');
+                renderOrders();
+                renderPayments();
+            };
+
+            window.deletePayment = (paymentId) => {
+                if (!confirm('Delete this payment?')) return;
+                const payments = getPayments();
+                const payment = payments.find(p => p.id === paymentId);
+                if (!payment) return;
+
+                const orders = getOrders();
+                const order = orders.find(o => o.id === payment.orderId);
+                if (order) {
+                    order.paidAmount -= payment.amount;
+                    save('orders', orders);
+                }
+                const updatedPayments = payments.filter(p => p.id !== paymentId);
+                save('payments', updatedPayments);
+                showToast('Payment deleted', 'success');
+                renderPayments();
                 renderOrders();
             };
 
@@ -1079,11 +1138,20 @@
                 let html = `<h5>${t('payments')}</h5>`;
                 if (!payments.length) html += '<div class="empty-state"><i class="fas fa-rupee-sign fa-2x"></i><p>No payments recorded</p></div>';
                 else {
-                    html += `<div class="table-responsive"><table class="table"><thead><tr><th>${t('date')}</th><th>${t('customer')}</th><th>${t('amount')}</th><th>${t('notes')}</th></tr></thead><tbody>`;
+                    html += `<div class="table-responsive"><table class="table"><thead><tr><th>${t('date')}</th><th>${t('customer')}</th><th>${t('amount')}</th><th>${t('notes')}</th><th>${t('actions')}</th></tr></thead><tbody>`;
                     payments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(p => {
                         const order = orders.find(o => o.id === p.orderId);
                         const cust = order ? custs.find(c => c.id === order.customerId) : null;
-                        html += `<tr><td>${p.date}</td><td>${cust?.name || '?'}</td><td>₹${p.amount}</td><td>${p.notes || '-'}</td></tr>`;
+                        html += `<tr>
+                            <td>${p.date}</td>
+                            <td>${cust?.name || '?'}</td>
+                            <td>₹${p.amount}</td>
+                            <td>${p.notes || '-'}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary" onclick="openPaymentModal('${p.orderId}', '${p.id}')"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deletePayment('${p.id}')"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>`;
                     });
                     html += '</tbody></table></div>';
                 }
