@@ -142,6 +142,17 @@
             box-shadow: 0 6px 14px #f59e0b80;
         }
 
+        .btn-settings {
+            background: #4b5563;
+            border: 1px solid #9ca3af;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-settings:hover {
+            background: #6b7280;
+        }
+
         .tabs {
             display: flex;
             gap: 0.8rem;
@@ -225,6 +236,7 @@
             font-size: 0.9rem;
             border-bottom: 1px dashed #fcd34d;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .ing-name {
@@ -234,6 +246,7 @@
             align-items: center;
             gap: 0.3rem;
             flex: 1;
+            min-width: 140px;
         }
 
         .ing-qty {
@@ -257,6 +270,178 @@
             padding: 0.15rem 0.6rem;
             border-radius: 1rem;
             white-space: nowrap;
+        }
+
+        .ing-cost {
+            font-weight: 700;
+            color: #16a34a;
+            background: #dcfce7;
+            padding: 0.15rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .status-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.15rem 0.6rem;
+            border-radius: 1.5rem;
+            white-space: nowrap;
+            background: #d1d5db;
+            color: #374151;
+            cursor: pointer;
+            user-select: none;
+            transition: 0.15s;
+            border: 1px solid transparent;
+        }
+
+        .status-badge.available {
+            background: #bbf7d0;
+            color: #166534;
+            border-color: #86efac;
+        }
+
+        .status-badge.not-available {
+            background: #fecaca;
+            color: #991b1b;
+            border-color: #fca5a5;
+        }
+
+        .status-badge:hover {
+            opacity: 0.8;
+            transform: scale(0.97);
+        }
+
+        .ing-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #2563eb;
+            cursor: pointer;
+            transform: scale(1.1);
+            flex-shrink: 0;
+        }
+
+        .ing-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .cost-summary {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            border-radius: 1.2rem;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            font-weight: 600;
+            color: #14532d;
+        }
+
+        .cost-summary span {
+            font-weight: 800;
+            color: #16a34a;
+            font-size: 1.1rem;
+        }
+
+        .total-cost {
+            font-size: 1.2rem;
+        }
+
+        .settings-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .settings-overlay.open {
+            display: flex;
+        }
+
+        .settings-modal {
+            background: #fff7ed;
+            border-radius: 2rem;
+            max-width: 650px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
+            border: 2px solid #fcd34d;
+        }
+
+        .settings-modal h2 {
+            color: #b45309;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-modal .close-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .settings-modal .close-btn:hover {
+            background: #b91c1c;
+        }
+
+        .settings-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.6rem 0.8rem;
+            border-radius: 1rem;
+            margin-bottom: 0.5rem;
+            align-items: center;
+            border: 1px solid #fcd34d;
+        }
+
+        .settings-item .item-name {
+            font-weight: 600;
+            flex: 1;
+            min-width: 120px;
+            color: #3b2f1e;
+        }
+
+        .settings-item input {
+            width: 80px;
+            padding: 0.4rem 0.5rem;
+            border: 2px solid #d1d5db;
+            border-radius: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            outline: none;
+        }
+
+        .settings-item input:focus {
+            border-color: #f59e0b;
+        }
+
+        .settings-item .unit-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            font-weight: 500;
         }
 
         .crunch-box {
@@ -295,6 +480,80 @@
             font-size: 0.8rem;
         }
 
+        .status-toggle-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            justify-content: flex-end;
+        }
+
+        .status-toggle-bar button {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 0.25rem 0.8rem;
+            border-radius: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+            color: #1f2937;
+        }
+
+        .status-toggle-bar button:hover {
+            background: #e5e7eb;
+        }
+
+        .status-toggle-bar button.mark-all {
+            background: #dbeafe;
+            border-color: #60a5fa;
+            color: #1e40af;
+        }
+
+        .status-toggle-bar button.clear-all {
+            background: #fee2e2;
+            border-color: #f87171;
+            color: #991b1b;
+        }
+
+        .legend {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+            color: #4b5563;
+            padding: 0.3rem 0.6rem;
+            background: #f9fafb;
+            border-radius: 2rem;
+            margin-bottom: 0.5rem;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .legend-item .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot.green {
+            background: #22c55e;
+        }
+
+        .dot.red {
+            background: #ef4444;
+        }
+
+        .dot.gray {
+            background: #9ca3af;
+        }
+
         @media (max-width: 500px) {
             .app-container {
                 padding: 1.5rem 1rem;
@@ -302,6 +561,15 @@
 
             .ing-row {
                 flex-wrap: wrap;
+            }
+
+            .tab {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .settings-modal {
+                padding: 1.2rem;
             }
         }
     </style>
@@ -319,6 +587,7 @@
                 <span style="color:#fcd34d; font-weight:bold;">Burgers</span>
             </div>
             <button class="btn" id="applyBtn"><span>🔄</span> Calculate</button>
+            <button class="btn btn-settings" id="settingsBtn">⚙️ Settings</button>
         </div>
 
         <div class="tabs">
@@ -336,11 +605,27 @@
         </div>
     </div>
 
+    <!-- Settings Modal -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-modal">
+            <h2>
+                ⚙️ Product Settings
+                <button class="close-btn" id="closeSettings">✕</button>
+            </h2>
+            <p style="color:#6b7280; margin-bottom:1rem; font-size:0.9rem;">Enter pack weight (grams) and price (₹) for
+                each product.</p>
+            <div id="settingsList"></div>
+            <div style="margin-top:1rem; display:flex; gap:0.8rem; justify-content:flex-end;">
+                <button class="btn" id="saveSettings" style="padding:0.5rem 1.5rem;">💾 Save Settings</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         (function () {
             // ----- Measurement conversion helpers -----
-            const TSP_PER_GRAM = 0.2; // 1 tsp ≈ 5g
-            const TBSP_PER_GRAM = 1 / 15; // 1 tbsp ≈ 15g
+            const TSP_PER_GRAM = 0.2;
+            const TBSP_PER_GRAM = 1 / 15;
 
             function formatSpoonMeasurement(grams) {
                 if (grams <= 0) return "0";
@@ -348,15 +633,7 @@
                 if (grams < 1) {
                     const tsp = grams * TSP_PER_GRAM;
                     if (tsp < 0.125) return `${grams.toFixed(2)}g`;
-                    const fractions = {
-                        0.125: '⅛',
-                        0.25: '¼',
-                        0.33: '⅓',
-                        0.5: '½',
-                        0.67: '⅔',
-                        0.75: '¾',
-                        0.875: '⅞'
-                    };
+                    const fractions = { 0.125: '⅛', 0.25: '¼', 0.33: '⅓', 0.5: '½', 0.67: '⅔', 0.75: '¾', 0.875: '⅞' };
                     let closest = '';
                     let minDiff = Infinity;
                     for (const [val, frac] of Object.entries(fractions)) {
@@ -378,15 +655,7 @@
                     const wholeTbsp = Math.floor(tbsp);
                     const fracTbsp = tbsp - wholeTbsp;
 
-                    const fractions = {
-                        0.125: '⅛',
-                        0.25: '¼',
-                        0.33: '⅓',
-                        0.5: '½',
-                        0.67: '⅔',
-                        0.75: '¾',
-                        0.875: '⅞'
-                    };
+                    const fractions = { 0.125: '⅛', 0.25: '¼', 0.33: '⅓', 0.5: '½', 0.67: '⅔', 0.75: '¾', 0.875: '⅞' };
 
                     let fracStr = '';
                     let minDiff = 0.08;
@@ -422,6 +691,171 @@
                     if (closest) return `${closest} tsp`;
                     return `${tsp.toFixed(1)} tsp`;
                 }
+            }
+
+            // ----- All unique ingredient names (for settings) -----
+            const ALL_INGREDIENTS = [
+                'FunFoods Veg Mayo',
+                'Veeba Thousand Island Spread',
+                'Kissan Spicy Tomato Ketchup',
+                'Veeba Jalapeño Sauce',
+                'French\'s Classic Yellow Mustard',
+                'Cornitos Jalapeños (finely chopped)',
+                'Jalapeño Brine',
+                'Lemon Juice',
+                'Garlic Powder',
+                'Onion Powder',
+                'Smoked Paprika',
+                'Oregano',
+                'Dry Parsley',
+                'Black Pepper',
+                'MSG (Ajinomoto)',
+                'Honey',
+                'Worcestershire Sauce',
+                'Iceberg (Julienne)',
+                'Extra Virgin Olive Oil',
+                'Celery Salt (optional but recommended)',
+                'Salt',
+                'Amul White Cheese Slice',
+                'Amul Orange Cheese Slice',
+                'McCain Veg Patty',
+                'Meatzza Chicken Patty',
+                'Burger Bun'
+            ];
+
+            // ----- Settings storage -----
+            const SETTINGS_KEY = 'burger_product_settings';
+
+            function loadSettings() {
+                try {
+                    const data = localStorage.getItem(SETTINGS_KEY);
+                    if (data) return JSON.parse(data);
+                } catch (_) { /* ignore */ }
+                return {};
+            }
+
+            function saveSettings(settings) {
+                try {
+                    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+                } catch (_) { /* ignore */ }
+            }
+
+            let productSettings = loadSettings();
+
+            // Default settings for common items
+            const DEFAULT_SETTINGS = {
+                'FunFoods Veg Mayo': { packWeight: 500, price: 180 },
+                'Veeba Thousand Island Spread': { packWeight: 500, price: 120 },
+                'Kissan Spicy Tomato Ketchup': { packWeight: 500, price: 85 },
+                'Veeba Jalapeño Sauce': { packWeight: 500, price: 110 },
+                'French\'s Classic Yellow Mustard': { packWeight: 100, price: 45 },
+                'Cornitos Jalapeños (finely chopped)': { packWeight: 100, price: 60 },
+                'Worcestershire Sauce': { packWeight: 150, price: 70 },
+                'Honey': { packWeight: 500, price: 150 },
+                'Amul White Cheese Slice': { packWeight: 200, price: 110 },
+                'Amul Orange Cheese Slice': { packWeight: 200, price: 110 },
+                'McCain Veg Patty': { packWeight: 400, price: 160 },
+                'Meatzza Chicken Patty': { packWeight: 400, price: 180 },
+                'Burger Bun': { packWeight: 100, price: 80 } // per 10 buns approx
+            };
+
+            // Merge defaults
+            for (const [key, val] of Object.entries(DEFAULT_SETTINGS)) {
+                if (!productSettings[key]) {
+                    productSettings[key] = { ...val };
+                }
+            }
+            saveSettings(productSettings);
+
+            // ----- Status storage (prep + stock) -----
+            const PREP_KEY = 'burger_prep_status';
+            const STOCK_KEY = 'burger_stock_status';
+
+            function loadStore(key) {
+                try {
+                    const data = localStorage.getItem(key);
+                    if (data) return JSON.parse(data);
+                } catch (_) { /* ignore */ }
+                return {};
+            }
+
+            function saveStore(key, store) {
+                try {
+                    localStorage.setItem(key, JSON.stringify(store));
+                } catch (_) { /* ignore */ }
+            }
+
+            let prepStore = loadStore(PREP_KEY);
+            let stockStore = loadStore(STOCK_KEY);
+
+            function getStoreKey(recipeKey, itemName) {
+                return recipeKey + '::' + itemName;
+            }
+
+            function getPrep(recipeKey, itemName) {
+                const key = getStoreKey(recipeKey, itemName);
+                return prepStore[key] || false;
+            }
+
+            function setPrep(recipeKey, itemName, value) {
+                const key = getStoreKey(recipeKey, itemName);
+                prepStore[key] = !!value;
+                saveStore(PREP_KEY, prepStore);
+            }
+
+            function setAllPrep(recipeKey, value) {
+                const recipe = getRecipeData(recipeKey);
+                if (!recipe) return;
+                recipe.items.forEach(item => {
+                    const key = getStoreKey(recipeKey, item.name);
+                    prepStore[key] = value;
+                });
+                saveStore(PREP_KEY, prepStore);
+                renderRecipe(currentTab, currentQty);
+            }
+
+            function getStock(recipeKey, itemName) {
+                const key = getStoreKey(recipeKey, itemName);
+                return stockStore[key] || false;
+            }
+
+            function setStock(recipeKey, itemName, value) {
+                const key = getStoreKey(recipeKey, itemName);
+                stockStore[key] = !!value;
+                saveStore(STOCK_KEY, stockStore);
+            }
+
+            function setAllStock(recipeKey, value) {
+                const recipe = getRecipeData(recipeKey);
+                if (!recipe) return;
+                recipe.items.forEach(item => {
+                    const key = getStoreKey(recipeKey, item.name);
+                    stockStore[key] = value;
+                });
+                saveStore(STOCK_KEY, stockStore);
+                renderRecipe(currentTab, currentQty);
+            }
+
+            function toggleStock(recipeKey, itemName) {
+                const current = getStock(recipeKey, itemName);
+                setStock(recipeKey, itemName, !current);
+                renderRecipe(currentTab, currentQty);
+            }
+
+            function getRecipeData(tab) {
+                if (tab === 'veg') return VEG_SAUCE_V2;
+                if (tab === 'chicken') return CHICKEN_SAUCE_V2;
+                if (tab === 'crunch') return CRUNCH_MIX_V2;
+                if (tab === 'fries') return FRIES_SEASONING;
+                return null;
+            }
+
+            // ----- Cost calculation -----
+            function calculateCost(itemName, gramsUsed) {
+                const setting = productSettings[itemName];
+                if (!setting || !setting.packWeight || !setting.price) return 0;
+                const costPerGram = setting.price / setting.packWeight;
+                return costPerGram * gramsUsed;
             }
 
             // ----- V2.0 BASE RECIPES (for 6 burgers) -----
@@ -489,19 +923,19 @@
                     { name: "Smoked Paprika", gram: 2 },
                     { name: "Black Pepper", gram: 1 },
                     { name: "Oregano", gram: 1 },
-                    { name: "MSG", gram: 1 }
+                    { name: "MSG (Ajinomoto)", gram: 1 }
                 ]
             };
 
             // Assembly constants V2.0 (per burger)
-            const SAUCE_BOTTOM = 15; // g
-            const SAUCE_CRUNCH_TOSS = 10; // g (≈2 tsp)
-            const CRUNCH_MIX_PER = 30; // g
-            const SAUCE_TOP = 11; // g (10-12g, midpoint 11)
-            const BUTTER_PER_BUN = 5; // g
+            const SAUCE_BOTTOM = 15;
+            const SAUCE_CRUNCH_TOSS = 10;
+            const CRUNCH_MIX_PER = 30;
+            const SAUCE_TOP = 11;
+            const BUTTER_PER_BUN = 5;
 
             // Current state
-            let currentTab = 'veg'; // 'veg', 'chicken', 'crunch', 'fries'
+            let currentTab = 'veg';
             let currentQty = 6;
 
             // DOM
@@ -512,6 +946,11 @@
             const crunchTab = document.getElementById('crunchTab');
             const friesTab = document.getElementById('friesTab');
             const dynamicDiv = document.getElementById('dynamicRecipe');
+            const settingsOverlay = document.getElementById('settingsOverlay');
+            const settingsList = document.getElementById('settingsList');
+            const closeSettingsBtn = document.getElementById('closeSettings');
+            const saveSettingsBtn = document.getElementById('saveSettings');
+            const settingsBtn = document.getElementById('settingsBtn');
 
             function scaleItems(baseItems, factor) {
                 return baseItems.map(item => ({
@@ -534,72 +973,93 @@
             function renderRecipe(tab, qty) {
                 const factor = qty / 6;
                 let html = '';
+                let totalCost = 0;
+                let costDetails = [];
 
                 // Header
                 html += `<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
         <span style="background:#1c1917; color:#fbbf24; padding:0.4rem 1.2rem; border-radius:2rem; font-weight:bold;">×${qty} burgers</span>
       </div>`;
 
-                if (tab === 'veg') {
-                    const items = scaleItems(VEG_SAUCE_V2.items, factor);
-                    html += `<h2 style="color:#16a34a; margin:0 0 0.5rem 0;">🟢 Veg Signature Sauce V2.0</h2>`;
-                    html += `<div class="section-title">🧴 Sauce Ingredients</div><div class="ingredient-list">`;
-                    items.forEach(item => {
-                        html += `<div class="ing-row">
-            <span class="ing-name">🌿 ${item.name}</span>
-            <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
-          </div>`;
-                    });
-                    html += `</div>`;
+                // Legend
+                html += `<div class="legend">
+          <span class="legend-item"><span class="dot green"></span> In Stock</span>
+          <span class="legend-item"><span class="dot red"></span> Out of Stock</span>
+          <span class="legend-item">☑️ Collected for prep</span>
+          <span class="legend-item">☐ Not collected</span>
+        </div>`;
 
-                    // Assembly for veg
-                    html += renderAssembly('veg', qty);
-                }
-                else if (tab === 'chicken') {
-                    const items = scaleItems(CHICKEN_SAUCE_V2.items, factor);
-                    html += `<h2 style="color:#dc2626; margin:0 0 0.5rem 0;">🔴 Chicken Signature Sauce V2.0</h2>`;
-                    html += `<div class="section-title">🧴 Sauce Ingredients</div><div class="ingredient-list">`;
-                    items.forEach(item => {
-                        html += `<div class="ing-row">
-            <span class="ing-name">🌿 ${item.name}</span>
-            <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
-          </div>`;
-                    });
-                    html += `</div>`;
+                // Status toggle buttons
+                html += `<div class="status-toggle-bar">
+          <button class="mark-all" data-action="mark-all-prep">✅ Mark all collected</button>
+          <button class="clear-all" data-action="clear-all-prep">❌ Mark all not collected</button>
+          <button class="mark-all" data-action="mark-all-stock">📦 Mark all in stock</button>
+          <button class="clear-all" data-action="clear-all-stock">📦 Mark all out of stock</button>
+        </div>`;
 
-                    html += renderAssembly('chicken', qty);
-                }
-                else if (tab === 'crunch') {
-                    const items = scaleItems(CRUNCH_MIX_V2.items, factor);
-                    html += `<h2 style="color:#ca8a04; margin:0 0 0.5rem 0;">🥬 Iceberg Signature Crunch Mix V2.0</h2>`;
+                const recipe = getRecipeData(tab);
+                if (!recipe) return;
+
+                const items = scaleItems(recipe.items, factor);
+
+                html += `<h2 style="margin:0 0 0.5rem 0; ${tab === 'veg' ? 'color:#16a34a;' : tab === 'chicken' ? 'color:#dc2626;' : tab === 'crunch' ? 'color:#ca8a04;' : 'color:#f59e0b;'}">${recipe.name}</h2>`;
+
+                if (tab === 'crunch') {
                     html += `<div class="crunch-box">⚠️ <strong>Order aane se pehle mat banana.</strong> Sirf order ke time mix karna.</div>`;
-                    html += `<div class="section-title">🥗 Crunch Mix Ingredients</div><div class="ingredient-list">`;
-                    items.forEach(item => {
-                        html += `<div class="ing-row">
-            <span class="ing-name">🧊 ${item.name}</span>
-            <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
-          </div>`;
-                    });
-                    html += `</div>`;
+                }
 
+                html += `<div class="section-title">🧴 Ingredients</div><div class="ingredient-list">`;
+
+                items.forEach(item => {
+                    const prep = getPrep(tab, item.name);
+                    const stock = getStock(tab, item.name);
+                    const badgeClass = stock ? 'available' : 'not-available';
+                    const badgeText = stock ? '✅ In Stock' : '❌ Out of Stock';
+                    const checkedAttr = prep ? 'checked' : '';
+                    const cost = calculateCost(item.name, item.gram);
+                    totalCost += cost;
+                    costDetails.push({ name: item.name, cost: cost });
+
+                    html += `<div class="ing-row" data-item="${item.name}">
+            <div class="ing-left">
+              <input type="checkbox" class="ing-checkbox" data-item="${item.name}" ${checkedAttr} title="Collected for preparation">
+              <span class="ing-name">🧾 ${item.name}</span>
+              <span class="status-badge ${badgeClass}" data-item="${item.name}" title="Click to toggle stock status">${badgeText}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+              <span class="ing-qty">
+                <span>${item.gram}g</span>
+                <span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span>
+              </span>
+              ${cost > 0 ? `<span class="ing-cost">₹${cost.toFixed(2)}</span>` : ''}
+            </div>
+          </div>`;
+                });
+
+                html += `</div>`;
+
+                // Cost summary
+                if (totalCost > 0) {
+                    html += `<div class="cost-summary">
+            💰 <strong>Total Cost for ${qty} burgers:</strong> 
+            <span class="total-cost">₹${totalCost.toFixed(2)}</span>
+            <span style="font-weight:400;font-size:0.85rem;display:block;margin-top:0.2rem;">
+              (${costDetails.filter(c => c.cost > 0).length} items with price data)
+            </span>
+          </div>`;
+                }
+
+                // Assembly
+                if (tab === 'veg' || tab === 'chicken') {
+                    html += renderAssembly(tab, qty);
+                } else if (tab === 'crunch') {
                     html += `<div class="crunch-box">
           <strong>📋 Order ke time (per burger):</strong><br>
           🥗 Crunch Mix → <strong>30 g</strong><br>
           🫙 Sauce → <strong>10 g (≈2 tsp)</strong><br>
           🔄 Light toss karo (5–10 sec) aur turant burger me lagao.
         </div>`;
-                }
-                else if (tab === 'fries') {
-                    const items = scaleItems(FRIES_SEASONING.items, factor);
-                    html += `<h2 style="color:#f59e0b; margin:0 0 0.5rem 0;">🍟 Fries Seasoning (Bonus)</h2>`;
-                    html += `<div class="section-title">🧂 Seasoning Mix</div><div class="ingredient-list">`;
-                    items.forEach(item => {
-                        html += `<div class="ing-row">
-            <span class="ing-name">✨ ${item.name}</span>
-            <span class="ing-qty"><span>${item.gram}g</span><span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
-          </div>`;
-                    });
-                    html += `</div>`;
+                } else if (tab === 'fries') {
                     html += `<div class="crunch-box">🍟 Fries ko shake karke serve karo. Quantity fries ke hisaab se adjust kar sakte ho.</div>`;
                 }
 
@@ -612,6 +1072,38 @@
       </div>`;
 
                 dynamicDiv.innerHTML = html;
+
+                // ---- Event: checkbox (prep) ----
+                document.querySelectorAll('.ing-checkbox').forEach(cb => {
+                    cb.addEventListener('change', function (e) {
+                        const itemName = this.dataset.item;
+                        const checked = this.checked;
+                        setPrep(tab, itemName, checked);
+                        renderRecipe(currentTab, currentQty);
+                    });
+                });
+
+                // ---- Event: badge click (toggle stock) ----
+                document.querySelectorAll('.status-badge').forEach(badge => {
+                    badge.addEventListener('click', function (e) {
+                        const itemName = this.dataset.item;
+                        toggleStock(tab, itemName);
+                    });
+                });
+
+                // ---- Batch buttons ----
+                document.querySelector('[data-action="mark-all-prep"]')?.addEventListener('click', function () {
+                    setAllPrep(tab, true);
+                });
+                document.querySelector('[data-action="clear-all-prep"]')?.addEventListener('click', function () {
+                    setAllPrep(tab, false);
+                });
+                document.querySelector('[data-action="mark-all-stock"]')?.addEventListener('click', function () {
+                    setAllStock(tab, true);
+                });
+                document.querySelector('[data-action="clear-all-stock"]')?.addEventListener('click', function () {
+                    setAllStock(tab, false);
+                });
             }
 
             function renderAssembly(type, qty) {
@@ -623,6 +1115,13 @@
                 const totalTossSauce = SAUCE_CRUNCH_TOSS * qty;
                 const totalTopSauce = SAUCE_TOP * qty;
 
+                // Calculate costs for assembly items
+                const butterCost = calculateCost('Burger Bun', totalButter * 0.1) || 0;
+                const cheeseCost = calculateCost(cheeseType, 20 * qty) || 0;
+                const pattyCost = calculateCost(pattyType, 80 * qty) || 0;
+
+                const totalAssemblyCost = butterCost + cheeseCost + pattyCost;
+
                 return `
         <div class="assembly-box">
           <strong>🍔 Assembly (per burger ×${qty}):</strong><br><br>
@@ -631,18 +1130,53 @@
             <tr><td style="padding:3px 0;">🟤 Bottom Sauce</td><td style="text-align:right; font-weight:bold;">${SAUCE_BOTTOM}g ×${qty} = ${totalBottomSauce}g (${formatSpoonMeasurement(totalBottomSauce)})</td></tr>
             <tr><td style="padding:3px 0;">🥗 Crunch Mix</td><td style="text-align:right; font-weight:bold;">${CRUNCH_MIX_PER}g ×${qty} = ${totalCrunchMix}g</td></tr>
             <tr><td style="padding:3px 0;">🫙 Toss Sauce</td><td style="text-align:right; font-weight:bold;">${SAUCE_CRUNCH_TOSS}g ×${qty} = ${totalTossSauce}g (${formatSpoonMeasurement(totalTossSauce)})</td></tr>
-            <tr><td style="padding:3px 0;">🍗 Patty</td><td style="text-align:right;">${pattyType} ×${qty}</td></tr>
-            <tr><td style="padding:3px 0;">🧀 Cheese</td><td style="text-align:right;">${cheeseType} ×${qty}</td></tr>
+            <tr><td style="padding:3px 0;">🍗 Patty</td><td style="text-align:right;">${pattyType} ×${qty} ${pattyCost > 0 ? `(₹${pattyCost.toFixed(2)})` : ''}</td></tr>
+            <tr><td style="padding:3px 0;">🧀 Cheese</td><td style="text-align:right;">${cheeseType} ×${qty} ${cheeseCost > 0 ? `(₹${cheeseCost.toFixed(2)})` : ''}</td></tr>
             <tr><td style="padding:3px 0;">🍅 Tomato</td><td style="text-align:right;">1 slice (6-7mm) ×${qty}</td></tr>
             <tr><td style="padding:3px 0;">🧅 Onion</td><td style="text-align:right;">2-3 rings (ice water soak) ×${qty}</td></tr>
             <tr><td style="padding:3px 0;">🥬 Whole Lettuce</td><td style="text-align:right;">1 leaf ×${qty}</td></tr>
             <tr><td style="padding:3px 0;">🔝 Top Sauce</td><td style="text-align:right; font-weight:bold;">10-12g ×${qty} ≈ ${totalTopSauce}g (${formatSpoonMeasurement(totalTopSauce)})</td></tr>
           </table>
+          ${totalAssemblyCost > 0 ? `<div style="margin-top:0.5rem;font-weight:700;color:#16a34a;">💰 Assembly Cost: ₹${totalAssemblyCost.toFixed(2)}</div>` : ''}
         </div>
       `;
             }
 
-            // Event handlers
+            // ----- Settings UI -----
+            function renderSettings() {
+                settingsList.innerHTML = '';
+                ALL_INGREDIENTS.forEach(name => {
+                    const setting = productSettings[name] || { packWeight: '', price: '' };
+                    const div = document.createElement('div');
+                    div.className = 'settings-item';
+                    div.innerHTML = `
+            <span class="item-name">${name}</span>
+            <input type="number" class="settings-pack" data-name="${name}" value="${setting.packWeight || ''}" placeholder="g" step="1" min="0">
+            <span class="unit-label">g</span>
+            <input type="number" class="settings-price" data-name="${name}" value="${setting.price || ''}" placeholder="₹" step="0.01" min="0">
+            <span class="unit-label">₹</span>
+          `;
+                    settingsList.appendChild(div);
+                });
+            }
+
+            function saveSettingsFromUI() {
+                document.querySelectorAll('.settings-item').forEach(item => {
+                    const name = item.querySelector('.settings-pack').dataset.name;
+                    const packWeight = parseFloat(item.querySelector('.settings-pack').value) || 0;
+                    const price = parseFloat(item.querySelector('.settings-price').value) || 0;
+                    if (packWeight > 0 && price > 0) {
+                        productSettings[name] = { packWeight, price };
+                    } else {
+                        delete productSettings[name];
+                    }
+                });
+                saveSettings(productSettings);
+                renderRecipe(currentTab, currentQty);
+                settingsOverlay.classList.remove('open');
+            }
+
+            // ----- Event handlers -----
             function onCalculate() {
                 let qty = parseInt(qtyInput.value, 10);
                 if (isNaN(qty) || qty < 1) qty = 1;
@@ -689,6 +1223,24 @@
                     renderRecipe(currentTab, currentQty);
                 }
             });
+
+            // Settings
+            settingsBtn.addEventListener('click', () => {
+                renderSettings();
+                settingsOverlay.classList.add('open');
+            });
+
+            closeSettingsBtn.addEventListener('click', () => {
+                settingsOverlay.classList.remove('open');
+            });
+
+            settingsOverlay.addEventListener('click', (e) => {
+                if (e.target === settingsOverlay) {
+                    settingsOverlay.classList.remove('open');
+                }
+            });
+
+            saveSettingsBtn.addEventListener('click', saveSettingsFromUI);
 
             // Initial render
             updateTabStyles('veg');
