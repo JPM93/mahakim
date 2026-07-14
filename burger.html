@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>Veg & Non-veg Burger</title>
+    <title>Veg & Non-veg Burger • MFM V3.1</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
     <style>
@@ -25,14 +25,14 @@
         }
 
         .app-container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             background: #fff7ed;
             border-radius: 3rem 3rem 2.5rem 2.5rem;
             box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.6);
             padding: 2rem 1.8rem;
             border: 1px solid #ffd7a5;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
 
         h1 {
@@ -44,7 +44,7 @@
             font-weight: 800;
             color: #b45309;
             text-shadow: 2px 2px 0 #fde68a;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.2rem;
             letter-spacing: -0.5px;
         }
 
@@ -61,7 +61,6 @@
             margin-right: auto;
             width: fit-content;
             font-size: 0.9rem;
-            letter-spacing: 0.3px;
             border: 1px solid #fbbf24;
         }
 
@@ -73,7 +72,6 @@
             padding: 0.2rem 0.8rem;
             border-radius: 1rem;
             margin-left: 0.5rem;
-            vertical-align: middle;
         }
 
         .control-panel {
@@ -119,7 +117,7 @@
         }
 
         .btn {
-            background: #f59e0b;
+            background: linear-gradient(to bottom, #fbbf24, #d97706);
             border: none;
             color: #1c1917;
             font-weight: 800;
@@ -128,29 +126,50 @@
             font-size: 1rem;
             letter-spacing: 0.5px;
             cursor: pointer;
-            background: linear-gradient(to bottom, #fbbf24, #d97706);
             box-shadow: 0 4px 10px rgba(245, 158, 11, 0.5);
-            transition: 0.2s;
             border: 1px solid #fde68a;
             display: flex;
             align-items: center;
             gap: 0.3rem;
+            transition: all 0.2s;
         }
 
         .btn:hover {
             background: linear-gradient(to bottom, #fcd34d, #b45309);
-            box-shadow: 0 6px 14px #f59e0b80;
+            transform: translateY(-1px);
         }
 
         .btn-settings {
             background: #4b5563;
-            border: 1px solid #9ca3af;
+            border-color: #9ca3af;
             color: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .btn-settings:hover {
             background: #6b7280;
+        }
+
+        .btn-csv {
+            background: #059669;
+            border-color: #34d399;
+            color: white;
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.4);
+        }
+
+        .btn-csv:hover {
+            background: #047857;
+        }
+
+        .btn-export {
+            background: #7c3aed;
+            border-color: #a78bfa;
+            color: white;
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-export:hover {
+            background: #6d28d9;
         }
 
         .tabs {
@@ -162,42 +181,42 @@
         }
 
         .tab {
-            background: #e7e5e4;
+            background: #d6d3d1;
             border: none;
             padding: 0.75rem 1.8rem;
             border-radius: 2.5rem;
             font-weight: 700;
-            font-size: 1rem;
             cursor: pointer;
-            transition: 0.2s;
             color: #44403c;
-            background: #d6d3d1;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
         }
 
         .tab.active {
             background: #16a34a;
             color: white;
             box-shadow: 0 0 15px #4ade80;
-            border: 1px solid #bbf7d0;
         }
 
         .tab.chicken-active {
             background: #b91c1c;
             box-shadow: 0 0 18px #f87171;
-            border: 1px solid #fecaca;
-        }
-
-        .tab.fries-tab {
-            background: #f59e0b;
-            color: #1c1917;
         }
 
         .tab.fries-active {
             background: #f59e0b;
-            box-shadow: 0 0 20px #fbbf24;
-            border: 2px solid white;
             color: #1c1917;
+            box-shadow: 0 0 20px #fbbf24;
+        }
+
+        .tab.burger-active {
+            background: #8b5cf6;
+            color: white;
+            box-shadow: 0 0 20px #a78bfa;
         }
 
         .recipe-card {
@@ -206,7 +225,6 @@
             padding: 1.5rem 1.2rem;
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
             border: 1px solid #fcd34d;
-            transition: 0.2s;
         }
 
         .section-title {
@@ -222,8 +240,7 @@
         .ingredient-list {
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
-            margin-bottom: 0.5rem;
+            gap: 0.4rem;
         }
 
         .ing-row {
@@ -237,6 +254,20 @@
             border-bottom: 1px dashed #fcd34d;
             gap: 0.5rem;
             flex-wrap: wrap;
+            transition: all 0.2s;
+        }
+
+        .ing-row:hover {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .ing-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            flex: 1;
         }
 
         .ing-name {
@@ -245,7 +276,6 @@
             display: flex;
             align-items: center;
             gap: 0.3rem;
-            flex: 1;
             min-width: 140px;
         }
 
@@ -257,19 +287,14 @@
             color: #92400e;
             font-size: 0.85rem;
             white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
         }
 
         .spoon-hint {
             font-weight: 600;
             color: #b45309;
-            font-size: 0.8rem;
             background: #fde68a;
             padding: 0.15rem 0.6rem;
             border-radius: 1rem;
-            white-space: nowrap;
         }
 
         .ing-cost {
@@ -279,7 +304,6 @@
             padding: 0.15rem 0.6rem;
             border-radius: 1rem;
             font-size: 0.8rem;
-            white-space: nowrap;
         }
 
         .status-badge {
@@ -287,13 +311,15 @@
             font-weight: 700;
             padding: 0.15rem 0.6rem;
             border-radius: 1.5rem;
-            white-space: nowrap;
+            cursor: pointer;
             background: #d1d5db;
             color: #374151;
-            cursor: pointer;
-            user-select: none;
-            transition: 0.15s;
             border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .status-badge:hover {
+            transform: scale(1.05);
         }
 
         .status-badge.available {
@@ -308,28 +334,6 @@
             border-color: #fca5a5;
         }
 
-        .status-badge:hover {
-            opacity: 0.8;
-            transform: scale(0.97);
-        }
-
-        .ing-checkbox {
-            width: 18px;
-            height: 18px;
-            accent-color: #2563eb;
-            cursor: pointer;
-            transform: scale(1.1);
-            flex-shrink: 0;
-        }
-
-        .ing-left {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            flex: 1;
-        }
-
         .cost-summary {
             background: #f0fdf4;
             border: 2px solid #22c55e;
@@ -340,14 +344,84 @@
             color: #14532d;
         }
 
-        .cost-summary span {
-            font-weight: 800;
-            color: #16a34a;
-            font-size: 1.1rem;
+        .burger-layer {
+            background: linear-gradient(135deg, #fef3c7, #fef9c3);
+            border: 2px solid #f59e0b;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            margin: 1rem 0;
         }
 
-        .total-cost {
+        .layer-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0.8rem;
+            margin: 0.3rem 0;
+            background: white;
+            border-radius: 1rem;
+            border-left: 4px solid #f59e0b;
+            font-size: 0.9rem;
+        }
+
+        .layer-item.bun {
+            border-left-color: #d97706;
+            background: #fef7ed;
+            font-weight: 700;
+        }
+
+        .layer-item.sauce {
+            border-left-color: #dc2626;
+        }
+
+        .layer-item.veggies {
+            border-left-color: #16a34a;
+        }
+
+        .layer-item.patty {
+            border-left-color: #b45309;
+            background: #fef3c7;
+            font-weight: 700;
+        }
+
+        .layer-item.cheese {
+            border-left-color: #fbbf24;
+        }
+
+        .layer-cost {
+            font-weight: 700;
+            color: #16a34a;
+            background: #dcfce7;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+        }
+
+        .fries-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fef3c7;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1.5rem;
+            margin: 0.8rem 0;
+            border: 2px solid #f59e0b;
+        }
+
+        .fries-input-group label {
+            font-weight: 700;
+            color: #92400e;
+        }
+
+        .fries-input-group input {
+            width: 80px;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: 800;
             font-size: 1.2rem;
+            background: white;
+            border: 2px solid #f59e0b;
+            border-radius: 1rem;
+            color: #78350f;
         }
 
         .settings-overlay {
@@ -371,7 +445,7 @@
         .settings-modal {
             background: #fff7ed;
             border-radius: 2rem;
-            max-width: 650px;
+            max-width: 750px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -383,13 +457,12 @@
         .settings-modal h2 {
             color: #b45309;
             margin-bottom: 1rem;
-            font-size: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .settings-modal .close-btn {
+        .close-btn {
             background: #dc2626;
             color: white;
             border: none;
@@ -397,12 +470,51 @@
             height: 36px;
             border-radius: 50%;
             font-size: 1.4rem;
-            font-weight: 700;
             cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .settings-modal .close-btn:hover {
+        .close-btn:hover {
             background: #b91c1c;
+            transform: scale(1.1);
+        }
+
+        .csv-section {
+            background: #f0fdf4;
+            border: 2px dashed #22c55e;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .csv-section h3 {
+            color: #166534;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .csv-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.8rem;
+        }
+
+        .csv-template {
+            background: #fef3c7;
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: #78350f;
+            margin-top: 0.5rem;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
 
         .settings-item {
@@ -410,57 +522,41 @@
             flex-wrap: wrap;
             gap: 0.5rem;
             background: white;
-            padding: 0.6rem 0.8rem;
+            padding: 0.7rem 0.8rem;
             border-radius: 1rem;
             margin-bottom: 0.5rem;
             align-items: center;
             border: 1px solid #fcd34d;
+            transition: all 0.2s;
         }
 
-        .settings-item .item-name {
+        .settings-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-name {
             font-weight: 600;
             flex: 1;
-            min-width: 120px;
+            min-width: 140px;
             color: #3b2f1e;
         }
 
         .settings-item input {
-            width: 80px;
-            padding: 0.4rem 0.5rem;
+            width: 85px;
+            padding: 0.4rem;
             border: 2px solid #d1d5db;
             border-radius: 0.8rem;
-            font-weight: 600;
             text-align: center;
-            outline: none;
         }
 
         .settings-item input:focus {
             border-color: #f59e0b;
+            outline: none;
         }
 
-        .settings-item .unit-label {
+        .unit-label {
             font-size: 0.8rem;
             color: #6b7280;
-            font-weight: 500;
-        }
-
-        .crunch-box {
-            background: #fef9c7;
-            border-radius: 1.2rem;
-            padding: 0.8rem 1rem;
-            margin: 0.8rem 0;
-            color: #713f12;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .assembly-box {
-            background: #f0fdf4;
-            border: 2px dashed #22c55e;
-            border-radius: 1.5rem;
-            padding: 1rem;
-            margin: 1rem 0;
-            color: #14532d;
         }
 
         .footer-note {
@@ -468,7 +564,6 @@
             font-size: 0.75rem;
             color: #a16207;
             margin-top: 1rem;
-            font-weight: 600;
         }
 
         .sop-box {
@@ -482,10 +577,10 @@
 
         .status-toggle-bar {
             display: flex;
-            flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 0.8rem;
             justify-content: flex-end;
+            flex-wrap: wrap;
         }
 
         .status-toggle-bar button {
@@ -494,84 +589,63 @@
             padding: 0.25rem 0.8rem;
             border-radius: 1.5rem;
             font-size: 0.75rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: 0.15s;
-            color: #1f2937;
+            transition: all 0.2s;
         }
 
         .status-toggle-bar button:hover {
             background: #e5e7eb;
+            transform: translateY(-1px);
         }
 
-        .status-toggle-bar button.mark-all {
-            background: #dbeafe;
-            border-color: #60a5fa;
-            color: #1e40af;
+        .total-cost-box {
+            background: linear-gradient(135deg, #1c1917, #292524);
+            color: #fbbf24;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            border: 2px solid #f59e0b;
         }
 
-        .status-toggle-bar button.clear-all {
-            background: #fee2e2;
-            border-color: #f87171;
-            color: #991b1b;
-        }
-
-        .legend {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            font-size: 0.75rem;
-            color: #4b5563;
-            padding: 0.3rem 0.6rem;
-            background: #f9fafb;
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1c1917;
+            color: #fbbf24;
+            padding: 0.8rem 1.5rem;
             border-radius: 2rem;
-            margin-bottom: 0.5rem;
-            justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
         }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
-        .legend-item .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
+        .fries-note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
         }
 
-        .dot.green {
-            background: #22c55e;
-        }
-<<<<<<< HEAD
-
-        .dot.red {
-            background: #ef4444;
-        }
-
-=======
-        .dot.red {
-            background: #ef4444;
-        }
->>>>>>> 0be8780580d4c4f65ef5109d7823339a67566531
-        .dot.gray {
-            background: #9ca3af;
-        }
-
-        @media (max-width: 500px) {
+        @media (max-width:500px) {
             .app-container {
                 padding: 1.5rem 1rem;
-            }
-
-            .ing-row {
-                flex-wrap: wrap;
-            }
-
-            .tab {
-                font-size: 0.8rem;
-                padding: 0.5rem 1rem;
             }
 
             .settings-modal {
@@ -583,133 +657,101 @@
 
 <body>
     <div class="app-container">
-        <h1>🍔 MFM BURGER <span class="version-badge">V2.0</span></h1>
-        <div style="text-align: center;"><span class="subhead">Production Ready · Auto Scale</span></div>
+        <h1>🍔 BURGER</h1>
+        <div style="text-align:center"><span class="subhead">Complete Cost Breakdown · Burger Assembly · Fries
+                Calculator</span></div>
 
         <div class="control-panel">
             <div class="input-group">
-                <label>🍟</label>
+                <label>🍔</label>
                 <input type="number" id="burgerQty" value="6" min="1" max="200" step="1">
                 <span style="color:#fcd34d; font-weight:bold;">Burgers</span>
             </div>
             <button class="btn" id="applyBtn"><span>🔄</span> Calculate</button>
-            <button class="btn btn-settings" id="settingsBtn">⚙️ Settings</button>
+            <button class="btn btn-settings" id="settingsBtn">⚙️ Price Settings</button>
         </div>
 
         <div class="tabs">
-            <button id="vegTab" class="tab active">🟢 Veg Sauce</button>
-            <button id="chickenTab" class="tab">🔴 Chicken Sauce</button>
+            <button id="vegTab" class="tab active">🟢 Veg Assembly</button>
+            <button id="chickenTab" class="tab">🔴 Chicken Assembly</button>
+            <button id="vegSauceTab" class="tab">🟢 Veg Sauce</button>
+            <button id="chickenSauceTab" class="tab">🔴 Chicken Sauce</button>
             <button id="crunchTab" class="tab">🥬 Crunch Mix</button>
             <button id="friesTab" class="tab fries-tab">🍟 Fries</button>
         </div>
 
-        <div id="dynamicRecipe" class="recipe-card">
-            <!-- JS filled -->
-        </div>
-        <div class="footer-note">
-            ⭐ Sauce rest 12-24h · Shelf life 3-4 din · Consistency is king 🚀
-        </div>
+        <div id="dynamicRecipe" class="recipe-card"></div>
+        <div class="footer-note">⭐ Sauce rest 12-24h · Shelf life 3-4 din · Complete cost tracking</div>
     </div>
 
-    <!-- Settings Modal -->
+    <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+
     <div class="settings-overlay" id="settingsOverlay">
         <div class="settings-modal">
-            <h2>
-                ⚙️ Product Settings
-                <button class="close-btn" id="closeSettings">✕</button>
-            </h2>
-<<<<<<< HEAD
-            <p style="color:#6b7280; margin-bottom:1rem; font-size:0.9rem;">Enter pack weight (grams) and price (₹) for
-                each product.</p>
-=======
-            <p style="color:#6b7280; margin-bottom:1rem; font-size:0.9rem;">Enter pack weight (grams) and price (₹) for each product.</p>
->>>>>>> 0be8780580d4c4f65ef5109d7823339a67566531
+            <h2>⚙️ Product Price Settings <button class="close-btn" id="closeSettings">✕</button></h2>
+
+            <div class="csv-section">
+                <h3>📊 CSV Import/Export</h3>
+                <p style="color:#6b7280; margin-bottom:0.5rem; font-size:0.85rem;">
+                    CSV format: <code>Item Name,Pack Weight (g),MRP (₹),Discounted Price (₹)</code>
+                </p>
+                <div class="csv-template">
+                    Example:<br>
+                    Burger Bun,400,40,36<br>
+                    Butter,500,310,282.45<br>
+                    McCain Fries,1250,381,191
+                </div>
+                <div class="csv-buttons">
+                    <button class="btn btn-csv" id="importCsvBtn">📥 Import CSV</button>
+                    <button class="btn btn-export" id="exportCsvBtn">📤 Export CSV</button>
+                    <button class="btn" id="downloadTemplateBtn" style="font-size:0.8rem;">📋 Download Template</button>
+                </div>
+            </div>
+
+            <p style="color:#6b7280; margin-bottom:1rem;">Enter pack weight (g), MRP (₹) and Discounted/Wholesale price
+                (₹).</p>
             <div id="settingsList"></div>
             <div style="margin-top:1rem; display:flex; gap:0.8rem; justify-content:flex-end;">
-                <button class="btn" id="saveSettings" style="padding:0.5rem 1.5rem;">💾 Save Settings</button>
+                <button class="btn" id="saveSettings">💾 Save & Apply</button>
             </div>
         </div>
     </div>
 
     <script>
         (function () {
-            // ----- Measurement conversion helpers -----
+            // ---------- spoon helpers ----------
             const TSP_PER_GRAM = 0.2;
             const TBSP_PER_GRAM = 1 / 15;
-
             function formatSpoonMeasurement(grams) {
                 if (grams <= 0) return "0";
-
                 if (grams < 1) {
                     const tsp = grams * TSP_PER_GRAM;
-                    if (tsp < 0.125) return `${grams.toFixed(2)}g`;
-                    const fractions = { 0.125: '⅛', 0.25: '¼', 0.33: '⅓', 0.5: '½', 0.67: '⅔', 0.75: '¾', 0.875: '⅞' };
-                    let closest = '';
-                    let minDiff = Infinity;
-                    for (const [val, frac] of Object.entries(fractions)) {
-                        const diff = Math.abs(tsp - parseFloat(val));
-                        if (diff < minDiff && diff < 0.1) {
-                            minDiff = diff;
-                            closest = frac;
-                        }
-                    }
-                    if (closest) return `${closest} tsp`;
-                    if (tsp >= 0.1) return `${tsp.toFixed(1)} tsp`;
-                    return `${grams.toFixed(2)}g`;
-                }
-
-                const tbsp = grams * TBSP_PER_GRAM;
-                const tsp = grams * TSP_PER_GRAM;
-
-                if (tbsp >= 0.5) {
-                    const wholeTbsp = Math.floor(tbsp);
-                    const fracTbsp = tbsp - wholeTbsp;
-
-                    const fractions = { 0.125: '⅛', 0.25: '¼', 0.33: '⅓', 0.5: '½', 0.67: '⅔', 0.75: '¾', 0.875: '⅞' };
-
-                    let fracStr = '';
-                    let minDiff = 0.08;
-                    for (const [val, frac] of Object.entries(fractions)) {
-                        const diff = Math.abs(fracTbsp - parseFloat(val));
-                        if (diff < minDiff) {
-                            minDiff = diff;
-                            fracStr = frac;
-                        }
-                    }
-
-                    if (wholeTbsp === 0 && fracStr) {
-                        return `${fracStr} tbsp`;
-                    } else if (wholeTbsp > 0 && fracStr) {
-                        return `${wholeTbsp}${fracStr} tbsp`;
-                    } else if (wholeTbsp > 0 && fracTbsp < 0.1) {
-                        return `${wholeTbsp} tbsp`;
-                    } else {
-                        return `${tbsp.toFixed(1)} tbsp`;
-                    }
-                } else {
-                    if (tsp < 0.5) return `${tsp.toFixed(1)} tsp`;
-                    const fractions = { 0.5: '½', 0.75: '¾', 1: '1' };
-                    let closest = '';
-                    let minDiff = Infinity;
-                    for (const [val, frac] of Object.entries(fractions)) {
-                        const diff = Math.abs(tsp - parseFloat(val));
-                        if (diff < minDiff && diff < 0.15) {
-                            minDiff = diff;
-                            closest = frac;
-                        }
-                    }
-                    if (closest) return `${closest} tsp`;
+                    if (tsp < 0.1) return `${grams.toFixed(2)}g`;
                     return `${tsp.toFixed(1)} tsp`;
                 }
+                const tbsp = grams * TBSP_PER_GRAM;
+                if (tbsp >= 0.5) return `${tbsp.toFixed(1)} tbsp`;
+                const tsp = grams * TSP_PER_GRAM;
+                return `${tsp.toFixed(1)} tsp`;
             }
 
-            // ----- All unique ingredient names (for settings) -----
+            function showToast(message, duration = 2500) {
+                const existingToast = document.querySelector('.toast');
+                if (existingToast) existingToast.remove();
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), duration);
+            }
+
+            // ---------- ingredient list ----------
             const ALL_INGREDIENTS = [
                 'FunFoods Veg Mayo',
                 'Veeba Thousand Island Spread',
                 'Kissan Spicy Tomato Ketchup',
                 'Veeba Jalapeño Sauce',
-                'French\'s Classic Yellow Mustard',
+                "French's Classic Yellow Mustard",
                 'Cornitos Jalapeños (finely chopped)',
                 'Jalapeño Brine',
                 'Lemon Juice',
@@ -730,532 +772,709 @@
                 'Amul Orange Cheese Slice',
                 'McCain Veg Patty',
                 'Meatzza Chicken Patty',
-                'Burger Bun'
+                'Burger Bun',
+                'Butter',
+                'Onion',
+                'Tomato',
+                'Lettuce Iceberg',
+                'Lettuce Green',
+                'Green Parsley',
+                'McCain Fries'
             ];
 
-            // ----- Settings storage -----
-            const SETTINGS_KEY = 'burger_product_settings';
-
+            const SETTINGS_KEY = 'burger_price_settings_v3';
             function loadSettings() {
-                try {
-                    const data = localStorage.getItem(SETTINGS_KEY);
-                    if (data) return JSON.parse(data);
-                } catch (_) { /* ignore */ }
-                return {};
+                try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch (_) { return {}; }
             }
-
-            function saveSettings(settings) {
-                try {
-                    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-                } catch (_) { /* ignore */ }
-            }
+            function saveSettings(settings) { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
 
             let productSettings = loadSettings();
 
-            // Default settings for common items
-            const DEFAULT_SETTINGS = {
-                'FunFoods Veg Mayo': { packWeight: 500, price: 180 },
-                'Veeba Thousand Island Spread': { packWeight: 500, price: 120 },
-                'Kissan Spicy Tomato Ketchup': { packWeight: 500, price: 85 },
-                'Veeba Jalapeño Sauce': { packWeight: 500, price: 110 },
-                'French\'s Classic Yellow Mustard': { packWeight: 100, price: 45 },
-                'Cornitos Jalapeños (finely chopped)': { packWeight: 100, price: 60 },
-                'Worcestershire Sauce': { packWeight: 150, price: 70 },
-                'Honey': { packWeight: 500, price: 150 },
-                'Amul White Cheese Slice': { packWeight: 200, price: 110 },
-                'Amul Orange Cheese Slice': { packWeight: 200, price: 110 },
-                'McCain Veg Patty': { packWeight: 400, price: 160 },
-                'Meatzza Chicken Patty': { packWeight: 400, price: 180 },
-                'Burger Bun': { packWeight: 100, price: 80 } // per 10 buns approx
+            const DEFAULT_PRICES = {
+                'Burger Bun': { packWeight: 400, mrp: 40, discounted: 36 },
+                'Butter': { packWeight: 500, mrp: 310, discounted: 282.45 },
+                'Extra Virgin Olive Oil': { packWeight: 182, mrp: 399, discounted: 372 },
+                'Amul White Cheese Slice': { packWeight: 1000, mrp: 440, discounted: 350 },
+                'Amul Orange Cheese Slice': { packWeight: 400, mrp: 400, discounted: 223 },
+                'Onion': { packWeight: 1000, mrp: 50, discounted: 50 },
+                'Tomato': { packWeight: 1000, mrp: 50, discounted: 50 },
+                'Lettuce Iceberg': { packWeight: 1000, mrp: 200, discounted: 200 },
+                'Lettuce Green': { packWeight: 1000, mrp: 150, discounted: 150 },
+                'Green Parsley': { packWeight: 100, mrp: 30, discounted: 30 },
+                'McCain Fries': { packWeight: 1250, mrp: 381, discounted: 191 }
             };
 
-            // Merge defaults
-            for (const [key, val] of Object.entries(DEFAULT_SETTINGS)) {
-                if (!productSettings[key]) {
-                    productSettings[key] = { ...val };
-                }
+            for (const [key, val] of Object.entries(DEFAULT_PRICES)) {
+                if (!productSettings[key]) productSettings[key] = { ...val };
             }
             saveSettings(productSettings);
 
-            // ----- Status storage (prep + stock) -----
-            const PREP_KEY = 'burger_prep_status';
-            const STOCK_KEY = 'burger_stock_status';
-
-            function loadStore(key) {
-                try {
-                    const data = localStorage.getItem(key);
-                    if (data) return JSON.parse(data);
-                } catch (_) { /* ignore */ }
-                return {};
+            // ---------- CSV Functions ----------
+            function parseCSV(csvText) {
+                const lines = csvText.split(/\r?\n/).filter(line => line.trim());
+                const results = [];
+                for (let i = 0; i < lines.length; i++) {
+                    if (i === 0 && lines[i].toLowerCase().includes('item name')) continue;
+                    const fields = [];
+                    let current = '';
+                    let inQuotes = false;
+                    for (let char of lines[i]) {
+                        if (char === '"') { inQuotes = !inQuotes; }
+                        else if (char === ',' && !inQuotes) { fields.push(current.trim()); current = ''; }
+                        else { current += char; }
+                    }
+                    fields.push(current.trim());
+                    if (fields.length >= 3) {
+                        const name = fields[0].replace(/^"|"$/g, '').trim();
+                        const packWeight = parseFloat(fields[1]) || 0;
+                        const mrp = parseFloat(fields[2]) || 0;
+                        const discounted = fields.length >= 4 ? (parseFloat(fields[3]) || mrp) : mrp;
+                        if (name && packWeight > 0) results.push({ name, packWeight, mrp, discounted });
+                    }
+                }
+                return results;
             }
 
-            function saveStore(key, store) {
-                try {
-                    localStorage.setItem(key, JSON.stringify(store));
-                } catch (_) { /* ignore */ }
+            function exportToCSV() {
+                let csvContent = 'Item Name,Pack Weight (g),MRP (₹),Discounted Price (₹)\n';
+                for (const name of ALL_INGREDIENTS) {
+                    const s = productSettings[name] || {};
+                    const packWeight = s.packWeight || '';
+                    const mrp = s.mrp || '';
+                    const discounted = s.discounted || '';
+                    const escapedName = name.includes(',') ? `"${name}"` : name;
+                    csvContent += `${escapedName},${packWeight},${mrp},${discounted}\n`;
+                }
+                return csvContent;
             }
 
-            let prepStore = loadStore(PREP_KEY);
-            let stockStore = loadStore(STOCK_KEY);
-
-            function getStoreKey(recipeKey, itemName) {
-                return recipeKey + '::' + itemName;
+            function downloadCSV(csvContent, filename) {
+                const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
             }
 
-            function getPrep(recipeKey, itemName) {
-                const key = getStoreKey(recipeKey, itemName);
-                return prepStore[key] || false;
+            function importCSVFromFile(file) {
+                if (!file) { showToast('❌ No file selected'); return; }
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    try {
+                        const csvData = parseCSV(e.target.result);
+                        if (csvData.length === 0) { showToast('❌ No valid data found'); return; }
+                        let imported = 0;
+                        csvData.forEach(row => {
+                            const matchedIngredient = ALL_INGREDIENTS.find(
+                                ing => ing.toLowerCase() === row.name.toLowerCase()
+                            );
+                            const itemName = matchedIngredient || row.name;
+                            productSettings[itemName] = { packWeight: row.packWeight, mrp: row.mrp, discounted: row.discounted };
+                            imported++;
+                        });
+                        saveSettings(productSettings);
+                        renderSettings();
+                        showToast(`✅ Imported ${imported} items!`);
+                        renderContent(currentTab, currentQty);
+                    } catch (error) {
+                        showToast('❌ Error: ' + error.message);
+                    }
+                };
+                reader.onerror = () => showToast('❌ Error reading file');
+                reader.readAsText(file, 'UTF-8');
             }
 
-            function setPrep(recipeKey, itemName, value) {
-                const key = getStoreKey(recipeKey, itemName);
-                prepStore[key] = !!value;
-                saveStore(PREP_KEY, prepStore);
+            function downloadTemplate() {
+                let csvContent = 'Item Name,Pack Weight (g),MRP (₹),Discounted Price (₹)\n';
+                for (const name of ALL_INGREDIENTS) {
+                    const escapedName = name.includes(',') ? `"${name}"` : name;
+                    csvContent += `${escapedName},,,\n`;
+                }
+                downloadCSV(csvContent, 'MFM_Burger_Price_Template.csv');
+                showToast('📋 Template downloaded!');
             }
 
-            function setAllPrep(recipeKey, value) {
-                const recipe = getRecipeData(recipeKey);
-                if (!recipe) return;
-                recipe.items.forEach(item => {
-                    const key = getStoreKey(recipeKey, item.name);
-                    prepStore[key] = value;
-                });
-                saveStore(PREP_KEY, prepStore);
-                renderRecipe(currentTab, currentQty);
+            // ---------- prep & stock stores ----------
+            const PREP_KEY = 'burger_prep_v3', STOCK_KEY = 'burger_stock_v3';
+            function loadStore(key) { try { return JSON.parse(localStorage.getItem(key)) || {}; } catch (_) { return {}; } }
+            function saveStore(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+            let prepStore = loadStore(PREP_KEY), stockStore = loadStore(STOCK_KEY);
+
+            function storeKey(tab, item) { return tab + '::' + item; }
+            function getPrep(tab, item) { return !!prepStore[storeKey(tab, item)]; }
+            function setPrep(tab, item, val) { prepStore[storeKey(tab, item)] = val; saveStore(PREP_KEY, prepStore); }
+            function getStock(tab, item) { return !!stockStore[storeKey(tab, item)]; }
+            function setStock(tab, item, val) { stockStore[storeKey(tab, item)] = val; saveStore(STOCK_KEY, stockStore); }
+            function toggleStock(tab, item) { setStock(tab, item, !getStock(tab, item)); }
+
+            function setAllPrep(tab, val) {
+                const recipe = getRecipe(tab); if (!recipe) return;
+                recipe.items.forEach(i => setPrep(tab, i.name, val));
+            }
+            function setAllStock(tab, val) {
+                const recipe = getRecipe(tab); if (!recipe) return;
+                recipe.items.forEach(i => setStock(tab, i.name, val));
             }
 
-            function getStock(recipeKey, itemName) {
-                const key = getStoreKey(recipeKey, itemName);
-                return stockStore[key] || false;
+            // ---------- cost helper ----------
+            function calculateCosts(itemName, gramsUsed) {
+                const s = productSettings[itemName];
+                if (!s || !s.packWeight || s.packWeight <= 0) return { mrpCost: 0, discountedCost: 0 };
+                const perGramMRP = (s.mrp || 0) / s.packWeight;
+                const perGramDisc = (s.discounted || s.mrp || 0) / s.packWeight;
+                return {
+                    mrpCost: perGramMRP * gramsUsed,
+                    discountedCost: perGramDisc * gramsUsed
+                };
             }
 
-            function setStock(recipeKey, itemName, value) {
-                const key = getStoreKey(recipeKey, itemName);
-                stockStore[key] = !!value;
-                saveStore(STOCK_KEY, stockStore);
-            }
-
-            function setAllStock(recipeKey, value) {
-                const recipe = getRecipeData(recipeKey);
-                if (!recipe) return;
-                recipe.items.forEach(item => {
-                    const key = getStoreKey(recipeKey, item.name);
-                    stockStore[key] = value;
-                });
-                saveStore(STOCK_KEY, stockStore);
-                renderRecipe(currentTab, currentQty);
-            }
-
-            function toggleStock(recipeKey, itemName) {
-                const current = getStock(recipeKey, itemName);
-                setStock(recipeKey, itemName, !current);
-                renderRecipe(currentTab, currentQty);
-            }
-
-            function getRecipeData(tab) {
-                if (tab === 'veg') return VEG_SAUCE_V2;
-                if (tab === 'chicken') return CHICKEN_SAUCE_V2;
-                if (tab === 'crunch') return CRUNCH_MIX_V2;
-                if (tab === 'fries') return FRIES_SEASONING;
-                return null;
-            }
-
-            // ----- Cost calculation -----
-            function calculateCost(itemName, gramsUsed) {
-                const setting = productSettings[itemName];
-                if (!setting || !setting.packWeight || !setting.price) return 0;
-                const costPerGram = setting.price / setting.packWeight;
-                return costPerGram * gramsUsed;
-            }
-
-            // ----- V2.0 BASE RECIPES (for 6 burgers) -----
-            const VEG_SAUCE_V2 = {
-                name: "🟢 MFM Veg Signature Sauce V2.0",
+            // ---------- Updated Recipes ----------
+            const VEG_SAUCE = {
+                name: "🟢 MFM Veg Signature Sauce",
                 items: [
-                    { name: "FunFoods Veg Mayo", gram: 120 },
-                    { name: "Veeba Thousand Island Spread", gram: 35 },
-                    { name: "Kissan Spicy Tomato Ketchup", gram: 18 },
-                    { name: "Veeba Jalapeño Sauce", gram: 15 },
-                    { name: "French's Classic Yellow Mustard", gram: 3 },
-                    { name: "Cornitos Jalapeños (finely chopped)", gram: 12 },
-                    { name: "Jalapeño Brine", gram: 5 },
-                    { name: "Lemon Juice", gram: 2 },
-                    { name: "Garlic Powder", gram: 2 },
-                    { name: "Onion Powder", gram: 2 },
-                    { name: "Smoked Paprika", gram: 1 },
-                    { name: "Oregano", gram: 1 },
-                    { name: "Dry Parsley", gram: 1 },
-                    { name: "Black Pepper", gram: 1.5 },
-                    { name: "MSG (Ajinomoto)", gram: 0.4 },
+                    { name: "FunFoods Veg Mayo", gram: 120 }, { name: "Veeba Thousand Island Spread", gram: 35 },
+                    { name: "Kissan Spicy Tomato Ketchup", gram: 18 }, { name: "Veeba Jalapeño Sauce", gram: 15 },
+                    { name: "French's Classic Yellow Mustard", gram: 3 }, { name: "Cornitos Jalapeños (finely chopped)", gram: 12 },
+                    { name: "Jalapeño Brine", gram: 5 }, { name: "Lemon Juice", gram: 2 }, { name: "Garlic Powder", gram: 2 },
+                    { name: "Onion Powder", gram: 2 }, { name: "Smoked Paprika", gram: 1 }, { name: "Oregano", gram: 1 },
+                    { name: "Dry Parsley", gram: 1 }, { name: "Black Pepper", gram: 1.5 }, { name: "MSG (Ajinomoto)", gram: 0.4 },
                     { name: "Honey", gram: 5 }
                 ]
             };
 
-            const CHICKEN_SAUCE_V2 = {
-                name: "🔴 MFM Chicken Signature Sauce V2.0",
+            const CHICKEN_SAUCE = {
+                name: "🔴 MFM Chicken Signature Sauce",
                 items: [
-                    { name: "FunFoods Veg Mayo", gram: 105 },
-                    { name: "Veeba Thousand Island Spread", gram: 35 },
-                    { name: "Kissan Spicy Tomato Ketchup", gram: 22 },
-                    { name: "Veeba Jalapeño Sauce", gram: 22 },
-                    { name: "French's Classic Yellow Mustard", gram: 8 },
-                    { name: "Worcestershire Sauce", gram: 5 },
-                    { name: "Cornitos Jalapeños (finely chopped)", gram: 15 },
-                    { name: "Jalapeño Brine", gram: 8 },
-                    { name: "Lemon Juice", gram: 3 },
-                    { name: "Garlic Powder", gram: 3 },
-                    { name: "Onion Powder", gram: 2 },
-                    { name: "Smoked Paprika", gram: 2 },
-                    { name: "Dry Parsley", gram: 1 },
-                    { name: "Black Pepper", gram: 2 },
-                    { name: "MSG (Ajinomoto)", gram: 0.5 },
-                    { name: "Honey", gram: 2 }
+                    { name: "FunFoods Veg Mayo", gram: 105 }, { name: "Veeba Thousand Island Spread", gram: 35 },
+                    { name: "Kissan Spicy Tomato Ketchup", gram: 22 }, { name: "Veeba Jalapeño Sauce", gram: 22 },
+                    { name: "French's Classic Yellow Mustard", gram: 8 }, { name: "Worcestershire Sauce", gram: 5 },
+                    { name: "Cornitos Jalapeños (finely chopped)", gram: 15 }, { name: "Jalapeño Brine", gram: 8 },
+                    { name: "Lemon Juice", gram: 3 }, { name: "Garlic Powder", gram: 3 }, { name: "Onion Powder", gram: 2 },
+                    { name: "Smoked Paprika", gram: 2 }, { name: "Dry Parsley", gram: 1 }, { name: "Black Pepper", gram: 2 },
+                    { name: "MSG (Ajinomoto)", gram: 0.5 }, { name: "Honey", gram: 2 }
                 ]
             };
 
-            const CRUNCH_MIX_V2 = {
-                name: "🥬 Iceberg Signature Crunch Mix V2.0",
+            const CRUNCH_MIX = {
+                name: "🥬 Iceberg Crunch Mix (for 6 burgers)",
                 items: [
                     { name: "Iceberg (Julienne)", gram: 180 },
                     { name: "Cornitos Jalapeños (finely chopped)", gram: 18 },
                     { name: "Extra Virgin Olive Oil", gram: 8 },
+                    { name: "FunFoods Veg Mayo", gram: 8 },
                     { name: "Black Pepper", gram: 1 },
                     { name: "Celery Salt (optional but recommended)", gram: 1 }
                 ]
             };
 
             const FRIES_SEASONING = {
-                name: "🍟 Fries Seasoning (Bonus)",
+                name: "🍟 Fries Seasoning (per 100g fries)",
                 items: [
-                    { name: "Salt", gram: 5 },
-                    { name: "Garlic Powder", gram: 2 },
-                    { name: "Onion Powder", gram: 2 },
-                    { name: "Smoked Paprika", gram: 2 },
-                    { name: "Black Pepper", gram: 1 },
-                    { name: "Oregano", gram: 1 },
-                    { name: "MSG (Ajinomoto)", gram: 1 }
+                    { name: "Salt", gram: 1.5 },
+                    { name: "Garlic Powder", gram: 0.5 },
+                    { name: "Onion Powder", gram: 0.5 },
+                    { name: "Smoked Paprika", gram: 0.5 },
+                    { name: "Black Pepper", gram: 0.25 },
+                    { name: "Oregano", gram: 0.25 },
+                    { name: "MSG (Ajinomoto)", gram: 0.25 }
                 ]
             };
 
-            // Assembly constants V2.0 (per burger)
+            function getRecipe(tab) {
+                if (tab === 'veg-sauce') return VEG_SAUCE;
+                if (tab === 'chicken-sauce') return CHICKEN_SAUCE;
+                if (tab === 'crunch') return CRUNCH_MIX;
+                if (tab === 'fries') return FRIES_SEASONING;
+                return null;
+            }
+
+            const BUN_WEIGHT = 100;
+            const BUTTER_PER_BUN_HALF = 5;
+            const ONION_RING = 12;
+            const TOMATO_SLICE = 20;
+            const CHEESE_SLICE = 15;
+            const VEG_PATTY = 45;
+            const CHICKEN_PATTY = 55;
+            const LETTUCE_LEAF = 50;
+            const SAUCE_TOP = 10;
             const SAUCE_BOTTOM = 15;
-            const SAUCE_CRUNCH_TOSS = 10;
-            const CRUNCH_MIX_PER = 30;
-            const SAUCE_TOP = 11;
-            const BUTTER_PER_BUN = 5;
+            const CRUNCH_MIX_PER_BURGER = 30;
 
-            // Current state
-            let currentTab = 'veg';
-            let currentQty = 6;
+            let currentTab = 'veg', currentQty = 6, friesServings = 1;
 
-            // DOM
+            // DOM elements
             const qtyInput = document.getElementById('burgerQty');
             const applyBtn = document.getElementById('applyBtn');
-            const vegTab = document.getElementById('vegTab');
-            const chickenTab = document.getElementById('chickenTab');
-            const crunchTab = document.getElementById('crunchTab');
-            const friesTab = document.getElementById('friesTab');
+            const vegTab = document.getElementById('vegTab'), chickenTab = document.getElementById('chickenTab');
+            const vegSauceTab = document.getElementById('vegSauceTab'), chickenSauceTab = document.getElementById('chickenSauceTab');
+            const crunchTab = document.getElementById('crunchTab'), friesTab = document.getElementById('friesTab');
             const dynamicDiv = document.getElementById('dynamicRecipe');
             const settingsOverlay = document.getElementById('settingsOverlay');
             const settingsList = document.getElementById('settingsList');
-            const closeSettingsBtn = document.getElementById('closeSettings');
             const saveSettingsBtn = document.getElementById('saveSettings');
             const settingsBtn = document.getElementById('settingsBtn');
+            const closeSettingsBtn = document.getElementById('closeSettings');
+            const csvFileInput = document.getElementById('csvFileInput');
+            const importCsvBtn = document.getElementById('importCsvBtn');
+            const exportCsvBtn = document.getElementById('exportCsvBtn');
+            const downloadTemplateBtn = document.getElementById('downloadTemplateBtn');
 
-            function scaleItems(baseItems, factor) {
-                return baseItems.map(item => ({
-                    ...item,
-                    gram: parseFloat((item.gram * factor).toFixed(2))
-                }));
+            function scaleItems(items, factor) {
+                return items.map(i => ({ ...i, gram: parseFloat((i.gram * factor).toFixed(2)) }));
             }
 
-            function updateTabStyles(active) {
-                [vegTab, chickenTab, crunchTab, friesTab].forEach(t => {
-                    t.classList.remove('active', 'chicken-active', 'fries-active');
-                });
+            function updateTabs(active) {
+                [vegTab, chickenTab, vegSauceTab, chickenSauceTab, crunchTab, friesTab].forEach(t =>
+                    t.classList.remove('active', 'chicken-active', 'fries-active', 'burger-active'));
 
-                if (active === 'veg') vegTab.classList.add('active');
-                else if (active === 'chicken') chickenTab.classList.add('active', 'chicken-active');
+                if (active === 'veg') vegTab.classList.add('active', 'burger-active');
+                else if (active === 'chicken') chickenTab.classList.add('active', 'chicken-active', 'burger-active');
+                else if (active === 'veg-sauce') vegSauceTab.classList.add('active');
+                else if (active === 'chicken-sauce') chickenSauceTab.classList.add('active', 'chicken-active');
                 else if (active === 'crunch') crunchTab.classList.add('active');
                 else if (active === 'fries') friesTab.classList.add('active', 'fries-active');
             }
 
-            function renderRecipe(tab, qty) {
+            function renderBurgerAssembly(tab, qty) {
+                const isVeg = tab === 'veg';
+                const cheese = isVeg ? 'Amul White Cheese Slice' : 'Amul Orange Cheese Slice';
+                const patty = isVeg ? 'McCain Veg Patty' : 'Meatzza Chicken Patty';
+                const pattyWeight = isVeg ? VEG_PATTY : CHICKEN_PATTY;
+
+                const bunCost = calculateCosts('Burger Bun', BUN_WEIGHT * 2);
+                const butterCost = calculateCosts('Butter', BUTTER_PER_BUN_HALF * 2);
+                const onionCost = calculateCosts('Onion', ONION_RING);
+                const tomatoCost = calculateCosts('Tomato', TOMATO_SLICE);
+                const cheeseCost = calculateCosts(cheese, CHEESE_SLICE);
+                const pattyCost = calculateCosts(patty, pattyWeight);
+                const lettuceCost = calculateCosts('Lettuce Iceberg', LETTUCE_LEAF);
+
+                const sauceRecipe = isVeg ? VEG_SAUCE : CHICKEN_SAUCE;
+                const totalSauceGram = sauceRecipe.items.reduce((sum, i) => sum + i.gram, 0);
+                const sauceFactor = (SAUCE_TOP + SAUCE_BOTTOM) / totalSauceGram;
+                const scaledSauce = scaleItems(sauceRecipe.items, sauceFactor);
+                let sauceCostDisc = 0, sauceCostMRP = 0;
+                scaledSauce.forEach(item => {
+                    const costs = calculateCosts(item.name, item.gram);
+                    sauceCostDisc += costs.discountedCost;
+                    sauceCostMRP += costs.mrpCost;
+                });
+
+                const crunchRecipe = CRUNCH_MIX;
+                const totalCrunchGram = crunchRecipe.items.reduce((sum, i) => sum + i.gram, 0);
+                const crunchFactor = CRUNCH_MIX_PER_BURGER / totalCrunchGram;
+                const scaledCrunch = scaleItems(crunchRecipe.items, crunchFactor);
+                let crunchCostDisc = 0;
+                scaledCrunch.forEach(item => {
+                    crunchCostDisc += calculateCosts(item.name, item.gram).discountedCost;
+                });
+
+                const perBurgerDiscounted = bunCost.discountedCost + butterCost.discountedCost + onionCost.discountedCost +
+                    tomatoCost.discountedCost + cheeseCost.discountedCost + pattyCost.discountedCost +
+                    lettuceCost.discountedCost + sauceCostDisc + crunchCostDisc;
+
+                const perBurgerMRP = bunCost.mrpCost + butterCost.mrpCost + onionCost.mrpCost +
+                    tomatoCost.mrpCost + cheeseCost.mrpCost + pattyCost.mrpCost +
+                    lettuceCost.mrpCost + sauceCostMRP + crunchCostDisc;
+
+                let html = `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+                    <span style="background:#1c1917; color:#fbbf24; padding:0.4rem 1.2rem; border-radius:2rem; font-weight:bold;">
+                        🍔 ${isVeg ? 'Veg' : 'Chicken'} Burger ×${qty}
+                    </span>
+                </div>`;
+
+                html += `<div class="burger-layer">
+                    <h3 style="text-align:center; color:#b45309; margin-bottom:0.8rem;">📐 Burger Layer Assembly (Per Burger)</h3>`;
+
+                const layers = [
+                    { class: 'bun', emoji: '🍞', name: 'TOP BUN', detail: `Toasted with ${BUTTER_PER_BUN_HALF}g Butter`, cost: bunCost.discountedCost / 2 + butterCost.discountedCost / 2 },
+                    { class: 'sauce', emoji: '🟤', name: 'SIGNATURE SAUCE', detail: `${SAUCE_TOP}g`, cost: sauceCostDisc * (SAUCE_TOP / (SAUCE_TOP + SAUCE_BOTTOM)) },
+                    { class: 'veggies', emoji: '🧅', name: 'ONION RING', detail: `${ONION_RING}g (Large)`, cost: onionCost.discountedCost },
+                    { class: 'veggies', emoji: '🍅', name: 'TOMATO SLICE', detail: `${TOMATO_SLICE}g`, cost: tomatoCost.discountedCost },
+                    { class: 'cheese', emoji: '🧀', name: 'CHEESE SLICE', detail: `${CHEESE_SLICE}g ${cheese}`, cost: cheeseCost.discountedCost },
+                    { class: 'patty', emoji: '🍗', name: 'PATTY', detail: `${pattyWeight}g ${patty}`, cost: pattyCost.discountedCost },
+                    { class: 'veggies', emoji: '🥗', name: 'CRUNCH MIX', detail: `${CRUNCH_MIX_PER_BURGER}g Iceberg Crunch`, cost: crunchCostDisc },
+                    { class: 'veggies', emoji: '🥬', name: 'LETTUCE LEAF', detail: `${LETTUCE_LEAF}g Whole Leaf`, cost: lettuceCost.discountedCost },
+                    { class: 'sauce', emoji: '🟤', name: 'SIGNATURE SAUCE', detail: `${SAUCE_BOTTOM}g`, cost: sauceCostDisc * (SAUCE_BOTTOM / (SAUCE_TOP + SAUCE_BOTTOM)) },
+                    { class: 'bun', emoji: '🍞', name: 'BOTTOM BUN', detail: `Toasted with ${BUTTER_PER_BUN_HALF}g Butter`, cost: bunCost.discountedCost / 2 + butterCost.discountedCost / 2 }
+                ];
+
+                layers.forEach(layer => {
+                    html += `<div class="layer-item ${layer.class}">
+                        <span>${layer.emoji} <strong>${layer.name}</strong> <small style="color:#6b7280;">${layer.detail}</small></span>
+                        <span class="layer-cost">₹${layer.cost.toFixed(2)}</span>
+                    </div>`;
+                });
+
+                html += `</div>`;
+
+                html += `<div class="total-cost-box">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>💰 <strong>Per Burger Cost (Discounted):</strong></span>
+                        <span style="font-size:1.3rem;">₹${perBurgerDiscounted.toFixed(2)}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem; color:#fcd34d;">
+                        <span>📊 Per Burger Cost (MRP):</span>
+                        <span>₹${perBurgerMRP.toFixed(2)}</span>
+                    </div>
+                </div>`;
+
+                html += `<div class="total-cost-box" style="border:2px solid #22c55e;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>🎯 <strong>Total for ${qty} Burgers (Discounted):</strong></span>
+                        <span style="font-size:1.5rem;">₹${(perBurgerDiscounted * qty).toFixed(2)}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem; color:#fcd34d;">
+                        <span>📊 Total for ${qty} Burgers (MRP):</span>
+                        <span>₹${(perBurgerMRP * qty).toFixed(2)}</span>
+                    </div>
+                </div>`;
+
+                // Fries optional cost
+                const friesCost100g = calculateCosts('McCain Fries', 100);
+                let friesSeasoningCost = 0;
+                FRIES_SEASONING.items.forEach(item => {
+                    friesSeasoningCost += calculateCosts(item.name, item.gram).discountedCost;
+                });
+                const totalFries100g = friesCost100g.discountedCost + friesSeasoningCost;
+
+                html += `<div class="fries-note">
+                    🍟 <strong>Fries (Optional):</strong> ₹${totalFries100g.toFixed(2)} per 100g serving 
+                    (Fries: ₹${friesCost100g.discountedCost.toFixed(2)} + Seasoning: ₹${friesSeasoningCost.toFixed(2)})
+                </div>`;
+
+                dynamicDiv.innerHTML = html;
+            }
+
+            function renderSauceRecipe(tab, qty) {
                 const factor = qty / 6;
-                let html = '';
-                let totalCost = 0;
-                let costDetails = [];
-
-                // Header
-                html += `<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
-        <span style="background:#1c1917; color:#fbbf24; padding:0.4rem 1.2rem; border-radius:2rem; font-weight:bold;">×${qty} burgers</span>
-      </div>`;
-
-                // Legend
-                html += `<div class="legend">
-          <span class="legend-item"><span class="dot green"></span> In Stock</span>
-          <span class="legend-item"><span class="dot red"></span> Out of Stock</span>
-          <span class="legend-item">☑️ Collected for prep</span>
-          <span class="legend-item">☐ Not collected</span>
-        </div>`;
-
-                // Status toggle buttons
-                html += `<div class="status-toggle-bar">
-          <button class="mark-all" data-action="mark-all-prep">✅ Mark all collected</button>
-          <button class="clear-all" data-action="clear-all-prep">❌ Mark all not collected</button>
-          <button class="mark-all" data-action="mark-all-stock">📦 Mark all in stock</button>
-          <button class="clear-all" data-action="clear-all-stock">📦 Mark all out of stock</button>
-        </div>`;
-
-                const recipe = getRecipeData(tab);
+                const recipe = getRecipe(tab);
                 if (!recipe) return;
-
                 const items = scaleItems(recipe.items, factor);
+                let totalMRP = 0, totalDiscounted = 0;
 
-                html += `<h2 style="margin:0 0 0.5rem 0; ${tab === 'veg' ? 'color:#16a34a;' : tab === 'chicken' ? 'color:#dc2626;' : tab === 'crunch' ? 'color:#ca8a04;' : 'color:#f59e0b;'}">${recipe.name}</h2>`;
+                let html = `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+                    <span style="background:#1c1917; color:#fbbf24; padding:0.4rem 1.2rem; border-radius:2rem; font-weight:bold;">×${qty} burgers</span>
+                </div>`;
 
-                if (tab === 'crunch') {
-                    html += `<div class="crunch-box">⚠️ <strong>Order aane se pehle mat banana.</strong> Sirf order ke time mix karna.</div>`;
-                }
+                html += `<div class="status-toggle-bar">
+                    <button data-action="mark-all-prep">✅ All collected</button>
+                    <button data-action="clear-all-prep">❌ None collected</button>
+                    <button data-action="mark-all-stock">📦 All in stock</button>
+                    <button data-action="clear-all-stock">📦 All out of stock</button>
+                </div>`;
 
+                html += `<h2 style="margin:0 0 0.5rem;">${recipe.name}</h2>`;
                 html += `<div class="section-title">🧴 Ingredients</div><div class="ingredient-list">`;
 
                 items.forEach(item => {
                     const prep = getPrep(tab, item.name);
                     const stock = getStock(tab, item.name);
-                    const badgeClass = stock ? 'available' : 'not-available';
-                    const badgeText = stock ? '✅ In Stock' : '❌ Out of Stock';
-                    const checkedAttr = prep ? 'checked' : '';
-                    const cost = calculateCost(item.name, item.gram);
-                    totalCost += cost;
-                    costDetails.push({ name: item.name, cost: cost });
+                    const costs = calculateCosts(item.name, item.gram);
+                    totalMRP += costs.mrpCost;
+                    totalDiscounted += costs.discountedCost;
+                    const costDisplay = costs.discountedCost > 0 ? `₹${costs.discountedCost.toFixed(2)}` : '';
 
-                    html += `<div class="ing-row" data-item="${item.name}">
-            <div class="ing-left">
-              <input type="checkbox" class="ing-checkbox" data-item="${item.name}" ${checkedAttr} title="Collected for preparation">
-              <span class="ing-name">🧾 ${item.name}</span>
-              <span class="status-badge ${badgeClass}" data-item="${item.name}" title="Click to toggle stock status">${badgeText}</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
-              <span class="ing-qty">
-                <span>${item.gram}g</span>
-                <span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span>
-              </span>
-              ${cost > 0 ? `<span class="ing-cost">₹${cost.toFixed(2)}</span>` : ''}
-            </div>
-          </div>`;
+                    html += `<div class="ing-row">
+                        <div class="ing-left">
+                            <input type="checkbox" class="ing-checkbox" data-item="${item.name}" ${prep ? 'checked' : ''}>
+                            <span class="ing-name">🧾 ${item.name}</span>
+                            <span class="status-badge ${stock ? 'available' : 'not-available'}" data-item="${item.name}">${stock ? '✅ In Stock' : '❌ Out'}</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                            <span class="ing-qty">${item.gram}g <span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
+                            ${costDisplay ? `<span class="ing-cost">${costDisplay}</span>` : ''}
+                        </div>
+                    </div>`;
                 });
-
                 html += `</div>`;
 
-                // Cost summary
-                if (totalCost > 0) {
-                    html += `<div class="cost-summary">
-            💰 <strong>Total Cost for ${qty} burgers:</strong> 
-            <span class="total-cost">₹${totalCost.toFixed(2)}</span>
-            <span style="font-weight:400;font-size:0.85rem;display:block;margin-top:0.2rem;">
-              (${costDetails.filter(c => c.cost > 0).length} items with price data)
-            </span>
-          </div>`;
-                }
+                html += `<div class="cost-summary">
+                    💰 <strong>Total Sauce Cost (${qty} burgers):</strong> 
+                    <span style="color:#16a34a;">₹${totalDiscounted.toFixed(2)}</span> discounted 
+                    <span style="color:#6b7280; margin-left:0.5rem;">(MRP ₹${totalMRP.toFixed(2)})</span>
+                </div>`;
 
-                // Assembly
-                if (tab === 'veg' || tab === 'chicken') {
-                    html += renderAssembly(tab, qty);
-                } else if (tab === 'crunch') {
-                    html += `<div class="crunch-box">
-          <strong>📋 Order ke time (per burger):</strong><br>
-          🥗 Crunch Mix → <strong>30 g</strong><br>
-          🫙 Sauce → <strong>10 g (≈2 tsp)</strong><br>
-          🔄 Light toss karo (5–10 sec) aur turant burger me lagao.
-        </div>`;
-                } else if (tab === 'fries') {
-                    html += `<div class="crunch-box">🍟 Fries ko shake karke serve karo. Quantity fries ke hisaab se adjust kar sakte ho.</div>`;
-                }
+                html += `<div class="sop-box">⭐ SOP: Sauce rest 12-24h · Use ${SAUCE_TOP + SAUCE_BOTTOM}g per burger (${SAUCE_TOP}g top + ${SAUCE_BOTTOM}g bottom)</div>`;
+                dynamicDiv.innerHTML = html;
+                attachRecipeEvents(tab, qty);
+            }
 
-                // SOP footer
+            function renderCrunchMix(tab, qty) {
+                const factor = qty / 6;
+                const recipe = getRecipe(tab);
+                if (!recipe) return;
+                const items = scaleItems(recipe.items, factor);
+                let totalMRP = 0, totalDiscounted = 0;
+
+                let html = `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+                    <span style="background:#1c1917; color:#fbbf24; padding:0.4rem 1.2rem; border-radius:2rem; font-weight:bold;">×${qty} burgers</span>
+                </div>`;
+
+                html += `<div class="status-toggle-bar">
+                    <button data-action="mark-all-prep">✅ All collected</button>
+                    <button data-action="clear-all-prep">❌ None collected</button>
+                    <button data-action="mark-all-stock">📦 All in stock</button>
+                    <button data-action="clear-all-stock">📦 All out of stock</button>
+                </div>`;
+
+                html += `<h2 style="margin:0 0 0.5rem;">${recipe.name}</h2>`;
+                html += `<div style="background:#fef9c7; padding:0.6rem; border-radius:1rem; margin-bottom:0.8rem;">⚠️ Order aane se pehle mat banana. Per burger ${CRUNCH_MIX_PER_BURGER}g use hota hai.</div>`;
+                html += `<div class="section-title">🧴 Ingredients</div><div class="ingredient-list">`;
+
+                items.forEach(item => {
+                    const prep = getPrep(tab, item.name);
+                    const stock = getStock(tab, item.name);
+                    const costs = calculateCosts(item.name, item.gram);
+                    totalMRP += costs.mrpCost;
+                    totalDiscounted += costs.discountedCost;
+                    const costDisplay = costs.discountedCost > 0 ? `₹${costs.discountedCost.toFixed(2)}` : '';
+
+                    html += `<div class="ing-row">
+                        <div class="ing-left">
+                            <input type="checkbox" class="ing-checkbox" data-item="${item.name}" ${prep ? 'checked' : ''}>
+                            <span class="ing-name">🧾 ${item.name}</span>
+                            <span class="status-badge ${stock ? 'available' : 'not-available'}" data-item="${item.name}">${stock ? '✅ In Stock' : '❌ Out'}</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                            <span class="ing-qty">${item.gram}g</span>
+                            ${costDisplay ? `<span class="ing-cost">${costDisplay}</span>` : ''}
+                        </div>
+                    </div>`;
+                });
+                html += `</div>`;
+
+                html += `<div class="cost-summary">
+                    💰 <strong>Total Crunch Mix Cost (${qty} burgers):</strong> 
+                    <span style="color:#16a34a;">₹${totalDiscounted.toFixed(2)}</span> discounted 
+                    <span style="color:#6b7280; margin-left:0.5rem;">(MRP ₹${totalMRP.toFixed(2)})</span>
+                    <br>📐 Per burger: ${CRUNCH_MIX_PER_BURGER}g (₹${(totalDiscounted / qty).toFixed(2)})
+                </div>`;
+
+                dynamicDiv.innerHTML = html;
+                attachRecipeEvents(tab, qty);
+            }
+
+            function renderFriesSection(tab, servings) {
+                const recipe = getRecipe(tab);
+                if (!recipe) return;
+                const items = scaleItems(recipe.items, servings);
+                let seasoningMRP = 0, seasoningDiscounted = 0;
+
+                const friesCost = calculateCosts('McCain Fries', 100 * servings);
+
+                let html = `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+                    <span style="background:#1c1917; color:#fbbf24; padding:0.4rem 1.2rem; border-radius:2rem; font-weight:bold;">
+                        🍟 Fries Calculator
+                    </span>
+                </div>`;
+
+                html += `<div class="fries-input-group">
+                    <label>🍟 Servings (100g each):</label>
+                    <input type="number" id="friesServingsInput" value="${servings}" min="1" max="50" step="1">
+                    <span style="font-weight:700; color:#92400e;">= ${servings * 100}g</span>
+                </div>`;
+
+                html += `<div class="cost-summary">
+                    <h3 style="color:#92400e;">🍟 McCain Fries Cost</h3>
+                    <div style="display:flex; justify-content:space-between; margin:0.3rem 0;">
+                        <span>📦 Pack: 1250g</span>
+                        <span>MRP: ₹381 | Discounted: ₹191</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin:0.3rem 0;">
+                        <span>🍟 Fries (${servings * 100}g):</span>
+                        <span style="color:#16a34a;">₹${friesCost.discountedCost.toFixed(2)} (MRP ₹${friesCost.mrpCost.toFixed(2)})</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin:0.3rem 0;">
+                        <span>📊 Per 100g rate:</span>
+                        <span>₹${(friesCost.discountedCost / servings).toFixed(2)} discounted</span>
+                    </div>
+                </div>`;
+
+                html += `<h2 style="margin:0.8rem 0 0.5rem;">${recipe.name}</h2>`;
+                html += `<div class="section-title">🧂 Seasoning for ${servings * 100}g Fries</div><div class="ingredient-list">`;
+
+                items.forEach(item => {
+                    const costs = calculateCosts(item.name, item.gram);
+                    seasoningMRP += costs.mrpCost;
+                    seasoningDiscounted += costs.discountedCost;
+
+                    html += `<div class="ing-row">
+                        <div class="ing-left">
+                            <span class="ing-name">🧾 ${item.name}</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                            <span class="ing-qty">${item.gram}g <span class="spoon-hint">${formatSpoonMeasurement(item.gram)}</span></span>
+                            <span class="ing-cost">₹${costs.discountedCost.toFixed(3)}</span>
+                        </div>
+                    </div>`;
+                });
+                html += `</div>`;
+
+                const totalDisc = friesCost.discountedCost + seasoningDiscounted;
+                const totalMrp = friesCost.mrpCost + seasoningMRP;
+
+                html += `<div class="total-cost-box">
+                    <h3 style="margin-bottom:0.8rem;">💰 Complete Fries Cost Breakdown</h3>
+                    <div style="display:flex; justify-content:space-between; margin:0.3rem 0;">
+                        <span>🍟 McCain Fries:</span>
+                        <span>₹${friesCost.discountedCost.toFixed(2)}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin:0.3rem 0;">
+                        <span>🧂 Seasoning:</span>
+                        <span>₹${seasoningDiscounted.toFixed(2)}</span>
+                    </div>
+                    <hr style="border-color:#f59e0b; margin:0.5rem 0;">
+                    <div style="display:flex; justify-content:space-between; font-size:1.2rem;">
+                        <span><strong>🎯 TOTAL (Discounted):</strong></span>
+                        <span><strong>₹${totalDisc.toFixed(2)}</strong></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; color:#fcd34d; margin-top:0.3rem;">
+                        <span>📊 TOTAL (MRP):</span>
+                        <span>₹${totalMrp.toFixed(2)}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; color:#fcd34d; margin-top:0.3rem;">
+                        <span>📐 Per 100g serving:</span>
+                        <span>₹${(totalDisc / servings).toFixed(2)}</span>
+                    </div>
+                </div>`;
+
                 html += `<div class="sop-box">
-        <strong>⭐ Production SOP (V2.0):</strong><br>
-        🫙 Sauce: 12–24h fridge rest · Shelf life 3–4 din<br>
-        🥬 Iceberg dry rakho · Whole lettuce alag container<br>
-        📦 Order aate hi: Toast → Sauce → Crunch toss → Patty+Cheese → Tomato → Onion → Lettuce → Top bun → Wrap 1-2min rest
-      </div>`;
+                    ⭐ <strong>SOP:</strong> Fry at 180°C for 3-4 min · Season immediately after frying · Serve hot
+                </div>`;
 
                 dynamicDiv.innerHTML = html;
 
-                // ---- Event: checkbox (prep) ----
+                // Fries servings input event
+                document.getElementById('friesServingsInput')?.addEventListener('input', function () {
+                    let val = parseInt(this.value, 10);
+                    if (isNaN(val) || val < 1) val = 1;
+                    if (val > 50) val = 50;
+                    this.value = val;
+                    friesServings = val;
+                    renderFriesSection('fries', val);
+                });
+            }
+
+            function attachRecipeEvents(tab, qty) {
                 document.querySelectorAll('.ing-checkbox').forEach(cb => {
-                    cb.addEventListener('change', function (e) {
-                        const itemName = this.dataset.item;
-                        const checked = this.checked;
-                        setPrep(tab, itemName, checked);
-                        renderRecipe(currentTab, currentQty);
+                    cb.addEventListener('change', function () {
+                        setPrep(tab, this.dataset.item, this.checked);
+                        renderContent(tab, qty);
                     });
                 });
-
-                // ---- Event: badge click (toggle stock) ----
                 document.querySelectorAll('.status-badge').forEach(badge => {
-                    badge.addEventListener('click', function (e) {
-                        const itemName = this.dataset.item;
-                        toggleStock(tab, itemName);
+                    badge.addEventListener('click', function () {
+                        toggleStock(tab, this.dataset.item);
+                        renderContent(tab, qty);
                     });
                 });
-
-                // ---- Batch buttons ----
-                document.querySelector('[data-action="mark-all-prep"]')?.addEventListener('click', function () {
-                    setAllPrep(tab, true);
-                });
-                document.querySelector('[data-action="clear-all-prep"]')?.addEventListener('click', function () {
-                    setAllPrep(tab, false);
-                });
-                document.querySelector('[data-action="mark-all-stock"]')?.addEventListener('click', function () {
-                    setAllStock(tab, true);
-                });
-                document.querySelector('[data-action="clear-all-stock"]')?.addEventListener('click', function () {
-                    setAllStock(tab, false);
-                });
+                document.querySelector('[data-action="mark-all-prep"]')?.addEventListener('click', () => { setAllPrep(tab, true); renderContent(tab, qty); });
+                document.querySelector('[data-action="clear-all-prep"]')?.addEventListener('click', () => { setAllPrep(tab, false); renderContent(tab, qty); });
+                document.querySelector('[data-action="mark-all-stock"]')?.addEventListener('click', () => { setAllStock(tab, true); renderContent(tab, qty); });
+                document.querySelector('[data-action="clear-all-stock"]')?.addEventListener('click', () => { setAllStock(tab, false); renderContent(tab, qty); });
             }
 
-            function renderAssembly(type, qty) {
-                const cheeseType = type === 'veg' ? 'Amul White Cheese Slice' : 'Amul Orange Cheese Slice';
-                const pattyType = type === 'veg' ? 'McCain Veg Patty' : 'Meatzza Chicken Patty';
-                const totalButter = BUTTER_PER_BUN * qty;
-                const totalBottomSauce = SAUCE_BOTTOM * qty;
-                const totalCrunchMix = CRUNCH_MIX_PER * qty;
-                const totalTossSauce = SAUCE_CRUNCH_TOSS * qty;
-                const totalTopSauce = SAUCE_TOP * qty;
-
-                // Calculate costs for assembly items
-                const butterCost = calculateCost('Burger Bun', totalButter * 0.1) || 0;
-                const cheeseCost = calculateCost(cheeseType, 20 * qty) || 0;
-                const pattyCost = calculateCost(pattyType, 80 * qty) || 0;
-
-                const totalAssemblyCost = butterCost + cheeseCost + pattyCost;
-
-                return `
-        <div class="assembly-box">
-          <strong>🍔 Assembly (per burger ×${qty}):</strong><br><br>
-          <table style="width:100%; font-size:0.85rem; border-collapse:collapse;">
-            <tr><td style="padding:3px 0;">🧈 Butter (toast)</td><td style="text-align:right; font-weight:bold;">${BUTTER_PER_BUN}g ×${qty} = ${totalButter}g</td></tr>
-            <tr><td style="padding:3px 0;">🟤 Bottom Sauce</td><td style="text-align:right; font-weight:bold;">${SAUCE_BOTTOM}g ×${qty} = ${totalBottomSauce}g (${formatSpoonMeasurement(totalBottomSauce)})</td></tr>
-            <tr><td style="padding:3px 0;">🥗 Crunch Mix</td><td style="text-align:right; font-weight:bold;">${CRUNCH_MIX_PER}g ×${qty} = ${totalCrunchMix}g</td></tr>
-            <tr><td style="padding:3px 0;">🫙 Toss Sauce</td><td style="text-align:right; font-weight:bold;">${SAUCE_CRUNCH_TOSS}g ×${qty} = ${totalTossSauce}g (${formatSpoonMeasurement(totalTossSauce)})</td></tr>
-            <tr><td style="padding:3px 0;">🍗 Patty</td><td style="text-align:right;">${pattyType} ×${qty} ${pattyCost > 0 ? `(₹${pattyCost.toFixed(2)})` : ''}</td></tr>
-            <tr><td style="padding:3px 0;">🧀 Cheese</td><td style="text-align:right;">${cheeseType} ×${qty} ${cheeseCost > 0 ? `(₹${cheeseCost.toFixed(2)})` : ''}</td></tr>
-            <tr><td style="padding:3px 0;">🍅 Tomato</td><td style="text-align:right;">1 slice (6-7mm) ×${qty}</td></tr>
-            <tr><td style="padding:3px 0;">🧅 Onion</td><td style="text-align:right;">2-3 rings (ice water soak) ×${qty}</td></tr>
-            <tr><td style="padding:3px 0;">🥬 Whole Lettuce</td><td style="text-align:right;">1 leaf ×${qty}</td></tr>
-            <tr><td style="padding:3px 0;">🔝 Top Sauce</td><td style="text-align:right; font-weight:bold;">10-12g ×${qty} ≈ ${totalTopSauce}g (${formatSpoonMeasurement(totalTopSauce)})</td></tr>
-          </table>
-          ${totalAssemblyCost > 0 ? `<div style="margin-top:0.5rem;font-weight:700;color:#16a34a;">💰 Assembly Cost: ₹${totalAssemblyCost.toFixed(2)}</div>` : ''}
-        </div>
-      `;
+            function renderContent(tab, qty) {
+                if (tab === 'veg' || tab === 'chicken') {
+                    renderBurgerAssembly(tab, qty);
+                } else if (tab === 'veg-sauce' || tab === 'chicken-sauce') {
+                    renderSauceRecipe(tab, qty);
+                } else if (tab === 'crunch') {
+                    renderCrunchMix(tab, qty);
+                } else if (tab === 'fries') {
+                    renderFriesSection(tab, friesServings);
+                }
             }
 
-            // ----- Settings UI -----
             function renderSettings() {
                 settingsList.innerHTML = '';
                 ALL_INGREDIENTS.forEach(name => {
-                    const setting = productSettings[name] || { packWeight: '', price: '' };
+                    const s = productSettings[name] || { packWeight: '', mrp: '', discounted: '' };
                     const div = document.createElement('div');
                     div.className = 'settings-item';
                     div.innerHTML = `
-            <span class="item-name">${name}</span>
-            <input type="number" class="settings-pack" data-name="${name}" value="${setting.packWeight || ''}" placeholder="g" step="1" min="0">
-            <span class="unit-label">g</span>
-            <input type="number" class="settings-price" data-name="${name}" value="${setting.price || ''}" placeholder="₹" step="0.01" min="0">
-            <span class="unit-label">₹</span>
-          `;
+                        <span class="item-name">${name}</span>
+                        <input type="number" class="set-pack" data-name="${name}" value="${s.packWeight || ''}" placeholder="g" step="1" min="0">
+                        <span class="unit-label">g</span>
+                        <input type="number" class="set-mrp" data-name="${name}" value="${s.mrp || ''}" placeholder="MRP ₹" step="0.01" min="0">
+                        <input type="number" class="set-disc" data-name="${name}" value="${s.discounted || ''}" placeholder="Disc ₹" step="0.01" min="0">
+                    `;
                     settingsList.appendChild(div);
                 });
             }
 
-            function saveSettingsFromUI() {
-                document.querySelectorAll('.settings-item').forEach(item => {
-                    const name = item.querySelector('.settings-pack').dataset.name;
-                    const packWeight = parseFloat(item.querySelector('.settings-pack').value) || 0;
-                    const price = parseFloat(item.querySelector('.settings-price').value) || 0;
-                    if (packWeight > 0 && price > 0) {
-                        productSettings[name] = { packWeight, price };
-                    } else {
-                        delete productSettings[name];
-                    }
+            function saveFromUI() {
+                document.querySelectorAll('.settings-item').forEach(el => {
+                    const name = el.querySelector('.set-pack').dataset.name;
+                    const pack = parseFloat(el.querySelector('.set-pack').value) || 0;
+                    const mrp = parseFloat(el.querySelector('.set-mrp').value) || 0;
+                    const discounted = parseFloat(el.querySelector('.set-disc').value) || 0;
+                    if (pack > 0) productSettings[name] = { packWeight: pack, mrp, discounted };
+                    else delete productSettings[name];
                 });
                 saveSettings(productSettings);
-                renderRecipe(currentTab, currentQty);
                 settingsOverlay.classList.remove('open');
+                renderContent(currentTab, currentQty);
+                showToast('✅ Settings saved!');
             }
 
-            // ----- Event handlers -----
-            function onCalculate() {
+            function onCalc() {
                 let qty = parseInt(qtyInput.value, 10);
                 if (isNaN(qty) || qty < 1) qty = 1;
                 if (qty > 200) qty = 200;
                 qtyInput.value = qty;
                 currentQty = qty;
-                renderRecipe(currentTab, currentQty);
+                renderContent(currentTab, currentQty);
             }
 
-            vegTab.addEventListener('click', () => {
-                currentTab = 'veg';
-                updateTabStyles('veg');
-                renderRecipe('veg', currentQty);
+            // CSV Events
+            importCsvBtn.addEventListener('click', () => csvFileInput.click());
+            csvFileInput.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (!file.name.toLowerCase().endsWith('.csv')) {
+                        showToast('❌ Please select a .csv file');
+                        csvFileInput.value = '';
+                        return;
+                    }
+                    importCSVFromFile(file);
+                }
+                csvFileInput.value = '';
             });
-
-            chickenTab.addEventListener('click', () => {
-                currentTab = 'chicken';
-                updateTabStyles('chicken');
-                renderRecipe('chicken', currentQty);
+            exportCsvBtn.addEventListener('click', () => {
+                downloadCSV(exportToCSV(), 'MFM_Burger_Prices.csv');
+                showToast('📤 CSV exported!');
             });
+            downloadTemplateBtn.addEventListener('click', downloadTemplate);
 
-            crunchTab.addEventListener('click', () => {
-                currentTab = 'crunch';
-                updateTabStyles('crunch');
-                renderRecipe('crunch', currentQty);
-            });
+            // Tab Events
+            vegTab.addEventListener('click', () => { currentTab = 'veg'; updateTabs('veg'); renderContent('veg', currentQty); });
+            chickenTab.addEventListener('click', () => { currentTab = 'chicken'; updateTabs('chicken'); renderContent('chicken', currentQty); });
+            vegSauceTab.addEventListener('click', () => { currentTab = 'veg-sauce'; updateTabs('veg-sauce'); renderContent('veg-sauce', currentQty); });
+            chickenSauceTab.addEventListener('click', () => { currentTab = 'chicken-sauce'; updateTabs('chicken-sauce'); renderContent('chicken-sauce', currentQty); });
+            crunchTab.addEventListener('click', () => { currentTab = 'crunch'; updateTabs('crunch'); renderContent('crunch', currentQty); });
+            friesTab.addEventListener('click', () => { currentTab = 'fries'; updateTabs('fries'); renderContent('fries', friesServings); });
 
-            friesTab.addEventListener('click', () => {
-                currentTab = 'fries';
-                updateTabStyles('fries');
-                renderRecipe('fries', currentQty);
-            });
-
-            applyBtn.addEventListener('click', onCalculate);
-
-            qtyInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') onCalculate();
-            });
-
+            applyBtn.addEventListener('click', onCalc);
+            qtyInput.addEventListener('keypress', e => { if (e.key === 'Enter') onCalc(); });
             qtyInput.addEventListener('input', () => {
-                let qty = parseInt(qtyInput.value, 10);
-                if (!isNaN(qty) && qty >= 1 && qty <= 200) {
-                    currentQty = qty;
-                    renderRecipe(currentTab, currentQty);
-                }
+                let q = parseInt(qtyInput.value, 10);
+                if (!isNaN(q) && q >= 1 && q <= 200) { currentQty = q; renderContent(currentTab, currentQty); }
             });
 
-            // Settings
-            settingsBtn.addEventListener('click', () => {
-                renderSettings();
-                settingsOverlay.classList.add('open');
-            });
+            settingsBtn.addEventListener('click', () => { renderSettings(); settingsOverlay.classList.add('open'); });
+            closeSettingsBtn.addEventListener('click', () => settingsOverlay.classList.remove('open'));
+            settingsOverlay.addEventListener('click', e => { if (e.target === settingsOverlay) settingsOverlay.classList.remove('open'); });
+            saveSettingsBtn.addEventListener('click', saveFromUI);
 
-            closeSettingsBtn.addEventListener('click', () => {
-                settingsOverlay.classList.remove('open');
-            });
-
-            settingsOverlay.addEventListener('click', (e) => {
-                if (e.target === settingsOverlay) {
-                    settingsOverlay.classList.remove('open');
-                }
-            });
-
-            saveSettingsBtn.addEventListener('click', saveSettingsFromUI);
-
-            // Initial render
-            updateTabStyles('veg');
-            renderRecipe('veg', 6);
-            qtyInput.value = 6;
+            // Initialize
+            updateTabs('veg');
+            renderContent('veg', 6);
         })();
     </script>
 </body>
